@@ -974,6 +974,7 @@ $browser-upgrade-bg: $yellow-supernova;
   color: $green-cucumber;
 
   @media (min-width: $bp-1) {
+    margin-top: 0;
     margin-left: percentage(26/1218);
   }
 
