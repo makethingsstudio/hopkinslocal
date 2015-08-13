@@ -5,9 +5,8 @@
     "sanitize-css": "~1.1.0",
     "mapbox.js": "~2.2.1",
     "enquire": "~2.1.2",
-    "zepto": "~1.1.6",
-    "zeptojs": "~1.1.6",
-    "blueimp-gallery": "~2.16.0"
+    "jquery": "~2.1.4",
+    "colorbox": "~1.6.3"
   },
   "devDependencies": {
     "chai": "~3.2.0",
