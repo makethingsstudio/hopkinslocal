@@ -32,7 +32,7 @@
         zoomControl: false
       });
 
-      L.mapbox.featureLayer('jhu-hopkinslocal.c70885a8').on('ready', function(e) {
+      L.mapbox.featureLayer('jhu-hopkinslocal.c70885a8').on('ready', function() {
         map.fitBounds(this.getBounds());
       });
 
