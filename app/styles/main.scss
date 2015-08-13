@@ -456,14 +456,20 @@ $browser-upgrade-bg: $yellow-supernova;
 .hopkins-local-mark {
   text-align: center;
   font-weight: $fw-quadon-l;
-  font-size: $fz-giga;
+  font-size: $fz-kilo;
+  @media (min-width: $bp-1) {
+    font-size: $fz-giga;
+  }
 }
 
 
 .overlay-hopkins-local-mark {
   text-align: center;
   font-weight: $fw-quadon-l;
-  font-size: 86px;
+  font-size: $fz-kilo;
+  @media (min-width: $bp-1) {
+    font-size: $fz-giga;
+  }
 }
 
 
@@ -495,9 +501,12 @@ $browser-upgrade-bg: $yellow-supernova;
 .hopkins-local-tagline {
   font-family: $default-font-family;
   font-weight: $fw-gentona-medium;
-  font-size: $fz-kilo;
+  font-size: $fz-deci;
   letter-spacing: .1em;
   text-align: right;
+  @media (min-width: $bp-1) {
+    font-size: $fz-kilo;
+  }
 }
 
 
@@ -599,17 +608,16 @@ $browser-upgrade-bg: $yellow-supernova;
 
 
 .block-stack {
-  @media (min-width: $bp-1) {
+
     position: relative;
     width: 100%;
     height: 0;
     padding-top: 125%;
-  }
 }
 
 
 .block-stack-heading {
-  @media (min-width: $bp-1) {
+
     position: absolute;
     left: 0;
     bottom: 0;
@@ -620,7 +628,6 @@ $browser-upgrade-bg: $yellow-supernova;
     line-height: $lh-thin;
     color: $grey-ebb;
     background: $blue-rhino;
-  }
 }
 
 
@@ -761,7 +768,11 @@ $browser-upgrade-bg: $yellow-supernova;
 
 
 .map {
+  display: none;
   position: relative;
+  @media (min-width: $bp-1) {
+    display: block;
+  }
 }
 
 .map-viewport {
@@ -882,8 +893,10 @@ $browser-upgrade-bg: $yellow-supernova;
   }
 
   & + & {
+    margin-top: 4*$vs;
     @media (min-width: $bp-1) {
       float: right;
+      margin-top: 0;
     }
   }
 }
@@ -894,6 +907,7 @@ $browser-upgrade-bg: $yellow-supernova;
   color: $red-roughy;
 
   @media (min-width: $bp-1) {
+    margin-top: 0;
       margin-left: percentage(77/1218);
     }
 
@@ -922,9 +936,11 @@ $browser-upgrade-bg: $yellow-supernova;
 
 .focus-item-hire {
   @include _focus-item;
+    margin-top: 8*$vs;
   color: $green-half-baked;
 
   @media (min-width: $bp-1) {
+    margin-top: 0;
     margin-left: percentage(26/1218);
   }
 
@@ -953,6 +969,8 @@ $browser-upgrade-bg: $yellow-supernova;
 
 .focus-item-buy {
   @include _focus-item;
+
+  margin-top: 8*$vs;
   color: $green-cucumber;
 
   @media (min-width: $bp-1) {

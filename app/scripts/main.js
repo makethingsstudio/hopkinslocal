@@ -19,6 +19,8 @@
   $(function () {
     $('#js-video-gallery').colorbox();
 
+    // $('#js-fit-local').fitText();
+
     // Get Height of Browser, apply it to map.
     mapE = document.getElementById('map');
     if (mapE) {

@@ -6,7 +6,8 @@
     "mapbox.js": "~2.2.1",
     "enquire": "~2.1.2",
     "jquery": "~2.1.4",
-    "colorbox": "~1.6.3"
+    "colorbox": "~1.6.3",
+    "FitText.js": "~1.2.0"
   },
   "devDependencies": {
     "chai": "~3.2.0",
