@@ -4,35 +4,275 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>jhu hopkinslocal dev</title>
+    <title>HopkinsLocal - Build, Hire, and Buy from local Baltimore Businesses</title>
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/sanitize-css/dist/sanitize.css" />
+    <link rel="stylesheet" href="/bower_components/mapbox.js/mapbox.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-    
+
   </head>
   <body>
     <!--[if lt IE 10]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <div class="browser-upgrade">
+        <div class="container">
+          <p class="browser-upgrade-content">
+            You are using an <strong>outdated</strong> browser. Please <a class="browser-upgrade-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+          </p>
+        </div>
+      </div>
     <![endif]-->
-    
-    <div class="hero-unit">
-      <h1>'Allo, 'Allo!</h1>
-      <p>You now have</p>
-      <ul>
-        <li>HTML5 Boilerplate</li>
-        <li>Sass</li>
-      </ul>
+
+    <div class="page-hero">
+      <div class="container">
+        <header class="masthead" role="banner">
+          <div class="masthead-brand">
+            <a class="masthead-logo" href="/" title="Johns Hopkins University &amp; Medical">Johns Hopkins University &amp; Medical</a>
+          </div>
+
+          <nav role="navigation">
+            <ul class="masthead-nav">
+              <li class="masthead-nav-item">
+                <a class="masthead-nav-link" href="/build.html" title="Build with Baltimore and Area Businesses">Build</a>
+              </li>
+              <li class="masthead-nav-item">
+                <a class="masthead-nav-link" href="/hire" title="Hire with Baltimore and Area Businesses">Hire</a>
+              </li>
+              <li class="masthead-nav-item">
+                <a class="masthead-nav-link" href="/buy" title="Buy with Baltimore and Area Businesses">Buy</a>
+              </li>
+              <li class="masthead-nav-item">
+                <a class="masthead-nav-link" id="js-show-about" href="#about" title="About with Baltimore and Area Businesses">About</a>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <div class="hopkins-local">
+          <h1 class="hopkins-local-mark">
+            Hopkins<strong class="hopkins-local-emphasis">Local</strong>
+          </h1>
+          <p class="hopkins-local-tagline">Build. Hire. Buy</p>
+        </div>
+
+        <div class="page-intro">
+          <h2 class="page-intro-heading">For a stronger Baltimore.</h2>
+          <div class="page-intro-content">
+            <p>
+              HopkinsLocal leverages Johns Hopkins University and Health System’s role as an economic engine to create lasting opportunities in Baltimore.
+            </p>
+            <p>
+              <a class="icon-play" href="#" title="">
+                Watch the video to learn more about
+                <br>“What is HopkinsLocal?”</a>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
-    
+
+    <div class="content-blocks">
+      <div class="content-blocks-columns-1">
+        <div class="block-stack" style="background-image: url('http://api.hub.jhu.edu/factory/sites/default/files/styles/hub_medium/public/tyren-day3_1.jpg');">
+        <h2 class="block-stack-heading">
+          <a class="block-stack-link" href="http://hub.jhu.edu/2015/06/04/summer-jobs-program-2015" title="Johns Hopkins summer jobs program for Baltimore youth expands by 50%">
+            Johns Hopkins summer jobs program for Baltimore youth expands by 50%
+          </a>
+          </h2>
+        </div>
+      </div>
+      <div class="content-blocks-columns-2-pattern">
+        <div class="block-quote">
+          <blockquote class="block-quote-quote">
+            <p>
+              This joint effort by the university and health system is a firm and measurable commitment to promote economic growth in the city and increase diversity among our employees, contractors, and business partners. We have always been truly, proudly of Baltimore and embrace our role in building communities where people are proud to work, live and study.
+            </p>
+          </blockquote>
+          <div class="block-quote-sources">
+            <p class="block-quote-source">
+              Ronald J. Daniels
+              <span class="block-quote-source-position">President, Johns Hopkins University</span>
+            </p>
+            <p class="block-quote-source">
+              Ronald R. Peterson
+              <span class="block-quote-source-position">President, Johns Hopkins Hospital and Health System</span>
+              <span class="block-quote-source-position">Executive Vice President, Johns Hopkins Medicine</span>
+            </p>
+            <p class="block-quote-source">
+              Paul B. Rothman, M.D.
+              <span class="block-quote-source-position">Dean of the Medical Faculty</span>
+              <span class="block-quote-source-position">CEO, Johns Hopkins Medicine</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="content-blocks-columns-2">
+        <div class="block-media-left">
+          <div class="block-media-attach">
+            <div class="block-media-ratio">
+              <img class="block-media-src" src="http://api.hub.jhu.edu/factory/sites/default/files/styles/hub_thumbnail/public/summer.jpg?itok=GhcMluWm" alt="University, hospital, health system to employ 300 Baltimore City students this summer">
+            </div>
+          </div>
+          <h2 class="block-media-heading">
+            <a class="block-media-link" href="http://hub.jhu.edu/2015/06/23/daniels-baltimore-build-event" title="Daniels outlines expansion of Johns Hopkins' 'deep and unwavering' commitment to Baltimore">
+              Daniels outlines expansion of Johns Hopkins' 'deep and unwavering' commitment to Baltimore
+            </a>
+          </h2>
+        </div>
+
+        <div class="block-media-right">
+          <div class="block-media-attach">
+            <div class="block-media-ratio">
+              <img class="block-media-src" src="http://api.hub.jhu.edu/factory/sites/default/files/styles/hub_thumbnail/public/summer.jpg?itok=GhcMluWm" alt="University, hospital, health system to employ 300 Baltimore City students this summer">
+            </div>
+          </div>
+          <h2 class="block-media-heading">
+            <a class="block-media-link" href="http://hub.jhu.edu/gazette/2015/march-april/currents-new-jhu-local-business-program" title="New JHU program helps local businesses grow">
+              New JHU program helps local businesses grow
+            </a>
+          </h2>
+        </div>
+      </div>
+    </div> <!-- /.content-blocks -->
+
+    <div class="map">
+      <div class="map-overlay">
+        <div class="map-overlay-canister">
+          <div class="map-overlay-content">
+            <h2 class="map-overlay-heading">
+              Your Community, Three Big Goals, Two Institutions.
+            </h2>
+            <p>
+              With campuses and offices throughout Baltimore City, new construction projects each year, and more employees than any other private employer in the state, Johns Hopkins University and Health System has a significant economic impact on Baltimore. HopkinsLocal is a substantial expansion of Johns Hopkins’ efforts to increase participation of local and minority-owned businesses in construction and purchasing opportunities; increase its hiring of city residents, including those from minority groups; and promote economic investment in Baltimore by its non-local business partners. Through these plans, Johns Hopkins is embracing its role as an anchor institution for the city and working with leaders, organizations, businesses and residents throughout Baltimore to support healthier, safer, more vibrant communities.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="map-viewport" id="map"></div>
+      <!-- /#map.map-viewport -->
+    </div>
+
+    <div class="focuses">
+      <div class="focuses-canister">
+
+        <div class="focus-item-build">
+          <h2 class="focus-item-heading">Build</h2>
+          <div class="focus-item-content">
+            <p>
+            Expanding opportunities for local contractors and vendors, and minority, women, and disadvantaged business enterprises.
+            </p>
+            <a class="focus-link-more" href="#" title="Learn More about expanding construction opportunities in Baltimore">
+            Learn More<span class="hide"> about expanding construction opportunities in Baltimore</span>
+            </a>
+            <a class="focus-link-option" href="#" title="Apply To Be A Vendor">Apply To Be A Vendor</a>
+            <a class="focus-link-option" href="#" title="Construction Opportunities">Construction Opportunities</a>
+          </div>
+        </div> <!-- /.focus-item-build -->
+
+        <div class="focus-item-hire">
+          <h2 class="focus-item-heading">Hire</h2>
+          <div class="focus-item-content">
+            <p>
+            Hiring locally, supporting diversity, and creating opportunities for advancement.
+            </p>
+            <a class="focus-link-more" href="#" title="Learn More about Baltimore area hiring initiatives and job listings">
+            Learn More<span class="hide"> about Baltimore area hiring initiatives and job listings</span>
+            </a>
+            <a class="focus-link-option" href="#" title="University Opportunities">University Opportunities</a>
+            <a class="focus-link-option" href="#" title="Health System Opportunities">Health System Opportunities</a>
+          </div>
+        </div>
+        <!-- /.focus-item-hire -->
+
+        <div class="focus-item-buy">
+          <h2 class="focus-item-heading">Buy</h2>
+          <div class="focus-item-content">
+            <p>
+              Utilizing as many local resources as possible, especially minority- and women-owned businesses.
+            </p>
+            <a class="focus-link-more" href="#" title="Learn More about purchase order opportunities within the Johns Hopkins University and Health system.">
+              Learn More
+              <span class="hide">
+                about purchase order opportunities within the Johns Hopkins University and Health System.
+              </span>
+            </a>
+            <a class="focus-link-option" href="#" title="University Opportunities">University Opportunities</a>
+            <a class="focus-link-option" href="#" title="Health System Opportunities">Health System Opportunities</a>
+          </div>
+        </div>
+        <!-- /.focus-item-buy -->
+      </div>
+    </div>
+
+
+
+
+
+    <div class="site-footer">
+      <div class="site-footer-canister">
+        <div class="site-footer-contact">
+          <p class="contact-01">
+            Johns Hopkins <br>University<br>
+                3400 N. Charles St.<br>
+                Baltimore, MD 21218
+          </p>
+
+          <p class="contact-02">
+            Johns Hopkins <br>Hospital Campus<br>
+                1800 Orleans St.<br>
+                Baltimore, MD 21287
+          </p>
+        </div>
+        <!-- /.site-footer-contact -->
+
+        <div class="site-footer-seal">
+          <a class="footer-logo" href="/" title="Johns Hopkins University &amp; Medical">Johns Hopkins University &amp; Medical</a>
+
+          <a class="footer-link" href="mailto:hopkinslocal@jhu.edu" title="Email the HopkinsLocal Program">Email HopkinsLocal</a>
+        </div>
+
+
+      </div>
+    </div>
+    <!-- /.site-footer -->
+
+
+
+
+
+    <div id="about" class="page-overlay">
+      <div class="page-overlay-canister">
+        <div class="page-overlay-content">
+          <div class="hopkins-local">
+            <p class="overlay-hopkins-local-prefix">About</p>
+            <p class="overlay-hopkins-local-mark">
+              Hopkins<strong class="overlay-hopkins-local-emphasis">Local</strong>
+            </p>
+            <p class="overlay-hopkins-local-tagline">Build. Hire. Buy</p>
+          </div>
+          <p>
+            HopkinsLocal is an initiative to build a stronger Baltimore by promoting economic growth. It builds on Johns Hopkins University and Health System’s role as an anchor institution for the city by laying out a plan to look to the city when it builds, hires and buys.
+          </p>
+          <p>
+            Hopkins Local is a firm and measurable commitment to increase design and construction contracts with local, minority-owned, and women-owned businesses, expand the number of new hires that come from city neighborhoods, and spend more purchasing dollars with city vendors. The initiative will also support ongoing efforts to support diversity in Johns Hopkins’ workforce and among our business partners.
+          </p>
+          <p>
+            With campuses across the city and more employees than any other private employer in Maryland, Johns Hopkins University and Health System can leverage its economic activity to help make Baltimore a place where people are proud to live, work, and study.
+          </p>
+        </div>
+
+        <button id="js-close-about" class="page-overlay-close">Close</button>
+      </div>
+    </div>
+
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -45,9 +285,12 @@
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
+    <script src="/bower_components/zepto/zepto.js"></script>
+    <script src="/bower_components/mapbox.js/mapbox.js"></script>
+    <script src="/bower_components/enquire/dist/enquire.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-    
+
     <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>
     <!-- endbuild -->

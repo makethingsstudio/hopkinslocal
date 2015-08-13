@@ -3,12 +3,19 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
 import del from 'del';
+import pxtorem from 'postcss-pxtorem';
 import {stream as wiredep} from 'wiredep';
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
 gulp.task('styles', () => {
+  const processors = [
+    pxtorem({
+        replace: false
+    })
+  ];
+
   return gulp.src('app/styles/*.scss')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -18,6 +25,7 @@ gulp.task('styles', () => {
       includePaths: ['.']
     }).on('error', $.sass.logError))
     .pipe($.autoprefixer({browsers: ['last 1 version']}))
+    .pipe($.postcss(processors))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/styles'))
     .pipe(reload({stream: true}));
@@ -144,7 +152,12 @@ gulp.task('serve:test', () => {
 gulp.task('wiredep', () => {
   gulp.src('app/styles/*.scss')
     .pipe(wiredep({
-      ignorePath: /^(\.\.\/)+/
+      ignorePath: /^(\.\.\/)+/,
+      overrides: {
+        "sanitize-css": {
+          "main": "sanitize.scss"
+        }
+      }
     }))
     .pipe(gulp.dest('app/styles'));
 
