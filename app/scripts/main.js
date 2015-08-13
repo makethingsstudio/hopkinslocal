@@ -32,6 +32,12 @@
         zoomControl: false
       });
 
+      L.mapbox.featureLayer('jhu-hopkinslocal.c70885a8').on('ready', function(e) {
+        map.fitBounds(this.getBounds());
+      });
+
+
+
       map.dragging.disable();
       map.touchZoom.disable();
       map.doubleClickZoom.disable();
