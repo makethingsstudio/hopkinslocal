@@ -221,6 +221,17 @@ $browser-upgrade-bg: $yellow-supernova;
 
 
 
+.icon-play-md {
+  display: inline-block;
+  width: 21px;
+  height: 22px;
+  background: url('../images/icon-play.svg') center center no-repeat;
+}
+
+
+
+
+
 .container {
   @include _container;
 }
@@ -529,6 +540,21 @@ $browser-upgrade-bg: $yellow-supernova;
   font-size: $fz-deca;
   font-weight: $fw-gentona-bold;
   line-height: $lh-thin;
+}
+
+
+.page-intro-videolink {
+  position: relative;
+  display: inline-block;
+  padding-left: 30px; // @NOTE magic number from icon size
+  margin-left: -30px; // @NOTE magic number from icon size
+}
+
+.page-intro-videolink .icon-play-md {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -11px; // @NOTE magic number for icon size
 }
 
 
@@ -927,7 +953,7 @@ $browser-upgrade-bg: $yellow-supernova;
 
 .focus-item-buy {
   @include _focus-item;
-  color: $green-half-baked;
+  color: $green-cucumber;
 
   @media (min-width: $bp-1) {
     margin-left: percentage(26/1218);
@@ -937,19 +963,19 @@ $browser-upgrade-bg: $yellow-supernova;
     &:hover,
     &:focus {
       color: $white;
-      border-color: $green-half-baked;
-      background: $green-half-baked;
+      border-color: $green-cucumber;
+      background: $green-cucumber;
     }
   }
 
   .focus-link-option {
     color: $white;
-    background: $green-half-baked;
+    background: $green-cucumber;
 
     &:hover,
     &:focus {
-      color: $green-half-baked;
-      border-color: $green-half-baked;
+      color: $green-cucumber;
+      border-color: $green-cucumber;
       background: $white;
     }
   }
