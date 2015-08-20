@@ -1,0 +1,26 @@
+data:
+  image: tutum/apache-php
+  volumes:
+    - /app/content/uploads
+    - /var/lib/mysql
+
+web:
+  build: conf/docker/images/apache-php
+  hostname: cied
+  domainname: cied.georgetown.dev
+  volumes:
+    - /vagrant/Documents/projects/cied-website/cied-website-dev/src/www:/app
+  volumes_from:
+    - data
+  links:
+    - mysql
+  environment:
+    - VIRTUAL_HOST=cied.georgetown.dev
+
+mysql:
+  image: mysql
+  ports:
+    - 3306
+  environment:
+    - VIRTUAL_HOST=mysql.cied.georgetown.dev
+    - MYSQL_ROOT_PASSWORD=password
