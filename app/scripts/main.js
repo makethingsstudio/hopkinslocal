@@ -17,7 +17,12 @@
 
 
   $(function () {
-    $('#js-video-gallery').colorbox();
+    $('#js-video-gallery').colorbox({
+      iframe: true,
+      innerWidth: 500,
+      innerHeight: 409
+    });
+
 
     // $('#js-fit-local').fitText();
 
