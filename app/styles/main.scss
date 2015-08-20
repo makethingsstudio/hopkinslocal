@@ -701,7 +701,8 @@ $browser-upgrade-bg: $yellow-supernova;
     position: absolute;
     top: 0;
     left: 0;
-    transform: translate(-25%);
+    width: auto;
+    height: 100%;
   }
 }
 
@@ -1201,6 +1202,7 @@ $browser-upgrade-bg: $yellow-supernova;
 
 
 .goal-list-01 {
+  padding-left: 30px;
   font-size: $fz-deca;
   line-height: $lh-thin;
   @media (min-width: $bp-1) {
@@ -1210,6 +1212,7 @@ $browser-upgrade-bg: $yellow-supernova;
 }
 
 .goal-list-02 {
+  padding-left: 30px;
   margin-top: 8*$vs;
   font-size: $fz-deca;
   line-height: $lh-thin;
