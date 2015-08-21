@@ -28,18 +28,19 @@
   </div>
 
 
-  <div class="page-intro">
-    <h2 class="page-intro-heading">For a stronger Baltimore.</h2>
-    <div class="page-intro-content">
-      <p>
-        HopkinsLocal leverages Johns Hopkins University and Health System’s role as an economic engine to create lasting opportunities in Baltimore.
-      </p>
-      <p>
-        <a class="page-intro-videolink" id="js-video-gallery" href="http://player.vimeo.com/video/2285902" title="">
-          <span class="icon-play-md"></span>
-          Watch the video to learn more about
-          <br>“What is HopkinsLocal?”</a>
-      </p>
+  <div class="container">
+    <div class="page-intro">
+      <h2 class="page-intro-heading">
+        {{ post.title }}
+      </h2>
+      <div class="page-intro-content">
+        {{ post.content }}
+        <p>
+          <a class="page-intro-videolink" id="js-video-gallery" href="{{ post.video_link_url }}" title="">
+            {{ post.video_link_text }}
+          </a>
+        </p>
+      </div>
     </div>
   </div>
 
@@ -48,47 +49,41 @@
   {% if posts|length %}
     {% for item in posts|slice(0,1) %}
     <div class="content-blocks-columns-1">
-      <div class="block-stack">
-      <h2 class="block-stack-heading">
-        <a class="block-stack-link" href="{{ item.source_url }}" title="{{ item.title }}">
+      <a class="block-stack" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+        <h2 class="block-stack-heading">
           {{ item.title }}
-        </a>
         </h2>
-      </div>
+      </a>
     </div>
     {% endfor %}
   {% endif %}
 
-    <div class="content-blocks-columns-2-pattern">
+    <div class="content-blocks-columns-2-dark">
       <div class="block-quote">
-        <blockquote class="block-quote-quote">
+        <blockquote class="block-quote-text">
         {{ post.quote_text|wpautop }}
+          <div class="block-quote-sources">
+          {% for source in post.get_field('quote_sources') %}
+          <p class="block-quote-source">
+            {{ source.source_name }}
+            <span class="block-quote-source-position">
+              {{ source.source_position}}
+            </span>
+          </p>
+          {% endfor %}
+          </div>
         </blockquote>
-        <div class="block-quote-sources">
-        {% for source in post.get_field('quote_sources') %}
-        <p class="block-quote-source">
-          {{ source.source_name }}
-          <span class="block-quote-source-position">
-            {{ source.source_position}}
-          </span>
-        </p>
-        {% endfor %}
-        </div>
       </div>
     </div>
 
   {% if 1 < posts|length %}
   <div class="content-blocks-columns-2">
   {% for item in posts|slice(1,3) %}
-  <div class="content-blocks-columns-1">
-    <div class="block-media-left">
-    <h2 class="block-media-heading">
-      <a class="block-media-link" href="{{ item.source_url }}" title="{{ item.title }}">
-        {{ item.title }}
-      </a>
-      </h2>
-    </div>
-  </div>
+  <a class="block-stack" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+    <h2 class="block-stack-heading">
+      {{ item.title }}
+    </h2>
+  </a>
   {% endfor %}
   </div>
   {% endif %}
@@ -98,13 +93,11 @@
 
   <div class="map">
     <div class="map-overlay">
-      <div class="map-overlay-canister">
-        <div class="map-overlay-content">
-          <h2 class="map-overlay-heading">
-            {{ post.map_heading }}
-          </h2>
-          {{ post.map_text }}
-        </div>
+      <div class="map-overlay-content">
+        <h2 class="map-overlay-heading">
+          {{ post.map_heading }}
+        </h2>
+        {{ post.map_text }}
       </div>
     </div>
     <div class="map-viewport" id="map"></div>
@@ -119,23 +112,23 @@
       <div class="focus-item-{{ focus.slug }}">
         <h2 class="focus-item-heading">{{ focus.title}}</h2>
         <div class="focus-item-content">
-        {{ focus.page_excerpt|wpautop }}
-
-        {% if focus.get_field('more_information_link') %}
-          {% for item in focus.get_field('more_information_link') %}
-          <a class="focus-link-more" href="{{ item.link_url }}" title="{{ item.link_text }}">
-            {{ item.link_text }}
-          </a>
-          {% endfor %}
-        {% endif %}
-        {% if focus.get_field('focus_link') %}
-          {% for item in focus.get_field('focus_link') %}
-          <a class="focus-link-option" href="{{ item.link_url }}" title="{{ item.link_text }}">
-            {{ item.link_text }}
-          </a>
-          {% endfor %}
-        {% endif %}
+          <div class="focus-item-text">{{ focus.page_excerpt|wpautop }}</div>
+          {% if focus.get_field('more_information_link') %}
+            {% for item in focus.get_field('more_information_link') %}
+            <a class="focus-link-more" href="{{ item.link_url }}" title="{{ item.link_text }}">
+              {{ item.link_text }}
+            </a>
+            {% endfor %}
+          {% endif %}
+          {% if focus.get_field('focus_link') %}
+            {% for item in focus.get_field('focus_link') %}
+            <a class="focus-link-option" href="{{ item.link_url }}" title="{{ item.link_text }}">
+              {{ item.link_text }}
+            </a>
+            {% endfor %}
+          {% endif %}
         </div>
+
       </div>
       <!-- /.focus-item-{{ focus.slug }} -->
     {% endfor %}

@@ -41,7 +41,19 @@ if ( is_front_page() ) {
   $context['posts'] = Timber::get_posts($args);
   array_unshift( $templates, 'home.twig' );
 } else {
-  $context['stories'] = Timber::get_posts(get_field( 'success_stories', $post->ID ) );
+  $args = array(
+    'post_type' => array(
+        'post'
+      ),
+      'meta_query' => array(
+        array(
+          'key' => 'showcase',
+          'value' => serialize(strval($post->ID)),
+          'compare' => 'LIKE'
+        )
+      )
+  );
+  $context['stories'] = Timber::get_posts( $args );
 }
 
 Timber::render( $templates, $context );

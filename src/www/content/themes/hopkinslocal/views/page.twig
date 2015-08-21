@@ -68,15 +68,15 @@
         {% for item in stories|slice(0, 1) %}
         <div class="block-media-left">
           {% if item.thumbnail|length %}
-          <div class="block-media-attach">
+          <a class="block-media-attach">
             <div class="block-media-ratio">
               <img class="block-media-src" src="{{ item.thumbnail.src() }}" alt="{{ item.thumbnail.alt }}">
             </div>
-          </div>
+          </a>
           {% endif %}
           <p class="block-media-type">Success Story</p>
           <h2 class="block-media-heading">
-            <a class="block-media-link" href="http://hub.jhu.edu/gazette/2014/september-october/focus-malone-hall" title="Johns Hopkins Engineering ushers in new era with opening of Malone Hall">
+            <a class="block-media-link" href="http://hub.jhu.edu/gazette/2014/september-october/focus-malone-hall" title="{{ item.title }}">
               {{ item.title }}
             </a>
           </h2>
