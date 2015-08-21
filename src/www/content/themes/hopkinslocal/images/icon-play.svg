@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="18px" height="20px" viewBox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch Beta 3.4 (14718) - http://www.bohemiancoding.com/sketch -->
+    <title>play</title>
+    <desc>Created with Sketch Beta.</desc>
+    <defs></defs>
+    <g id="Direction-01" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Homepage" sketch:type="MSArtboardGroup" transform="translate(-314.000000, -686.000000)" fill="#418FDE">
+            <g id="intro" sketch:type="MSLayerGroup" transform="translate(2.000000, 253.000000)">
+                <path d="M329.05006,441.825031 C328.800059,441.60003 322.625037,436.400012 314.575009,433.125 C314.375008,433.05 314.150008,433 313.950007,433 C313.650006,433 313.375005,433.075 313.125004,433.225001 C312.700002,433.500002 312.400001,433.950003 312.375001,434.450005 C312.350001,434.600006 312,438.65002 312,443.000035 C312,447.35005 312.350001,451.400065 312.375001,451.575065 C312.400001,452.075067 312.700002,452.525069 313.125004,452.77507 C313.375005,452.92507 313.675006,453.00007 313.950007,453.00007 C314.175008,453.00007 314.375008,452.95007 314.575009,452.87507 C322.625037,449.600058 328.800059,444.40004 329.05006,444.200039 C329.400061,443.900038 329.600062,443.450037 329.600062,443.000035 C329.600062,442.550034 329.400061,442.100032 329.05006,441.825031 L329.05006,441.825031 Z" id="play" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

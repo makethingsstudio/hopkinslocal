@@ -1,0 +1,113 @@
+{% extends "_base.twig" %}
+
+{% block content %}
+  <div class="page-hero">
+      <div class="container">
+        <header class="masthead" role="banner">
+          <div class="masthead-brand-interior">
+            <a class="masthead-logo" href="/" title="Johns Hopkins University &amp; Medical">Johns Hopkins University &amp; Medical</a>
+            <a class="masthead-property" href="/" title="HopkinsLocal Homepage">Hopkins<strong>Local</strong></a>
+          </div>
+
+          <nav role="navigation">
+            <ul class="masthead-nav">
+            {% for item in primary.get_items %}
+              <li class="masthead-nav-item">
+                <a class="masthead-nav-link {{ item.classes|join(' ') }}" href="{{ item.get_link }}" title="{{ item.title }}">{{ item.title }}</a>
+              </li>
+            {% endfor %}
+            </ul>
+          </nav>
+        </header>
+        <div class="hopkins-local">
+          <h1 class="hopkins-local-mark">
+            Build<strong class="hopkins-local-emphasis">Local</strong>
+          </h1>
+        </div>
+      </div>
+    </div>
+
+
+  <div class="site-content">
+    <div class="container">
+      <h2 class="page-heading">
+        {{ post.heading }}
+      </h2>
+      <div class="page-content">
+        <div class="page-content-intro">
+          {{ post.content }}
+        </div>
+        <!-- @TODO add styles for this -->
+        <h2 style="font-size: 24px;">
+          {{ post.program_detail_title }}
+        </h2>
+
+        {% if post.get_field('program_detail_list_a') %}
+        <ul class="goal-list-01">
+        {% for item in post.get_field('program_detail_list_a') %}
+          <li>
+            {{ item.list_item }}
+          </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if post.get_field('program_detail_list_b') %}
+        <ul class="goal-list-02">
+        {% for item in post.get_field('program_detail_list_b') %}
+          <li>
+            {{ item.list_item }}
+          </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+
+      <div class="success-story">
+      {% if stories %}
+        {% for item in stories|slice(0, 1) %}
+        <div class="block-media-left">
+          {% if item.thumbnail|length %}
+          <div class="block-media-attach">
+            <div class="block-media-ratio">
+              <img class="block-media-src" src="{{ item.thumbnail.src() }}" alt="{{ item.thumbnail.alt }}">
+            </div>
+          </div>
+          {% endif %}
+          <p class="block-media-type">Success Story</p>
+          <h2 class="block-media-heading">
+            <a class="block-media-link" href="http://hub.jhu.edu/gazette/2014/september-october/focus-malone-hall" title="Johns Hopkins Engineering ushers in new era with opening of Malone Hall">
+              {{ item.title }}
+            </a>
+          </h2>
+          {{ item.post_excerpt|wpautop }}
+        </div>
+        {% endfor %}
+      {% endif %}
+      </div>
+
+      <div class="page-actions">
+      {% if post.get_field('more_information_link') %}
+        {% for item in post.get_field('more_information_link') %}
+        <a class="focus-link-option" href="{{ item.link_url }}" title="{{ item.link_text }}">
+          {{ item.link_text }}
+        </a>
+        {% endfor %}
+      {% endif %}
+      {% if post.get_field('focus_link') %}
+        {% for item in post.get_field('focus_link') %}
+        <a class="focus-link-option" href="{{ item.link_url }}" title="{{ item.link_text }}">
+          {{ item.link_text }}
+        </a>
+        {% endfor %}
+      {% endif %}
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  {% include "_inc-about-local.twig" %}
+{% endblock %}
