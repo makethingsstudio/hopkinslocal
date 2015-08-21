@@ -6,21 +6,21 @@ data:
 
 web:
   build: conf/docker/images/apache-php
-  hostname: cied
-  domainname: cied.georgetown.dev
+  hostname: hopkinslocal
+  domainname: hopkinslocal.jhu.dev
   volumes:
-    - /vagrant/Documents/projects/cied-website/cied-website-dev/src/www:/app
+    - /vagrant/Documents/projects/jhu-hopkinslocal-dev/src/www:/app
   volumes_from:
     - data
   links:
     - mysql
   environment:
-    - VIRTUAL_HOST=cied.georgetown.dev
+    - VIRTUAL_HOST=hopkinslocal.jhu.dev
 
 mysql:
   image: mysql
   ports:
     - 3306
   environment:
-    - VIRTUAL_HOST=mysql.cied.georgetown.dev
+    - VIRTUAL_HOST=mysql.hopkinslocal.jhu.dev
     - MYSQL_ROOT_PASSWORD=password

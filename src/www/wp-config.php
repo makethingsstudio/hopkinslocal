@@ -8,10 +8,10 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
   include( dirname( __FILE__ ) . '/local-config.php' );
 } else {
   define( 'WP_LOCAL_DEV', false );
-  define( 'DB_NAME', 'p0282' );
-  define( 'DB_USER', 'bk_mysql' );
-  define( 'DB_PASSWORD', 'St3alth9' );
-  define( 'DB_HOST', 'mysql.clients.make-things.com' ); // Probably 'localhost'
+  define( 'DB_NAME', 'hopkinslocal' );
+  define( 'DB_USER', 'root' );
+  define( 'DB_PASSWORD', 'password' );
+  define( 'DB_HOST', 'mysql' ); // Probably 'localhost'
 }
 
 // ========================
