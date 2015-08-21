@@ -22,7 +22,20 @@
  */
 
 $context = Timber::get_context();
+
+
 $post = new TimberPost();
 $context['post'] = $post;
-$context['stories'] = Timber::get_posts(get_field( 'success_stories', $post->ID ) );
-Timber::render( array( 'page-' . $post->post_name . '.twig', 'page.twig' ), $context );
+
+
+$templates = array( 'page-' . $post->post_name . '.twig', 'page.twig' );
+
+if ( is_front_page() ) {
+  $focusIds = array(14, 16, 18);
+  $context['focuses'] = Timber::get_posts($focusIds);
+  array_unshift( $templates, 'home.twig' );
+} else {
+  $context['stories'] = Timber::get_posts(get_field( 'success_stories', $post->ID ) );
+}
+
+Timber::render( $templates, $context );

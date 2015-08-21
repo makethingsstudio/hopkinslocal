@@ -8,6 +8,20 @@
 
 
 
+
+
+
+  function path_classes($classes) {
+    global $post;
+    $path = get_page_uri($post->ID);
+    $parts = explode('/', 't-' . $path);
+    $classes = array_merge($classes, $parts);
+
+    return $classes;
+  }
+  add_filter('body_class', 'path_classes');
+
+
   register_nav_menus( array(
     'primary' => 'Primary Site Navigation'
   ) );
@@ -23,6 +37,7 @@
       // add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
       add_action( 'init', array( $this, 'register_post_types' ) );
       add_action( 'init', array( $this, 'register_taxonomies' ) );
+      add_filter('body_class', 'path_classes');
       parent::__construct();
     }
 

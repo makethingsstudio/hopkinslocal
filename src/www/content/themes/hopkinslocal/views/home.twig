@@ -1,5 +1,158 @@
 {% extends "_base.twig" %}
 
 {% block content %}
+  <div class="page-hero">
+    <div class="container">
+      <header class="masthead" role="banner">
+        <div class="masthead-brand">
+          <a class="masthead-logo" href="/" title="Johns Hopkins University &amp; Medical">Johns Hopkins University &amp; Medical</a>
+        </div>
 
+        <nav role="navigation">
+          <ul class="masthead-nav">
+            {% for item in primary.get_items %}
+              <li class="masthead-nav-item">
+                <a class="masthead-nav-link {{ item.classes|join(' ') }}" href="{{ item.get_link }}" title="{{ item.title }}">{{ item.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </header>
+      <div class="hopkins-local">
+        <h1 class="hopkins-local-mark" id="js-fit-local">
+          Hopkins<strong class="hopkins-local-emphasis">Local</strong>
+        </h1>
+        <p class="hopkins-local-tagline">Build. Hire. Buy</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="page-intro">
+    <h2 class="page-intro-heading">For a stronger Baltimore.</h2>
+    <div class="page-intro-content">
+      <p>
+        HopkinsLocal leverages Johns Hopkins University and Health System’s role as an economic engine to create lasting opportunities in Baltimore.
+      </p>
+      <p>
+        <a class="page-intro-videolink" id="js-video-gallery" href="http://player.vimeo.com/video/2285902" title="">
+          <span class="icon-play-md"></span>
+          Watch the video to learn more about
+          <br>“What is HopkinsLocal?”</a>
+      </p>
+    </div>
+  </div>
+
+
+  <div class="content-blocks">
+    <div class="content-blocks-columns-1">
+      <div class="block-stack" style="background-image: url('http://api.hub.jhu.edu/factory/sites/default/files/styles/hub_medium/public/tyren-day3_1.jpg'); background-size: cover; background-repeat: no-repeat">
+      <h2 class="block-stack-heading">
+        <a class="block-stack-link" href="http://hub.jhu.edu/2015/06/04/summer-jobs-program-2015" title="Johns Hopkins summer jobs program for Baltimore youth expands by 50%">
+          Johns Hopkins summer jobs program for Baltimore youth expands by 50%
+        </a>
+        </h2>
+      </div>
+    </div>
+    <div class="content-blocks-columns-2-pattern">
+      <div class="block-quote">
+        <blockquote class="block-quote-quote">
+          <p>
+            This joint effort by the university and health system is a firm and measurable commitment to promote economic growth in the city and increase diversity among our employees, contractors, and business partners. We have always been truly, proudly of Baltimore and embrace our role in building communities where people are proud to work, live and study.
+          </p>
+        </blockquote>
+        <div class="block-quote-sources">
+          <p class="block-quote-source">
+            Ronald J. Daniels
+            <span class="block-quote-source-position">President, Johns Hopkins University</span>
+          </p>
+          <p class="block-quote-source">
+            Ronald R. Peterson
+            <span class="block-quote-source-position">President, Johns Hopkins Hospital and Health System</span>
+            <span class="block-quote-source-position">Executive Vice President, Johns Hopkins Medicine</span>
+          </p>
+          <p class="block-quote-source">
+            Paul B. Rothman, M.D.
+            <span class="block-quote-source-position">Dean of the Medical Faculty</span>
+            <span class="block-quote-source-position">CEO, Johns Hopkins Medicine</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="content-blocks-columns-2">
+      <div class="block-media-left">
+        <div class="block-media-attach">
+          <div class="block-media-ratio">
+            <img class="block-media-src" src="http://api.hub.jhu.edu/factory/sites/default/files/styles/hub_thumbnail/public/summer.jpg?itok=GhcMluWm" alt="University, hospital, health system to employ 300 Baltimore City students this summer">
+          </div>
+        </div>
+        <h2 class="block-media-heading">
+          <a class="block-media-link" href="http://hub.jhu.edu/2015/06/23/daniels-baltimore-build-event" title="Daniels outlines expansion of Johns Hopkins' 'deep and unwavering' commitment to Baltimore">
+            Daniels outlines expansion of Johns Hopkins' 'deep and unwavering' commitment to Baltimore
+          </a>
+        </h2>
+      </div>
+
+      <div class="block-media-right">
+        <div class="block-media-attach">
+          <div class="block-media-ratio">
+            <img class="block-media-src" src="http://api.hub.jhu.edu/factory/sites/default/files/styles/hub_thumbnail/public/summer.jpg?itok=GhcMluWm" alt="University, hospital, health system to employ 300 Baltimore City students this summer">
+          </div>
+        </div>
+        <h2 class="block-media-heading">
+          <a class="block-media-link" href="http://hub.jhu.edu/gazette/2015/march-april/currents-new-jhu-local-business-program" title="New JHU program helps local businesses grow">
+            New JHU program helps local businesses grow
+          </a>
+        </h2>
+      </div>
+    </div>
+  </div> <!-- /.content-blocks -->
+
+
+  <div class="map">
+    <div class="map-overlay">
+      <div class="map-overlay-canister">
+        <div class="map-overlay-content">
+          <h2 class="map-overlay-heading">
+            {{ post.map_heading }}
+          </h2>
+          {{ post.map_text }}
+        </div>
+      </div>
+    </div>
+    <div class="map-viewport" id="map"></div>
+    <!-- /#map.map-viewport -->
+  </div>
+
+
+  {% if focuses|length %}
+  <div class="focuses">
+    <div class="focuses-canister">
+    {% for focus in focuses %}
+      <div class="focus-item-{{ focus.slug }}">
+        <h2 class="focus-item-heading">{{ focus.title}}</h2>
+        <div class="focus-item-content">
+        {{ focus.page_excerpt|wpautop }}
+
+        {% if focus.get_field('more_information_link') %}
+          {% for item in focus.get_field('more_information_link') %}
+          <a class="focus-link-more" href="{{ item.link_url }}" title="{{ item.link_text }}">
+            {{ item.link_text }}
+          </a>
+          {% endfor %}
+        {% endif %}
+        {% if focus.get_field('focus_link') %}
+          {% for item in focus.get_field('focus_link') %}
+          <a class="focus-link-option" href="{{ item.link_url }}" title="{{ item.link_text }}">
+            {{ item.link_text }}
+          </a>
+          {% endfor %}
+        {% endif %}
+        </div>
+      </div>
+      <!-- /.focus-item-{{ focus.slug }} -->
+    {% endfor %}
+    </div>
+  </div>
+  {% endif %}
 {% endblock %}
