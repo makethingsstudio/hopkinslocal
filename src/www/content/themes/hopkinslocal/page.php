@@ -33,6 +33,12 @@ $templates = array( 'page-' . $post->post_name . '.twig', 'page.twig' );
 if ( is_front_page() ) {
   $focusIds = array(14, 16, 18);
   $context['focuses'] = Timber::get_posts($focusIds);
+  $args = array(
+    'post_type' => 'post',
+    'meta_key' => 'homepage',
+    'meta_value' => 1
+  );
+  $context['posts'] = Timber::get_posts($args);
   array_unshift( $templates, 'home.twig' );
 } else {
   $context['stories'] = Timber::get_posts(get_field( 'success_stories', $post->ID ) );

@@ -45,67 +45,54 @@
 
 
   <div class="content-blocks">
+  {% if posts|length %}
+    {% for item in posts|slice(0,1) %}
     <div class="content-blocks-columns-1">
-      <div class="block-stack" style="background-image: url('http://api.hub.jhu.edu/factory/sites/default/files/styles/hub_medium/public/tyren-day3_1.jpg'); background-size: cover; background-repeat: no-repeat">
+      <div class="block-stack">
       <h2 class="block-stack-heading">
-        <a class="block-stack-link" href="http://hub.jhu.edu/2015/06/04/summer-jobs-program-2015" title="Johns Hopkins summer jobs program for Baltimore youth expands by 50%">
-          Johns Hopkins summer jobs program for Baltimore youth expands by 50%
+        <a class="block-stack-link" href="{{ item.source_url }}" title="{{ item.title }}">
+          {{ item.title }}
         </a>
         </h2>
       </div>
     </div>
+    {% endfor %}
+  {% endif %}
+
     <div class="content-blocks-columns-2-pattern">
       <div class="block-quote">
         <blockquote class="block-quote-quote">
-          <p>
-            This joint effort by the university and health system is a firm and measurable commitment to promote economic growth in the city and increase diversity among our employees, contractors, and business partners. We have always been truly, proudly of Baltimore and embrace our role in building communities where people are proud to work, live and study.
-          </p>
+        {{ post.quote_text|wpautop }}
         </blockquote>
         <div class="block-quote-sources">
-          <p class="block-quote-source">
-            Ronald J. Daniels
-            <span class="block-quote-source-position">President, Johns Hopkins University</span>
-          </p>
-          <p class="block-quote-source">
-            Ronald R. Peterson
-            <span class="block-quote-source-position">President, Johns Hopkins Hospital and Health System</span>
-            <span class="block-quote-source-position">Executive Vice President, Johns Hopkins Medicine</span>
-          </p>
-          <p class="block-quote-source">
-            Paul B. Rothman, M.D.
-            <span class="block-quote-source-position">Dean of the Medical Faculty</span>
-            <span class="block-quote-source-position">CEO, Johns Hopkins Medicine</span>
-          </p>
+        {% for source in post.get_field('quote_sources') %}
+        <p class="block-quote-source">
+          {{ source.source_name }}
+          <span class="block-quote-source-position">
+            {{ source.source_position}}
+          </span>
+        </p>
+        {% endfor %}
         </div>
       </div>
     </div>
-    <div class="content-blocks-columns-2">
-      <div class="block-media-left">
-        <div class="block-media-attach">
-          <div class="block-media-ratio">
-            <img class="block-media-src" src="http://api.hub.jhu.edu/factory/sites/default/files/styles/hub_thumbnail/public/summer.jpg?itok=GhcMluWm" alt="University, hospital, health system to employ 300 Baltimore City students this summer">
-          </div>
-        </div>
-        <h2 class="block-media-heading">
-          <a class="block-media-link" href="http://hub.jhu.edu/2015/06/23/daniels-baltimore-build-event" title="Daniels outlines expansion of Johns Hopkins' 'deep and unwavering' commitment to Baltimore">
-            Daniels outlines expansion of Johns Hopkins' 'deep and unwavering' commitment to Baltimore
-          </a>
-        </h2>
-      </div>
 
-      <div class="block-media-right">
-        <div class="block-media-attach">
-          <div class="block-media-ratio">
-            <img class="block-media-src" src="http://api.hub.jhu.edu/factory/sites/default/files/styles/hub_thumbnail/public/summer.jpg?itok=GhcMluWm" alt="University, hospital, health system to employ 300 Baltimore City students this summer">
-          </div>
-        </div>
-        <h2 class="block-media-heading">
-          <a class="block-media-link" href="http://hub.jhu.edu/gazette/2015/march-april/currents-new-jhu-local-business-program" title="New JHU program helps local businesses grow">
-            New JHU program helps local businesses grow
-          </a>
-        </h2>
-      </div>
+  {% if 1 < posts|length %}
+  <div class="content-blocks-columns-2">
+  {% for item in posts|slice(1,3) %}
+  <div class="content-blocks-columns-1">
+    <div class="block-media-left">
+    <h2 class="block-media-heading">
+      <a class="block-media-link" href="{{ item.source_url }}" title="{{ item.title }}">
+        {{ item.title }}
+      </a>
+      </h2>
     </div>
+  </div>
+  {% endfor %}
+  </div>
+  {% endif %}
+
   </div> <!-- /.content-blocks -->
 
 
