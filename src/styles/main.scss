@@ -67,9 +67,10 @@ $fw-gentona-t: 100;
 $black: #000;
 $grey-ebb: #e5e2e0;
 $white: #fff;
-
+$grey-gravel: #4a484c;
 $blue-cornflower: #68ace5;
 $blue-jacarta: #34276d;
+$blue-curious: #3b8ede;
 $blue-rhino: #2a455c;
 $green-cucumber: #74aa50;
 $green-half-baked: #86c8bc;
@@ -101,6 +102,23 @@ $browser-upgrade-bg: $yellow-supernova;
 //
 @mixin _animate-hover {
   transition-duration: .15s;
+}
+
+
+//
+// @TODO: Add docs to _animate!
+//
+@mixin _animate-news {
+  transition: max-height 350ms ease-in-out,
+              padding 500ms ease-in-out;
+}
+
+
+//
+// @TODO: Add docs to _animate!
+//
+@mixin _animate-news-hover {
+  transition-duration: 500ms, 350ms;
 }
 
 
@@ -193,6 +211,14 @@ $browser-upgrade-bg: $yellow-supernova;
   > * + * {
     margin-top: .5em;
   }
+
+  > img,
+  > video,
+  > audio,
+  > iframe {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 
@@ -239,6 +265,12 @@ $browser-upgrade-bg: $yellow-supernova;
 #colorbox, #cboxContent, #cboxLoadedContent{box-sizing:content-box; -moz-box-sizing:content-box; -webkit-box-sizing:content-box;}
 
 
+
+::selection {
+  color: $white;
+  background-color: $default-selection-background-color; // required when declaring ::selection
+  text-shadow: none;
+}
 
 
 
@@ -324,6 +356,10 @@ $browser-upgrade-bg: $yellow-supernova;
   @media (min-width: $bp-1) {
     float: left;
   }
+}
+
+.t-homepage .masthead-logo {
+  background-image: url('../images/jhu-enterprise-logo-black.svg')
 }
 
 .t-hire .masthead-logo {
@@ -415,6 +451,16 @@ $browser-upgrade-bg: $yellow-supernova;
 }
 
 
+.t-homepage .masthead-nav-link {
+  color: $black;
+}
+
+.t-homepage .masthead-nav-link:hover,
+.t-homepage .masthead-nav-link:focus {
+  color: $blue-curious;
+}
+
+
 .t-hire .masthead-nav-link.is-active {
   color: $white;
 }
@@ -426,7 +472,7 @@ $browser-upgrade-bg: $yellow-supernova;
 .page-hero {
   padding-bottom: 18*$vs;
   color: $grey-ebb;
-  background: $blue-rhino url('../images/hopkinslocal-pattern-dark-50.png') center center repeat;
+  background: $blue-rhino url('../images/hopkins-local-pattern-orange-on-academic-gold.png') center center repeat;
   background-size: 500px;
   background-attachment: fixed;
 }
@@ -481,6 +527,7 @@ $browser-upgrade-bg: $yellow-supernova;
   text-align: center;
   font-weight: $fw-quadon-l;
   font-size: $fz-kilo;
+  color: $black;
   @media (min-width: $bp-1) {
     font-size: $fz-giga;
   }
@@ -498,7 +545,7 @@ $browser-upgrade-bg: $yellow-supernova;
 
 
 .hopkins-local-emphasis {
-  color: $blue-cornflower;
+  color: $blue-curious;
 }
 
 .t-build .hopkins-local-emphasis {
@@ -528,8 +575,11 @@ $browser-upgrade-bg: $yellow-supernova;
   font-size: $fz-deci;
   letter-spacing: .1em;
   text-align: right;
+  color: $black;
   @media (min-width: $bp-1) {
-    font-size: $fz-kilo;
+    // font-size: $fz-kilo;
+    font-size: 36px;
+    letter-spacing: .1em;
   }
 }
 
@@ -556,23 +606,38 @@ $browser-upgrade-bg: $yellow-supernova;
 
 .page-intro {
   @media (min-width: $bp-1) {
-    width: percentage(596/1218);
+    width: percentage(908/1218);
     margin: 8*$vs auto;
+    overflow: hidden;
   }
 }
 
 
 .page-intro-heading {
+  margin-bottom: .25em;
+  font-family: $heading-font-family;
+  font-weight: $fw-quadon-n;
   font-size: $fz-hecto;
   line-height: $lh-base;
-  font-weight: $fw-gentona-bold;
+  @media (min-width: $bp-1) {
+    font-size: $fz-mega;
+  }
 }
 
 .page-intro-content {
   @include _cms;
-  font-size: $fz-dec;
-  font-weight: $fw-gentona-bold;
-  line-height: $lh-thin;
+  color: $grey-gravel;
+
+  @media (min-width: $bp-1) {
+    width: percentage(500/908);
+    float: left;
+  }
+
+  h3 {
+    font-size: $fz-dec;
+    font-weight: $fw-gentona-bold;
+    line-height: $lh-thin;
+  }
 }
 
 
@@ -581,13 +646,11 @@ $browser-upgrade-bg: $yellow-supernova;
   position: relative;
   display: block;
   padding: 2*$vs;
-  padding-left: 45px;
-  border-radius: $vs;
-  border: $vs solid $blue-cornflower;
-  background: url('../images/icon-play.svg') 3*$vs center no-repeat;
+  background: $grey-ebb;
 
   @media (min-width: $bp-1) {
-    width: percentage(440/596);
+    float: right;
+    width: percentage(346/908);
   }
 
   &:hover,
@@ -599,7 +662,20 @@ $browser-upgrade-bg: $yellow-supernova;
   }
 }
 
-.page-intro-videolink .icon-play-md {
+.page-intro-videolink-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.page-intro-videolink-text {
+  display: block;
+  padding-top: $vs;
+  text-align: center;
+  font-size: $fz-deci;
+  line-height: $lh-base;
+  font-family: $heading-font-family;
+  font-weight: $fw-quadon-b;
 }
 
 
@@ -608,7 +684,22 @@ $browser-upgrade-bg: $yellow-supernova;
 
 .content-blocks {
   overflow: hidden;
+  border-top: 10px solid #005db9;
   @media (min-width: $bp-1) {
+    position: relative;
+
+  }
+}
+
+.content-blocks-header {
+  padding: 0 2*$vs 2*$vs;
+  color: #fff;
+  background-color: #005db9;
+  @media (min-width: $bp-1) {
+    position: absolute;
+    top: 0;
+    left: 15.5%;
+    z-index: 2;
   }
 }
 
@@ -616,7 +707,7 @@ $browser-upgrade-bg: $yellow-supernova;
   background: $blue-rhino;
   @media (min-width: $bp-1) {
     float: left;
-    width: percentage(333/1218);
+    width: percentage(594/1218);
     margin: 0;
   }
 
@@ -625,17 +716,7 @@ $browser-upgrade-bg: $yellow-supernova;
 .content-blocks-columns-2 {
   @media (min-width: $bp-1) {
     float: left;
-    width: percentage(333/1218);
-  }
-}
-
-
-.content-blocks-columns-2-dark {
-  background: $blue-cornflower;
-
-  @media (min-width: $bp-1) {
-    float: left;
-    width: percentage(552/1218);
+    width: percentage(312/1218);
   }
 }
 
@@ -651,64 +732,59 @@ $browser-upgrade-bg: $yellow-supernova;
   &:hover,
   &:focus {
     @include _animate-hover;
-
-    &:after {
-      @include _animate-hover;
-      opacity: 1;
+    .block-stack-heading {
+      max-height: 75%;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
     }
   }
 
   &:after {
     @include _animate;
     content: '';
+    display: block;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba($blue-rhino, .5);
-    opacity: 0;
-
-
+    bottom: 1rem;
+    left: 1rem;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    background: url('../images/icon-info.svg') center center no-repeat;
+    border-radius: 100%;
   }
 }
 
 
 .content-blocks-columns-1 .block-stack {
-  padding-top: 100%;
-  @media (min-width: $bp-1) {
-    padding-top: 125%;
-  }
+  padding-top: 104%;
 }
 
 
 .content-blocks-columns-2 .block-stack {
-  padding-top: 50%;
-  @media (min-width: $bp-1) {
-    padding-top: 62.5%;
-  }
+  padding-top: 99%;
 }
 
 
 .block-stack-heading {
-  @include _animate;
+  @include _animate-news;
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
+  max-height: 0;
   z-index: $z-content;
   width: 100%;
-  padding: $vs*3 $vs*4 $vs*4;
+  padding: 0 1rem;
+  overflow: hidden;
+
   font-size: $fz-deci;
   line-height: $lh-thin;
   color: $grey-ebb;
-  background-color: $blue-rhino;
-  background-color: rgba($blue-rhino, .8);
+  background-color: $red-roughy;
 
   .block-stack:hover &,
   .block-stack:focus & {
-    @include _animate-hover;
-    background-color: $black
+    @include _animate-news-hover;
   }
 }
 

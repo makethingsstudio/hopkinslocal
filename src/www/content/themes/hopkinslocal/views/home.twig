@@ -15,7 +15,9 @@
                 <a class="masthead-nav-link {{ item.classes|join(' ') }}" href="{{ item.get_link }}" title="{{ item.title }}">{{ item.title }}</a>
               </li>
             {% endfor %}
-            <li class=masthead-nav-item> <a class=masthead-nav-link id=js-show-about href=#about title="About with Baltimore and Area Businesses">About</a> </li>
+	    <li class="masthead-nav-item">
+	      <a class="masthead-nav-link" id="js-show-about" href="#about">About</a>
+	    </li>
           </ul>
         </nav>
       </header>
@@ -23,7 +25,7 @@
         <h1 class="hopkins-local-mark" id="js-fit-local">
           Hopkins<strong class="hopkins-local-emphasis">Local</strong>
         </h1>
-        <p class="hopkins-local-tagline">Build. Hire. Buy</p>
+        <p class="hopkins-local-tagline">Build. Hire. Buy.</p>
       </div>
     </div>
   </div>
@@ -36,74 +38,80 @@
       </h2>
       <div class="page-intro-content">
         {{ post.content }}
-        <p>
-          <a class="page-intro-videolink" id="js-video-gallery" href="{{ post.video_link_url }}" title="">
-            {{ post.video_link_text }}
-          </a>
-        </p>
+
+      </div>
+      <div class="page-intro-video">
+        <a class="page-intro-videolink" id="js-video-gallery" href="{{ post.video_link_url }}" title="">
+            <img class="page-intro-videolink-image" src="{{site.theme.link}}/images/play-video.jpg" alt="{{ post.video_link_text }}">
+            <strong class="page-intro-videolink-text">{{ post.video_link_text }}</strong>
+        </a>
+
       </div>
     </div>
   </div>
 
 
   <div class="content-blocks">
+  <h2 class="content-blocks-header">
+    HopkinsLocal in Action
+  </h2>
   {% if posts|length %}
     {% for item in posts|slice(0,1) %}
     <div class="content-blocks-columns-1">
+      {% if item.story_url|length %}
       <a class="block-stack" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
         <h2 class="block-stack-heading">
           {{ item.title }}
         </h2>
       </a>
+      {% else %}
+      <div class="block-stack" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+        <h2 class="block-stack-heading">
+          {{ item.title }}
+        </h2>
+      </div>
+      {% endif %}
     </div>
     {% endfor %}
-  {% endif %}
 
-    <div class="content-blocks-columns-2-dark">
-      <div class="block-quote">
-        <blockquote class="block-quote-text">
-        {{ post.quote_text|wpautop }}
-          <div class="block-quote-sources">
-          {% for source in post.get_field('quote_sources') %}
-          <p class="block-quote-source">
-            {{ source.source_name }}
-            <span class="block-quote-source-position">
-              {{ source.source_position}}
-            </span>
-          </p>
-          {% endfor %}
-          </div>
-        </blockquote>
+    <div class="content-blocks-columns-2">
+    {% for item in posts|slice(1,2) %}
+      {% if item.story_url|length %}
+      <a class="block-stack" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+        <h2 class="block-stack-heading">
+          {{ item.title }}
+        </h2>
+      </a>
+      {% else %}
+      <div class="block-stack" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+        <h2 class="block-stack-heading">
+          {{ item.title }}
+        </h2>
       </div>
+      {% endif %}
+    {% endfor %}
     </div>
 
-  {% if 1 < posts|length %}
-  <div class="content-blocks-columns-2">
-  {% for item in posts|slice(1,3) %}
-  <a class="block-stack" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
-    <h2 class="block-stack-heading">
-      {{ item.title }}
-    </h2>
-  </a>
-  {% endfor %}
-  </div>
+    <div class="content-blocks-columns-2">
+    {% for item in posts|slice(3,2) %}
+    {% if item.story_url|length %}
+    <a class="block-stack" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+      <h2 class="block-stack-heading">
+        {{ item.title }}
+      </h2>
+    </a>
+    {% else %}
+    <div class="block-stack" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+      <h2 class="block-stack-heading">
+        {{ item.title }}
+      </h2>
+    </div>
+    {% endif %}
+    {% endfor %}
+    </div>
   {% endif %}
 
   </div> <!-- /.content-blocks -->
-
-
-  <div class="map">
-    <div class="map-overlay">
-      <div class="map-overlay-content">
-        <h2 class="map-overlay-heading">
-          {{ post.map_heading }}
-        </h2>
-        {{ post.map_text }}
-      </div>
-    </div>
-    <div class="map-viewport" id="map"></div>
-    <!-- /#map.map-viewport -->
-  </div>
 
 
   {% if focuses|length %}
