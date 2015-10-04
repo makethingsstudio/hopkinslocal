@@ -1,0 +1,26 @@
+data:
+  image: tutum/apache-php
+  volumes:
+    - /app/content/uploads
+    - /var/lib/mysql
+
+web:
+  build: conf/docker/images/apache-php
+  hostname: hopkinslocal
+  domainname: hopkinslocal.jhu.dev
+  volumes:
+    - /vagrant/Documents/projects/jhu-hopkinslocal-dev/src/www:/app
+  volumes_from:
+    - data
+  links:
+    - mysql
+  environment:
+    - VIRTUAL_HOST=hopkinslocal.jhu.dev
+
+mysql:
+  image: mysql
+  ports:
+    - 3306
+  environment:
+    - VIRTUAL_HOST=mysql.hopkinslocal.jhu.dev
+    - MYSQL_ROOT_PASSWORD=password

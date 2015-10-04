@@ -1,0 +1,49 @@
+{% block html_head_container %}
+  {% include 'html-header.twig' %}
+  {% block head %}
+  {% endblock %}
+  </head>
+{% endblock %}
+
+
+
+
+
+  <body class="{{ body_class }}">
+    <!--[if lt IE 10]>
+      <div class="browser-upgrade">
+        <div class="container">
+          <p class="browser-upgrade-content">
+            You are using an <strong>outdated</strong> browser. Please <a class="browser-upgrade-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+          </p>
+        </div>
+      </div>
+    <![endif]-->
+{% block header %}
+{% endblock %}
+
+{% block content %}
+  Sorry, no content
+{% endblock %}
+
+{% block footer %}
+  {% include 'footer.twig' %}
+  {{ function('wp_footer') }}
+{% endblock %}
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    {# <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script> #}
+
+
+    <script src="{{site.theme.link}}/scripts/vendor.js"></script>
+    <script src="{{site.theme.link}}/scripts/main.js"></script>
+
+  </body>
+</html>
