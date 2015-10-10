@@ -1,1 +1,78 @@
-!function(){"use strict";var o,e,a,l,s,n,t;$(function(){$("#js-video-gallery").colorbox(),t=document.getElementById("map"),t&&(a=window.innerHeight,t.style.height=a+"px",console.log(a),L.mapbox.accessToken="pk.eyJ1Ijoiamh1LWhvcGtpbnNsb2NhbCIsImEiOiJhYWU0NmI1MDNhYmQwYWMyNGE1ZmE2N2M2ZDQzOGU0ZSJ9.qIccEmDGFYTizXvc3O3SDQ",n=L.mapbox.map("map","jhu-hopkinslocal.c70885a8",{zoomControl:!1}),L.mapbox.featureLayer("jhu-hopkinslocal.c70885a8").on("ready",function(){n.fitBounds(this.getBounds())}),n.dragging.disable(),n.touchZoom.disable(),n.doubleClickZoom.disable(),n.scrollWheelZoom.disable()),o=$("#js-show-about"),s=$("#js-show-about-more"),l=$("#js-close-about"),e=$("body"),o.on("click",function(o){o.preventDefault(),e.toggleClass("has-overlay")}),s&&s.on("click",function(o){o.preventDefault(),e.toggleClass("has-overlay")}),l.on("click",function(o){o.preventDefault(),e.toggleClass("has-overlay")})})}();
+/* globals L: false */
+/* globals $: false */
+
+(function () {
+  'use strict';
+
+  var aboutControl;
+  var $body;
+  var bodyHeight;
+  var closeAboutControl;
+  var learnAboutControl;
+  var map;
+  var mapE;
+
+
+
+
+
+  $(function () {
+    $('#js-video-gallery').colorbox({
+      iframe: true,
+      width: '60%',
+      height: '60%'
+    });
+
+    $('#js-fit-local').fitText(0.9);
+
+    // // Get Height of Browser, apply it to map.
+    // mapE = document.getElementById('map');
+    // if (mapE) {
+    //   bodyHeight = window.innerHeight;
+    //   mapE.style.height = bodyHeight + 'px';
+    //   console.log(bodyHeight);
+
+
+    //   L.mapbox.accessToken = 'pk.eyJ1Ijoiamh1LWhvcGtpbnNsb2NhbCIsImEiOiJhYWU0NmI1MDNhYmQwYWMyNGE1ZmE2N2M2ZDQzOGU0ZSJ9.qIccEmDGFYTizXvc3O3SDQ';
+    //   map = L.mapbox.map('map', 'jhu-hopkinslocal.c70885a8', {
+    //     zoomControl: false
+    //   });
+
+    //   L.mapbox.featureLayer('jhu-hopkinslocal.c70885a8').on('ready', function() {
+    //     map.fitBounds(this.getBounds());
+    //   });
+
+
+
+    //   map.dragging.disable();
+    //   map.touchZoom.disable();
+    //   map.doubleClickZoom.disable();
+    //   map.scrollWheelZoom.disable();
+    // }
+
+    aboutControl = $('#js-show-about');
+    learnAboutControl = $('#js-show-about-more');
+    closeAboutControl = $('#js-close-about');
+    $body = $('body');
+
+    aboutControl.on('click', function(e) {
+      e.preventDefault();
+      $body.toggleClass('has-overlay');
+      $('#js-overlay-mark').fitText(0.8);
+    });
+
+    if (learnAboutControl) {
+      learnAboutControl.on('click', function(e) {
+        e.preventDefault();
+        $body.toggleClass('has-overlay');
+        $('#js-overlay-mark').fitText(0.8);
+      });
+    }
+
+    closeAboutControl.on('click', function(e) {
+      e.preventDefault();
+      $body.toggleClass('has-overlay');
+    });
+  });
+
+})();

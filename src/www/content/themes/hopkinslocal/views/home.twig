@@ -21,9 +21,11 @@
       </header>
       <div class="hopkins-local">
         <h1 class="hopkins-local-mark" id="js-fit-local">
-          Hopkins<strong class="hopkins-local-emphasis">Local</strong>
+            <span style="display: inline-block;">Hopkins </span>
+            <strong class="hopkins-local-emphasis" style="display: inline-block;">Local
+            <span class="hopkins-local-tagline" style="display: block; font-size: .359em">Build. Hire. Buy.</span></strong>
         </h1>
-        <p class="hopkins-local-tagline">Build. Hire. Buy</p>
+
       </div>
     </div>
   </div>
@@ -32,78 +34,121 @@
   <div class="container">
     <div class="page-intro">
       <h2 class="page-intro-heading">
-        {{ post.title }}
+        {{ post.page_heading }}
       </h2>
       <div class="page-intro-content">
         {{ post.content }}
-        <p>
-          <a class="page-intro-videolink" id="js-video-gallery" href="{{ post.video_link_url }}" title="">
-            {{ post.video_link_text }}
-          </a>
-        </p>
+
+      </div>
+      <div class="page-intro-video">
+        <a class="page-intro-videolink" id="js-video-gallery" href="{{ post.video_link_url }}" title="">
+            <img class="page-intro-videolink-image" src="{{site.theme.link}}/images/play-video.jpg" alt="{{ post.video_link_text }}">
+            <strong class="page-intro-videolink-text">{{ post.video_link_text }}</strong>
+        </a>
       </div>
     </div>
   </div>
 
 
   <div class="content-blocks">
+  <h2 class="content-blocks-header">
+    HopkinsLocal in Action
+  </h2>
   {% if posts|length %}
     {% for item in posts|slice(0,1) %}
+    {% if item.associated_program|length %}
+    {% set blockClass = 'block-stack-' ~ item.associated_program %}
+    {% else %}
+        {% set blockCls = '' %}
+    {% endif %}
     <div class="content-blocks-columns-1">
-      <a class="block-stack" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+      {% if item.story_url|length %}
+      <a class="block-stack {{ blockClass }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
         <h2 class="block-stack-heading">
-          {{ item.title }}
+          {% if item.post_excerpt|length %}
+            {{ item.post_excerpt }}
+          {% else %}
+            {{ item.title }}
+          {% endif %}
         </h2>
       </a>
+      {% else %}
+      <div class="block-stack {{ blockClass }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+        <h2 class="block-stack-heading">
+          {% if item.post_excerpt|length %}
+            {{ item.post_excerpt }}
+          {% else %}
+            {{ item.title }}
+          {% endif %}
+        </h2>
+      </div>
+      {% endif %}
     </div>
     {% endfor %}
-  {% endif %}
 
-    <div class="content-blocks-columns-2-dark">
-      <div class="block-quote">
-        <blockquote class="block-quote-text">
-        {{ post.quote_text|wpautop }}
-          <div class="block-quote-sources">
-          {% for source in post.get_field('quote_sources') %}
-          <p class="block-quote-source">
-            {{ source.source_name }}
-            <span class="block-quote-source-position">
-              {{ source.source_position}}
-            </span>
-          </p>
-          {% endfor %}
-          </div>
-        </blockquote>
-      </div>
-    </div>
-
-  {% if 1 < posts|length %}
-  <div class="content-blocks-columns-2">
-  {% for item in posts|slice(1,3) %}
-  <a class="block-stack" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
-    <h2 class="block-stack-heading">
-      {{ item.title }}
-    </h2>
-  </a>
-  {% endfor %}
-  </div>
-  {% endif %}
-
-  </div> <!-- /.content-blocks -->
-
-
-  <div class="map">
-    <div class="map-overlay">
-      <div class="map-overlay-content">
-        <h2 class="map-overlay-heading">
-          {{ post.map_heading }}
+    <div class="content-blocks-columns-2">
+    {% for item in posts|slice(1,2) %}
+      {% if item.associated_program|length %}
+      {% set blockClass = 'block-stack-' ~ item.associated_program %}
+      {% else %}
+      {% set blockCls = '' %}
+      {% endif %}
+      {% if item.story_url|length %}
+      <a class="block-stack {{ blockClass }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+        <h2 class="block-stack-heading">
+          {% if item.post_excerpt|length %}
+            {{ item.post_excerpt }}
+          {% else %}
+            {{ item.title }}
+          {% endif %}
         </h2>
-        {{ post.map_text }}
+      </a>
+      {% else %}
+      <div class="block-stack {{ blockClass }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+        <h2 class="block-stack-heading">
+          {% if item.post_excerpt|length %}
+            {{ item.post_excerpt }}
+          {% else %}
+            {{ item.title }}
+          {% endif %}
+        </h2>
       </div>
+      {% endif %}
+    {% endfor %}
     </div>
-    <div class="map-viewport" id="map"></div>
-    <!-- /#map.map-viewport -->
-  </div>
+
+    <div class="content-blocks-columns-2">
+    {% for item in posts|slice(3,2) %}
+    {% if item.associated_program|length %}
+    {% set blockClass = 'block-stack-' ~ item.associated_program %}
+    {% else %}
+        {% set blockCls = '' %}
+    {% endif %}
+    {% if item.story_url|length %}
+    <a class="block-stack {{ blockClass }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+      <h2 class="block-stack-heading">
+        {% if item.post_excerpt|length %}
+            {{ item.post_excerpt }}
+          {% else %}
+            {{ item.title }}
+          {% endif %}
+      </h2>
+    </a>
+    {% else %}
+    <div class="block-stack {{ blockClass }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+      <h2 class="block-stack-heading">
+        {% if item.post_excerpt|length %}
+            {{ item.post_excerpt }}
+          {% else %}
+            {{ item.title }}
+          {% endif %}
+      </h2>
+    </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+  {% endif %}
+  </div> <!-- /.content-blocks -->
 
 
   {% if focuses|length %}
@@ -113,21 +158,12 @@
       <div class="focus-item-{{ focus.slug }}">
         <h2 class="focus-item-heading">{{ focus.title}}</h2>
         <div class="focus-item-content">
+          <img class="focus-item-src" src="{{ focus.thumbnail.src }}" alt="">
           <div class="focus-item-text">{{ focus.page_excerpt|wpautop }}</div>
-          {% if focus.get_field('more_information_link') %}
-            {% for item in focus.get_field('more_information_link') %}
-            <a class="focus-link-more" href="{{ item.link_url }}" title="{{ item.link_text }}">
-              {{ item.link_text }}
-            </a>
-            {% endfor %}
-          {% endif %}
-          {% if focus.get_field('focus_link') %}
-            {% for item in focus.get_field('focus_link') %}
-            <a class="focus-link-option" href="{{ item.link_url }}" title="{{ item.link_text }}">
-              {{ item.link_text }}
-            </a>
-            {% endfor %}
-          {% endif %}
+
+          <a class="focus-link-more" href="{{ focus.link }}" title="Learn More">
+            Learn More
+          </a>
         </div>
 
       </div>
@@ -136,4 +172,22 @@
     </div>
   </div>
   {% endif %}
+
+  <div class="quote">
+    <div class="container">
+      <div class="block-quote">
+        <blockquote class="block-quote-text">
+          {{ post.quote_text|wpautop }}
+          <div class="block-quote-sources">
+            {% for source in post.get_field('quote_sources') %}
+            <p class="block-quote-source">
+              {{ source.source_name }}
+              <span class="block-quote-source-position">{{ source.source_position}}</span>
+            </p>
+            {% endfor %}
+          </div>
+        </blockquote>
+      </div>
+    </div>
+  </div>
 {% endblock %}

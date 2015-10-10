@@ -11,12 +11,12 @@
 
           <nav role="navigation">
             <ul class="masthead-nav">
-            {% for item in primary.get_items %}
-              <li class="masthead-nav-item">
-                <a class="masthead-nav-link {{ item.classes|join(' ') }}" href="{{ item.get_link }}" title="{{ item.title }}">{{ item.title }}</a>
-              </li>
-            {% endfor %}
-            <li class=masthead-nav-item> <a class=masthead-nav-link id=js-show-about href=#about title="About with Baltimore and Area Businesses">About</a> </li>
+              {% for item in primary.get_items %}
+                <li class="masthead-nav-item">
+                  <a class="masthead-nav-link {{ item.classes|join(' ') }}" href="{{ item.get_link }}" title="{{ item.title }}">{{ item.title }}</a>
+                </li>
+              {% endfor %}
+              <li class=masthead-nav-item> <a class=masthead-nav-link id=js-show-about href=#about title="About with Baltimore and Area Businesses">About</a> </li>
             </ul>
           </nav>
         </header>
@@ -39,7 +39,7 @@
           {{ post.content }}
         </div>
         <!-- @TODO add styles for this -->
-        <h2 style="font-size: 24px;">
+        <h2 style="font-size: 24px; margin-bottom: .5em;">
           {{ post.program_detail_title }}
         </h2>
 
@@ -75,13 +75,18 @@
             </div>
           </a>
           {% endif %}
-          <p class="block-media-type">Success Story</p>
+          <p class="block-media-type">HopkinsLocal in Action</p>
           <h2 class="block-media-heading">
             <a class="block-media-link" href="http://hub.jhu.edu/gazette/2014/september-october/focus-malone-hall" title="{{ item.title }}">
+            {% if item.post_excerpt|length %}
+              {{ item.post_excerpt }}
+            {% else %}
               {{ item.title }}
+            {% endif %}
+
             </a>
           </h2>
-          {{ item.post_excerpt|wpautop }}
+
         </div>
         {% endfor %}
       {% endif %}
