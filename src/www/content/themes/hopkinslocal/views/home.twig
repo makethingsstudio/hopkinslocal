@@ -8,7 +8,7 @@
           <a class="masthead-logo" href="/" title="Johns Hopkins University &amp; Medical">Johns Hopkins University &amp; Medical</a>
         </div>
 
-        <nav role="navigation">
+        <nav class="masthead-menu" role="navigation">
           <ul class="masthead-nav">
             {% for item in primary.get_items %}
               <li class="masthead-nav-item">
@@ -59,13 +59,13 @@
     {% for item in posts|slice(0,1) %}
     <div class="content-blocks-columns-1">
       {% if item.story_url|length %}
-      <a class="block-stack" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+      <a class="block-stack" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}'); filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{{ item.thumbnail.src|resize(500, 500) }}', sizingMethod='scale'); -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{{ item.thumbnail.src|resize(500, 500) }}', sizingMethod='scale')"; " target="_blank">
         <h2 class="block-stack-heading">
           {{ item.title }}
         </h2>
       </a>
       {% else %}
-      <div class="block-stack" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+      <div class="block-stack" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}'); filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{{ item.thumbnail.src|resize(500, 500) }}', sizingMethod='scale'); -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{{ item.thumbnail.src|resize(500, 500) }}" target="_blank">
         <h2 class="block-stack-heading">
           {{ item.title }}
         </h2>
