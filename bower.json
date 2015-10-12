@@ -7,10 +7,13 @@
     "enquire": "~2.1.2",
     "jquery": "~2.1.4",
     "colorbox": "~1.6.3",
-    "FitText.js": "~1.2.0"
+    "FitText.js": "~1.2.0",
+    "modernizr": "2.8.3"
   },
   "devDependencies": {
     "chai": "~3.2.0",
-    "mocha": "~2.2.5"
+    "mocha": "~2.2.5",
+    "modernizr": "2.8.3",
+    "compass-breakpoint": "breakpoint-sass#~2.6.1"
   }
 }

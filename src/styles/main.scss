@@ -1,4 +1,10 @@
-$default-font-family: gentona, 'proxima nova', 'Helvetica Neue', Helvetica, sans-serif;
+$breakpoint-no-query-fallbacks: true;
+
+@import "../../bower_components/compass-breakpoint/stylesheets/_breakpoint.scss";
+
+
+
+$default-font-family: gentona, 'proxima nova', 'Helvetica Neue', Helvetica, arial, sans-serif;
 $default-selection-background-color: #2a455c;
 $default-underline-color: #2a455c;
 $heading-font-family: quadon, $default-font-family;
@@ -22,7 +28,7 @@ $vs: 4px;
 
 
 
-$bp-1: 48em;
+$bp-1: 48em, 'no-query' '.lt-ie9';
 
 
 
@@ -193,8 +199,7 @@ $browser-upgrade-bg: $yellow-supernova;
   -2px 0 $background,
   -3px 0 $background;
   // Tweak position + thickness for high res (1.75x and up) displays
-  @media (-webkit-min-device-pixel-ratio: 1.75),
-  (min-resolution: 168dpi) {
+  @include breakpoint(-webkit-min-device-pixel-ratio 1.75, min-resolution 168dpi) {
     background-image: linear-gradient(rgba($default-underline-color, 0.25) 0%, $default-underline-color 100%);
     background-position: 0 93%;
   }
@@ -219,6 +224,12 @@ $browser-upgrade-bg: $yellow-supernova;
     max-width: 100%;
     height: auto;
   }
+
+  a:link,
+  a:active,
+  a:visited {
+    text-decoration: underline;
+  }
 }
 
 
@@ -242,7 +253,7 @@ $browser-upgrade-bg: $yellow-supernova;
 
 // bower:scss
 @import 'bower_components/sanitize-css/sanitize.scss';
-// endbower
+
 
 
 
@@ -285,6 +296,8 @@ body {
 
 
 
+
+
 ::selection {
   color: $white;
   background-color: $default-selection-background-color; // required when declaring ::selection
@@ -303,6 +316,23 @@ body {
 
 
 
+html,
+body {
+  font-family: $default-font-family;
+}
+
+
+
+
+a:link,
+a:active,
+a:visited {
+  text-decoration: none;
+}
+
+
+
+
 
 .container {
   @include _container;
@@ -316,7 +346,7 @@ body {
   padding: 1em 0 1.2em;
   font-size: $fz-deca;
   color: #000;
-  background: $browser-upgrade-bg;
+  background: $white;
 }
 
 
@@ -349,18 +379,25 @@ body {
 
 
 .masthead-brand {
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
+    float: left;
+    padding-left: 51px; // @NOTE magic number, from logo
+    margin-left: -51px;
+  }
+
+  .lt-ie9 & {
     float: left;
     padding-left: 51px; // @NOTE magic number, from logo
     margin-left: -51px;
   }
 }
 
+
+
 .masthead-brand-interior {
   margin: 0 auto;
   text-align: center;
-
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     float: left;
     width: 586px; // 341+245
     padding-left: 51px; // @NOTE magic number, from logo
@@ -377,17 +414,32 @@ body {
   height: 151px;
   margin-left: -51px;
   background: transparent url('../images/jhu-enterprise-logo-white.svg') center center no-repeat;
-  @media (min-width: $bp-1) {
+
+  @include breakpoint($bp-1) {
     float: left;
+  }
+
+  .lt-ie9 & {
+    float: left;
+    background-image: url('../images/jhu-enterprise-logo-white.png')
   }
 }
 
+
 .t-homepage .masthead-logo {
-  background-image: url('../images/jhu-enterprise-logo-black.svg')
+  background-image: url('../images/jhu-enterprise-logo-black.svg');
+
+  .lt-ie9 & {
+    background-image: url('../images/jhu-enterprise-logo-black.png');
+  }
 }
 
 .t-hire .masthead-logo {
-  background-image: url('../images/jhu-enterprise-logo-black.svg')
+  background-image: url('../images/jhu-enterprise-logo-black.svg');
+
+  .lt-ie9 & {
+    background-image: url('../images/jhu-enterprise-logo-black.png');
+  }
 }
 
 
@@ -401,7 +453,14 @@ body {
   text-transform: uppercase;
   color: $white;
 
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
+    float: left;
+    width: 245px;
+    padding-top: 56px;
+    padding-left: 48px;
+  }
+
+  .lt-ie9 & {
     float: left;
     width: 245px;
     padding-top: 56px;
@@ -409,8 +468,9 @@ body {
   }
 }
 
+
 .masthead-property:before {
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     content: '';
     position: absolute;
     top: 51px;
@@ -435,19 +495,19 @@ body {
 }
 
 
-.masthead-property-emphasis {
 
+
+
+.masthead-menu {
+  overflow: hidden;
 }
-
-
-
 
 
 .masthead-nav {
   font-weight: $fw-gentona-bold;
   text-transform: uppercase;
   letter-spacing: .1em;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     padding-top: $vs*14; // @NOTE magic number. (151-24)/2
     text-align: right;
   }
@@ -457,7 +517,7 @@ body {
 .masthead-nav-item {
   display: inline-block;
   & + & {
-    @media (min-width: $bp-1) {
+    @include breakpoint($bp-1) {
       margin-left: $vs*3;
     }
   }
@@ -467,6 +527,14 @@ body {
 .masthead-nav-link {
   display: block;
   padding: $vs;
+
+  &:link,
+  &:active,
+  &:visited {
+    text-decoration: none;
+    color: $black;
+  }
+
   &:hover,
   &:focus {
     color: $yellow-supernova
@@ -510,21 +578,23 @@ body {
 
 .t-build .page-hero {
   background-image: url("../images/hopkins-local-pattern-white-on-burnt-orange.png");
+  background-size: 500px;
   background-color: $red-roughy;
 }
 
 .t-hire .page-hero {
   color: $black;
   background-image: url("../images/hopkins-local-pattern-white-on-copper-petina.png");
+  background-size: 500px;
   background-color: $green-half-baked;
 }
 
 
 .t-buy .page-hero {
   background-image: url("../images/hopkins-local-pattern-white-on-oak-leaves.png");
+  background-size: 500px;
   background-color: $green-cucumber;
 }
-
 
 
 
@@ -538,10 +608,8 @@ body {
   padding-left: 6.3218390805%;
   text-transform: uppercase;
   font-family: $heading-font-family;
+  font-style: normal;
   line-height: $lh-base;
-  // @media (min-width: $bp-1) {
-  //   width: percentage(908/1218);
-  // }
 }
 
 
@@ -554,7 +622,7 @@ body {
 .about-local-heading {
   text-transform: uppercase;
   font-family: $heading-font-family;
-  font-weight: $fw-quadon-l;
+  font-weight: 300;
   line-height: $lh-base;
   color: $black;
 }
@@ -564,7 +632,7 @@ body {
   display: inline-block;
   width: 100%;
   text-align: center;
-  font-weight: $fw-quadon-l;
+  font-weight: 300;
   font-size: 37px;
   color: $black;
   @media (min-width: $bp-1) {
@@ -610,13 +678,14 @@ body {
 
 
 .hopkins-local-tagline {
+  display: block;
   font-family: $default-font-family;
   font-weight: $fw-gentona-medium;
   font-size: 14px;
   letter-spacing: .1em;
   text-align: right;
   color: $black;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     // font-size: $fz-kilo;
     font-size: 36px;
     letter-spacing: .1em;
@@ -662,7 +731,7 @@ body {
   font-weight: $fw-quadon-n;
   font-size: 48px;
   line-height: $lh-base;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     font-size: $fz-mega;
   }
 }
@@ -710,7 +779,7 @@ body {
   padding: 2*$vs;
   background: $grey-ebb;
 
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     float: right;
     width: percentage(346/908);
   }
@@ -747,7 +816,7 @@ body {
 .content-blocks {
   overflow: hidden;
   border-top: 10px solid #005db9;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     position: relative;
 
   }
@@ -758,7 +827,7 @@ body {
   text-transform: uppercase;
   color: #fff;
   background-color: #005db9;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     position: absolute;
     top: 0;
     left: 9.5%;
@@ -770,7 +839,7 @@ body {
 
 .content-blocks-columns-1 {
   background: $blue-rhino;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     float: left;
     width: percentage(594/1218);
     margin: 0;
@@ -779,7 +848,7 @@ body {
 }
 
 .content-blocks-columns-2 {
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     float: left;
     width: percentage(312/1218);
   }
@@ -793,6 +862,8 @@ body {
   width: 100%;
   height: 0;
   background-size: cover;
+
+
 
   &:hover,
   &:focus {
@@ -874,7 +945,7 @@ body {
   color: $grey-ebb;
   background: $red-heath;
   .block-media-attach {
-    @media (min-width: $bp-1) {
+    @include breakpoint($bp-1) {
       float: left;
     }
   }
@@ -886,7 +957,7 @@ body {
   color: $grey-ebb;
   background: $blue-jacarta;
   .block-media-attach {
-    @media (min-width: $bp-1) {
+    @include breakpoint($bp-1) {
       float: right;
     }
   }
@@ -895,7 +966,7 @@ body {
 
 .block-media-attach {
   position: relative;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     width: 50%;
   }
 }
@@ -903,7 +974,7 @@ body {
 
 .block-media-ratio {
   overflow: hidden;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     position: relative;
     width: 100%;
     height: 0;
@@ -913,7 +984,7 @@ body {
 
 
 .block-media-src {
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     position: absolute;
     top: 0;
     left: 0;
@@ -935,7 +1006,7 @@ body {
 .map {
   display: none;
   position: relative;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     display: block;
   }
 }
@@ -971,7 +1042,7 @@ body {
   font-weight: $fw-gentona-bold;
   color: $grey-ebb;
   background: $blue-jacarta;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     width: percentage(552/1218);
     margin: 0 auto;
   }
@@ -991,7 +1062,7 @@ body {
   padding-left: $vs;
   background: $white;
 
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     display: inline-block;
     width: percentage(336/1218);
     min-height: 94*$vs;
@@ -1033,7 +1104,7 @@ body {
 
 .focus-item-text {
   color: $black;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     min-height: 26*$vs;
   }
 }
@@ -1062,7 +1133,7 @@ body {
   font-size: $fz-deci;
   line-height: $lh-thin;
   border: $vs solid transparent;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     float: left;
     width: percentage(151/310);
   }
@@ -1074,7 +1145,7 @@ body {
 
   & + & {
     margin-top: 4*$vs;
-    @media (min-width: $bp-1) {
+    @include breakpoint($bp-1) {
       float: right;
       margin-top: 0;
     }
@@ -1086,7 +1157,7 @@ body {
   @include _focus-item;
   color: $red-roughy;
 
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     margin-top: 0;
       margin-left: percentage(77/1218);
     }
@@ -1119,7 +1190,7 @@ body {
     margin-top: 8*$vs;
   color: $green-half-baked;
 
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     margin-top: 0;
     margin-left: percentage(26/1218);
   }
@@ -1153,7 +1224,7 @@ body {
   margin-top: 8*$vs;
   color: $green-cucumber;
 
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     margin-top: 0;
     margin-left: percentage(26/1218);
   }
@@ -1332,6 +1403,10 @@ body {
   overflow: auto;
 
   background-color: $blue-cornflower;
+
+  .no-opacity & {
+    display: none;
+  }
 }
 
 .has-overlay {
@@ -1341,6 +1416,10 @@ body {
   @include _animate;
     opacity: 1;
     z-index: 2000;
+
+    .no-opacity & {
+      display: block;
+    }
   }
 }
 
@@ -1371,7 +1450,7 @@ body {
 
 .page-overlay-content {
   @include _cms;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     width: percentage(758/1218);
     padding-bottom: 20*$vs;
     margin: 0 auto;
@@ -1414,6 +1493,10 @@ body {
     width: 341px;
     height: 151px;
     background: transparent url('../images/jhu-enterprise-logo-white.svg') center center no-repeat;
+
+    .lt-ie9 & {
+      background-image: url('../images/jhu-enterprise-logo-white.png');
+    }
 }
 
 
@@ -1431,7 +1514,8 @@ body {
   font-size: $fz-centi;
   line-height: $lh-thin;
   color: $white;
-  @media (min-width: $bp-1) {
+
+  @include breakpoint($bp-1) {
     display: block;
     float: right;
     width: percentage(286/1218);
@@ -1445,6 +1529,7 @@ body {
 .contact-01 {
   display: table-cell;
   @media (min-width: $bp-1) {
+
     float: left;
     width: 48.7096774194%;
   }
@@ -1452,7 +1537,9 @@ body {
 
 .contact-02 {
   display: table-cell;
-  @media (min-width: $bp-1) {
+
+
+  @include breakpoint($bp-1) {
     margin-top: 0;
     float: right;
     width: 48.7096774194%;
@@ -1508,11 +1595,15 @@ body {
 
 .goal-list-01 {
   padding-left: 30px;
-  font-size: 18px;
-  line-height: 1.5;
-  @media (min-width: $bp-1) {
+  font-size: $fz;
+  line-height: $lh-thin;
+  @include breakpoint($bp-1) {
     float: left;
     width: 48.7096774194%;
+  }
+
+  .lt-ie9 & {
+    width: 45%;
   }
 }
 
@@ -1522,10 +1613,14 @@ body {
   font-size: 18px;
   line-height: 1.5;
 
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     float: right;
     width: 48.7096774194%;
     margin-top: 0;
+  }
+
+  .lt-ie9 & {
+    width: 45%;
   }
 
 }
@@ -1537,7 +1632,7 @@ body {
 
 
 .success-story {
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     float: left;
     width: percentage(850/1218);
     margin-right: 32px;
@@ -1551,7 +1646,7 @@ body {
 
 
 .success-story .block-media-attach {
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     margin-right: 4*$vs;
   }
 }
@@ -1625,7 +1720,7 @@ body {
 .page-actions {
   overflow: hidden;
   padding-top: 4*$vs;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     padding-top: 12*$vs;
   }
 }
@@ -1650,6 +1745,10 @@ body {
 
   + .focus-link-option {
     margin-top: 4*$vs;
+  }
+
+  .lt-ie9 & {
+    width: 90%;
   }
 }
 
@@ -1710,7 +1809,7 @@ body {
   padding-top: 8*$vs;
   padding-bottom: 8*$vs;
   background: $grey-ebb;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     padding-top: 16*$vs;
     padding-bottom: 16*$vs;
   }
@@ -1746,6 +1845,7 @@ body {
   font-weight: $fw-quadon-eb;
   font-size: $fz-deca;
   text-align: center;
+  text-decoration: none;
   color: $blue-cornflower;
   border: $vs solid ;
 
