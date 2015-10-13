@@ -417,7 +417,7 @@ a:visited {
   width: 341px;
   height: 151px;
   margin-left: -51px;
-  background: transparent url('../images/jhu-enterprise-logo-white.svg') center center no-repeat;
+  background: transparent url('../images/jhu-enterprise-logo-black.svg') center center no-repeat;
 
   @include breakpoint($bp-1) {
     float: left;
@@ -425,24 +425,7 @@ a:visited {
 
   .lt-ie9 & {
     float: left;
-    background-image: url('../images/jhu-enterprise-logo-white.png')
-  }
-}
-
-
-.t-homepage .masthead-logo {
-  background-image: url('../images/jhu-enterprise-logo-black.svg');
-
-  .lt-ie9 & {
-    background-image: url('../images/jhu-enterprise-logo-black.png');
-  }
-}
-
-.t-hire .masthead-logo {
-  background-image: url('../images/jhu-enterprise-logo-black.svg');
-
-  .lt-ie9 & {
-    background-image: url('../images/jhu-enterprise-logo-black.png');
+    background-image: url('../images/jhu-enterprise-logo-black.png')
   }
 }
 
@@ -563,9 +546,12 @@ a:visited {
 
 
 .t-hire .masthead-nav-link.is-active,
-.t-hire .masthead-nav-link.current-menu-item {
+.t-hire .masthead-nav-link.current-menu-item,
+.t-build .masthead-nav-link.current-menu-item,
+.t-buy .masthead-nav-link.current-menu-item {
   color: $white;
 }
+
 
 
 
@@ -698,6 +684,7 @@ a:visited {
 
 
 .overlay-hopkins-local-tagline {
+  display: block;
   font-family: $default-font-family;
   font-weight: $fw-gentona-medium;
   font-size: 30px;
@@ -945,13 +932,18 @@ a:visited {
 
 .block-media-left {
   overflow: hidden;
-  color: $grey-ebb;
+  color: $black;
   background: $red-heath;
   .block-media-attach {
     @include breakpoint($bp-1) {
       float: left;
     }
   }
+}
+
+
+.t-home .block-media-left {
+  color: $grey-ebb
 }
 
 
@@ -1833,24 +1825,29 @@ a:visited {
 .about-local-content {
   @include _cms;
   max-width: 90%;
+  margin-bottom: 1em;
   font-weight: $fw-gentona-medium;
   color: $blue-rhino;
 }
 
 
 .about-local-link {
-  @include _animate;
-  display: inline-block;
-  padding: 3*$vs 3*$vs 4*$vs;
-  margin: 0;
-  line-height: 1;
-  font-family: $heading-font-family;
-  font-weight: $fw-quadon-eb;
-  font-size: $fz-deca;
-  text-align: center;
-  text-decoration: none;
-  color: $blue-cornflower;
-  border: $vs solid ;
+  &:link,
+  &:active,
+  &:visited {
+    @include _animate;
+    display: inline-block;
+    padding: 3*$vs 3*$vs 4*$vs;
+    margin: 0;
+    line-height: 1;
+    font-family: $heading-font-family;
+    font-weight: $fw-quadon-eb;
+    font-size: $fz-deca;
+    text-align: center;
+    text-decoration: none;
+    color: $blue-cornflower;
+    border: $vs solid ;
+  }
 
   &:hover,
   &:focus {

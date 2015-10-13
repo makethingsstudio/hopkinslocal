@@ -24,7 +24,8 @@
     });
 
 
-    $('#js-fit-local').fitText();
+    $('#js-fit-local').fitText(0.9);
+    $('#js-overlay-fit-local').fitText(0.9);
 
     // // Get Height of Browser, apply it to map.
     // mapE = document.getElementById('map');
