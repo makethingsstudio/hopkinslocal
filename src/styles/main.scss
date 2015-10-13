@@ -385,11 +385,11 @@ a:visited {
     margin-left: -51px;
   }
 
-  .lt-ie9 & {
-    float: left;
-    padding-left: 51px; // @NOTE magic number, from logo
-    margin-left: -51px;
-  }
+  // .lt-ie9 & {
+  //   float: left;
+  //   padding-left: 51px; // @NOTE magic number, from logo
+  //   margin-left: -51px;
+  // }
 }
 
 
@@ -460,12 +460,12 @@ a:visited {
     padding-left: 48px;
   }
 
-  .lt-ie9 & {
-    float: left;
-    width: 245px;
-    padding-top: 56px;
-    padding-left: 48px;
-  }
+  // .lt-ie9 & {
+  //   float: left;
+  //   width: 245px;
+  //   padding-top: 56px;
+  //   padding-left: 48px;
+  // }
 }
 
 
