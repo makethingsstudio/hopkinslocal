@@ -311,6 +311,10 @@ body {
   width: 21px;
   height: 22px;
   background: url('../images/icon-play.svg') center center no-repeat;
+
+  .lt-ie9 & {
+    background-image: url('../images/icon-play.png');
+  }
 }
 
 
@@ -570,7 +574,7 @@ a:visited {
 .page-hero {
   padding-bottom: 18*$vs;
   color: $grey-ebb;
-  background: $blue-rhino url('../images/hopkins-local-pattern-orange-on-academic-gold.png') center center repeat;
+  background: $yellow-supernova url('../images/hopkins-local-pattern-orange-on-academic-gold.png') center center repeat;
   background-size: 500px;
   background-attachment: fixed;
 }
@@ -635,7 +639,7 @@ a:visited {
   font-weight: 300;
   font-size: 37px;
   color: $black;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     font-size: 99px;
   }
 }
@@ -645,7 +649,7 @@ a:visited {
   text-align: center;
   font-weight: $fw-quadon-l;
   font-size: 37px;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     font-size: 99px;
   }
 }
@@ -716,7 +720,7 @@ a:visited {
 .page-intro {
   padding-top: 32px;
   margin-bottom: 32px;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     padding-top: 0;
     padding-bottom: 0;
     margin: 32px 6.3218390805% 64px;
@@ -747,7 +751,7 @@ a:visited {
   font-size: 1.25rem;
   color: $grey-gravel;
 
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     width: 58.5205992509%;
     float: left;
   }
@@ -778,11 +782,6 @@ a:visited {
   display: block;
   padding: 2*$vs;
   background: $grey-ebb;
-
-  @include breakpoint($bp-1) {
-    float: right;
-    width: percentage(346/908);
-  }
 
   &:hover,
   &:focus {
@@ -887,6 +886,10 @@ a:visited {
     text-align: center;
     background: url('../images/icon-info.svg') center center no-repeat;
     border-radius: 100%;
+
+    .lt-ie9 & {
+      background-image: url('../images/icon-info.png');
+    }
   }
 }
 
@@ -926,15 +929,15 @@ a:visited {
 
 
 .block-stack-build .block-stack-heading {
-  background-color: #cf4520;
+  background-color: $red-roughy;
 }
 
 .block-stack-hire .block-stack-heading {
-  background-color: #86c8bc;
+  background-color: $green-half-baked;
 }
 
 .block-stack-buy .block-stack-heading {
-  background-color: #74aa50;
+  background-color: $green-cucumber;
 }
 
 
@@ -1528,7 +1531,7 @@ a:visited {
 
 .contact-01 {
   display: table-cell;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
 
     float: left;
     width: 48.7096774194%;
