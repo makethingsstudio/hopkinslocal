@@ -4,10 +4,10 @@
 <style type="text/css">
   {% if posts|length %}
     {% for item in posts %}
-      #action-{{ post.id }} {
+      #action-{{ item.id }} {
         background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');
         filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{{ item.thumbnail.src|resize(500, 500) }}', sizingMethod='scale');
-        -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{{ item.thumbnail.src|resize(500, 500) }}', sizingMethod='scale')
+        -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{{ item.thumbnail.src|resize(500, 500) }}', sizingMethod='scale');
       }
     {% endfor %}
   {% endif %}
@@ -35,8 +35,8 @@
       </header>
       <div class="hopkins-local">
         <h1 class="hopkins-local-mark" id="js-fit-local">
-            <span style="display: inline-block;">Hopkins </span>
-            <strong class="hopkins-local-emphasis" style="display: inline-block;">Local
+            <span style="">Hopkins </span>
+            <strong class="hopkins-local-emphasis" style="">Local
             <span class="hopkins-local-tagline" style="display: block; font-size: .359em">Build. Hire. Buy.</span></strong>
         </h1>
 
@@ -77,7 +77,7 @@
     {% endif %}
     <div class="content-blocks-columns-1">
       {% if item.story_url|length %}
-      <a class="block-stack {{ blockClass }}" id="action-{{ post.id }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+      <a class="block-stack {{ blockClass }}" id="action-{{ item.id }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
         <h2 class="block-stack-heading">
           {% if item.post_excerpt|length %}
             {{ item.post_excerpt }}
@@ -87,7 +87,7 @@
         </h2>
       </a>
       {% else %}
-      <div class="block-stack {{ blockClass }}" id="action-{{ post.id }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+      <div class="block-stack {{ blockClass }}" id="action-{{ item.id }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
         <h2 class="block-stack-heading">
           {% if item.post_excerpt|length %}
             {{ item.post_excerpt }}
@@ -108,7 +108,7 @@
       {% set blockClass = '' %}
       {% endif %}
       {% if item.story_url|length %}
-      <a class="block-stack {{ blockClass }}" id="action-{{ post.id }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+      <a class="block-stack {{ blockClass }}" id="action-{{ item.id }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
         <h2 class="block-stack-heading">
           {% if item.post_excerpt|length %}
             {{ item.post_excerpt }}
@@ -118,7 +118,7 @@
         </h2>
       </a>
       {% else %}
-      <div class="block-stack {{ blockClass }}" id="action-{{ post.id }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+      <div class="block-stack {{ blockClass }}" id="action-{{ item.id }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
         <h2 class="block-stack-heading">
           {% if item.post_excerpt|length %}
             {{ item.post_excerpt }}
