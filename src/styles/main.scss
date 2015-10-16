@@ -1,4 +1,10 @@
-$default-font-family: gentona, 'proxima nova', 'Helvetica Neue', Helvetica, sans-serif;
+$breakpoint-no-query-fallbacks: true;
+
+@import "../../bower_components/compass-breakpoint/stylesheets/_breakpoint.scss";
+
+
+
+$default-font-family: gentona, 'proxima nova', 'Helvetica Neue', Helvetica, arial, sans-serif;
 $default-selection-background-color: #2a455c;
 $default-underline-color: #2a455c;
 $heading-font-family: quadon, $default-font-family;
@@ -22,7 +28,7 @@ $vs: 4px;
 
 
 
-$bp-1: 48em;
+$bp-1: 48em, 'no-query' '.lt-ie9';
 
 
 
@@ -67,9 +73,10 @@ $fw-gentona-t: 100;
 $black: #000;
 $grey-ebb: #e5e2e0;
 $white: #fff;
-
+$grey-gravel: #4a484c;
 $blue-cornflower: #68ace5;
 $blue-jacarta: #34276d;
+$blue-curious: #3b8ede;
 $blue-rhino: #2a455c;
 $green-cucumber: #74aa50;
 $green-half-baked: #86c8bc;
@@ -101,6 +108,23 @@ $browser-upgrade-bg: $yellow-supernova;
 //
 @mixin _animate-hover {
   transition-duration: .15s;
+}
+
+
+//
+// @TODO: Add docs to _animate!
+//
+@mixin _animate-news {
+  transition: max-height 350ms ease-in-out,
+              padding 500ms ease-in-out;
+}
+
+
+//
+// @TODO: Add docs to _animate!
+//
+@mixin _animate-news-hover {
+  transition-duration: 500ms, 350ms;
 }
 
 
@@ -175,8 +199,7 @@ $browser-upgrade-bg: $yellow-supernova;
   -2px 0 $background,
   -3px 0 $background;
   // Tweak position + thickness for high res (1.75x and up) displays
-  @media (-webkit-min-device-pixel-ratio: 1.75),
-  (min-resolution: 168dpi) {
+  @include breakpoint(-webkit-min-device-pixel-ratio 1.75, min-resolution 168dpi) {
     background-image: linear-gradient(rgba($default-underline-color, 0.25) 0%, $default-underline-color 100%);
     background-position: 0 93%;
   }
@@ -192,6 +215,20 @@ $browser-upgrade-bg: $yellow-supernova;
 @mixin _cms {
   > * + * {
     margin-top: .5em;
+  }
+
+  > img,
+  > video,
+  > audio,
+  > iframe {
+    max-width: 100%;
+    height: auto;
+  }
+
+  a:link,
+  a:active,
+  a:visited {
+    text-decoration: underline;
   }
 }
 
@@ -216,7 +253,7 @@ $browser-upgrade-bg: $yellow-supernova;
 
 // bower:scss
 @import 'bower_components/sanitize-css/sanitize.scss';
-// endbower
+
 
 
 
@@ -238,7 +275,34 @@ $browser-upgrade-bg: $yellow-supernova;
 .cboxIframe{width:100%; height:100%; display:block; border:0; padding:0; margin:0;}
 #colorbox, #cboxContent, #cboxLoadedContent{box-sizing:content-box; -moz-box-sizing:content-box; -webkit-box-sizing:content-box;}
 
+#cboxOverlay {
+  background-color: #000;
+}
 
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-font-smoothing: antialiased !important;
+  -o-font-smoothing: antialiased !important;
+  -ms-font-smoothing: antialiased !important;
+  font-smoothing: antialiased !important;
+}
+
+body {
+  background: $white;
+}
+
+
+
+
+
+::selection {
+  color: $white;
+  background-color: $default-selection-background-color; // required when declaring ::selection
+  text-shadow: none;
+}
 
 
 
@@ -247,6 +311,27 @@ $browser-upgrade-bg: $yellow-supernova;
   width: 21px;
   height: 22px;
   background: url('../images/icon-play.svg') center center no-repeat;
+
+  .lt-ie9 & {
+    background-image: url('../images/icon-play.png');
+  }
+}
+
+
+
+
+html,
+body {
+  font-family: $default-font-family;
+}
+
+
+
+
+a:link,
+a:active,
+a:visited {
+  text-decoration: none;
 }
 
 
@@ -265,7 +350,7 @@ $browser-upgrade-bg: $yellow-supernova;
   padding: 1em 0 1.2em;
   font-size: $fz-deca;
   color: #000;
-  background: $browser-upgrade-bg;
+  background: $white;
 }
 
 
@@ -292,24 +377,36 @@ $browser-upgrade-bg: $yellow-supernova;
 
 
 .masthead {
+  margin: 0 auto;
   overflow: hidden;
 }
 
 
 .masthead-brand {
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     float: left;
     padding-left: 51px; // @NOTE magic number, from logo
     margin-left: -51px;
   }
+
+  // .lt-ie9 & {
+  //   float: left;
+  //   padding-left: 51px; // @NOTE magic number, from logo
+  //   margin-left: -51px;
+  // }
 }
 
+
+
 .masthead-brand-interior {
-  @media (min-width: $bp-1) {
+  margin: 0 auto;
+  text-align: center;
+  @include breakpoint($bp-1) {
     float: left;
     width: 586px; // 341+245
     padding-left: 51px; // @NOTE magic number, from logo
     margin-left: -51px;
+    text-align: left;
   }
 }
 
@@ -320,14 +417,16 @@ $browser-upgrade-bg: $yellow-supernova;
   width: 341px;
   height: 151px;
   margin-left: -51px;
-  background: transparent url('../images/jhu-enterprise-logo-white.svg') center center no-repeat;
-  @media (min-width: $bp-1) {
+  background: transparent url('../images/jhu-enterprise-logo-black.svg') center center no-repeat;
+
+  @include breakpoint($bp-1) {
     float: left;
   }
-}
 
-.t-hire .masthead-logo {
-  background-image: url('../images/jhu-enterprise-logo-black.svg')
+  .lt-ie9 & {
+    float: left;
+    background-image: url('../images/jhu-enterprise-logo-black.png')
+  }
 }
 
 
@@ -335,22 +434,30 @@ $browser-upgrade-bg: $yellow-supernova;
   display: block;
   position: relative;
   font-family: $heading-font-family;
-  font-weight: 100;
+  font-weight: 300;
   font-size: $fz-hecto;
   line-height: 1;
   text-transform: uppercase;
   color: $white;
 
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     float: left;
     width: 245px;
     padding-top: 56px;
     padding-left: 48px;
   }
+
+  // .lt-ie9 & {
+  //   float: left;
+  //   width: 245px;
+  //   padding-top: 56px;
+  //   padding-left: 48px;
+  // }
 }
 
+
 .masthead-property:before {
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     content: '';
     position: absolute;
     top: 51px;
@@ -362,28 +469,32 @@ $browser-upgrade-bg: $yellow-supernova;
 }
 
 
-.t-hire .masthead-property {
-  color: $black;
+.t-hire .masthead-property,
+.t-build .masthead-property,
+.t-buy .masthead-property {
+  color: #000;
 }
 
-.t-hire .masthead-property:before {
+.t-hire .masthead-property:before,
+.t-build .masthead-property:before,
+.t-buy .masthead-property:before {
   background: $black
 }
 
 
-.masthead-property-emphasis {
 
+
+
+.masthead-menu {
+  overflow: hidden;
 }
-
-
-
 
 
 .masthead-nav {
   font-weight: $fw-gentona-bold;
   text-transform: uppercase;
   letter-spacing: .1em;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     padding-top: $vs*14; // @NOTE magic number. (151-24)/2
     text-align: right;
   }
@@ -393,7 +504,7 @@ $browser-upgrade-bg: $yellow-supernova;
 .masthead-nav-item {
   display: inline-block;
   & + & {
-    @media (min-width: $bp-1) {
+    @include breakpoint($bp-1) {
       margin-left: $vs*3;
     }
   }
@@ -403,6 +514,14 @@ $browser-upgrade-bg: $yellow-supernova;
 .masthead-nav-link {
   display: block;
   padding: $vs;
+
+  &:link,
+  &:active,
+  &:visited {
+    text-decoration: none;
+    color: $black;
+  }
+
   &:hover,
   &:focus {
     color: $yellow-supernova
@@ -410,14 +529,29 @@ $browser-upgrade-bg: $yellow-supernova;
 }
 
 
-.masthead-nav-link.is-active {
+.masthead-nav-link.is-active,
+.masthead-nav-link.current-menu-item {
   color: $black;
 }
 
 
-.t-hire .masthead-nav-link.is-active {
+.t-homepage .masthead-nav-link {
+  color: $black;
+}
+
+.t-homepage .masthead-nav-link:hover,
+.t-homepage .masthead-nav-link:focus {
+  color: $blue-curious;
+}
+
+
+.t-hire .masthead-nav-link.is-active,
+.t-hire .masthead-nav-link.current-menu-item,
+.t-build .masthead-nav-link.current-menu-item,
+.t-buy .masthead-nav-link.current-menu-item {
   color: $white;
 }
+
 
 
 
@@ -426,63 +560,73 @@ $browser-upgrade-bg: $yellow-supernova;
 .page-hero {
   padding-bottom: 18*$vs;
   color: $grey-ebb;
-  background: $blue-rhino url('../images/hopkinslocal-pattern-dark-50.png') center center repeat;
+  background: $yellow-supernova url('../images/hopkins-local-pattern-orange-on-academic-gold.png') center center repeat;
   background-size: 500px;
   background-attachment: fixed;
 }
 
 
 .t-build .page-hero {
-  background-image: url('../images/hopkinslocal-pattern-dark-20.png');
+  background-image: url("../images/hopkins-local-pattern-white-on-burnt-orange.png");
+  background-size: 500px;
   background-color: $red-roughy;
 }
 
 .t-hire .page-hero {
   color: $black;
-  background-image: url('../images/hopkinslocal-pattern-light-20.png');
+  background-image: url("../images/hopkins-local-pattern-white-on-copper-petina.png");
+  background-size: 500px;
   background-color: $green-half-baked;
 }
 
 
 .t-buy .page-hero {
-  background-image: url('../images/hopkinslocal-pattern-light-20.png');
+  background-image: url("../images/hopkins-local-pattern-white-on-oak-leaves.png");
+  background-size: 500px;
   background-color: $green-cucumber;
 }
 
 
 
 
-
 .hopkins-local {
-  display: inline-block;
+  display: block;
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  padding-top: 18*$vs;
-  padding-bottom: 18*$vs;
+  padding-top: 72px;
+  padding-right: 6.3218390805%;
+  padding-bottom: 72px;
+  padding-left: 6.3218390805%;
   text-transform: uppercase;
   font-family: $heading-font-family;
+  font-style: normal;
   line-height: $lh-base;
-  @media (min-width: $bp-1) {
-    width: percentage(908/1218);
-  }
 }
+
+
+.overlay-hopkins-local {
+  padding-right: 0;
+  padding-left: 0;
+}
+
 
 .about-local-heading {
   text-transform: uppercase;
   font-family: $heading-font-family;
-  font-weight: $fw-quadon-l;
+  font-weight: 300;
   line-height: $lh-base;
   color: $black;
 }
 
 
 .hopkins-local-mark {
+  display: inline-block;
+  width: 100%;
   text-align: center;
-  font-weight: $fw-quadon-l;
-  font-size: $fz-kilo;
-  @media (min-width: $bp-1) {
-    font-size: $fz-giga;
+  font-weight: 300;
+  font-size: 37px;
+  color: $black;
+  @include breakpoint($bp-1) {
+    font-size: 99px;
   }
 }
 
@@ -490,15 +634,16 @@ $browser-upgrade-bg: $yellow-supernova;
 .overlay-hopkins-local-mark {
   text-align: center;
   font-weight: $fw-quadon-l;
-  font-size: $fz-kilo;
-  @media (min-width: $bp-1) {
-    font-size: $fz-giga;
+  font-size: 37px;
+  @include breakpoint($bp-1) {
+    font-size: 99px;
   }
 }
 
 
 .hopkins-local-emphasis {
-  color: $blue-cornflower;
+  font-style: normal;
+  color: $blue-curious;
 }
 
 .t-build .hopkins-local-emphasis {
@@ -523,21 +668,26 @@ $browser-upgrade-bg: $yellow-supernova;
 
 
 .hopkins-local-tagline {
+  display: block;
   font-family: $default-font-family;
   font-weight: $fw-gentona-medium;
-  font-size: $fz-deci;
+  font-size: 14px;
   letter-spacing: .1em;
   text-align: right;
-  @media (min-width: $bp-1) {
-    font-size: $fz-kilo;
+  color: $black;
+  @include breakpoint($bp-1) {
+    // font-size: $fz-kilo;
+    font-size: 36px;
+    letter-spacing: .1em;
   }
 }
 
 
 .overlay-hopkins-local-tagline {
+  display: block;
   font-family: $default-font-family;
   font-weight: $fw-gentona-medium;
-  font-size: $fz-hecto;
+  font-size: 30px;
   letter-spacing: .1em;
   text-align: right;
   color: $black;
@@ -555,24 +705,61 @@ $browser-upgrade-bg: $yellow-supernova;
 
 
 .page-intro {
-  @media (min-width: $bp-1) {
-    width: percentage(596/1218);
-    margin: 8*$vs auto;
+  padding-top: 32px;
+  margin-bottom: 32px;
+  @include breakpoint($bp-1) {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 32px 6.3218390805% 64px;
+    overflow: hidden;
   }
 }
 
 
 .page-intro-heading {
-  font-size: $fz-hecto;
+  margin-bottom: .25em;
+  font-family: $heading-font-family;
+  font-weight: $fw-quadon-n;
+  font-size: 48px;
   line-height: $lh-base;
-  font-weight: $fw-gentona-bold;
+  @include breakpoint($bp-1) {
+    font-size: $fz-mega;
+  }
 }
+
+.page-intro-heading strong {
+  font-weight: 500;
+}
+
 
 .page-intro-content {
   @include _cms;
-  font-size: $fz-dec;
-  font-weight: $fw-gentona-bold;
-  line-height: $lh-thin;
+  font-size: 20px;
+  font-size: 1.25rem;
+  color: $grey-gravel;
+
+  @include breakpoint($bp-1) {
+    width: 58.5205992509%;
+    float: left;
+  }
+
+  h3 {
+    font-size: 24px;
+    font-weight: $fw-gentona-bold;
+    line-height: $lh-thin;
+  }
+}
+
+.page-intro-video {
+  margin-top: 16px;
+}
+
+@media (min-width: 48em) {
+  .page-intro-video {
+    float: right;
+    width: 31.8352059925%;
+    margin-top: 0;
+  }
 }
 
 
@@ -581,14 +768,7 @@ $browser-upgrade-bg: $yellow-supernova;
   position: relative;
   display: block;
   padding: 2*$vs;
-  padding-left: 45px;
-  border-radius: $vs;
-  border: $vs solid $blue-cornflower;
-  background: url('../images/icon-play.svg') 3*$vs center no-repeat;
-
-  @media (min-width: $bp-1) {
-    width: percentage(440/596);
-  }
+  background: $grey-ebb;
 
   &:hover,
   &:focus {
@@ -599,7 +779,20 @@ $browser-upgrade-bg: $yellow-supernova;
   }
 }
 
-.page-intro-videolink .icon-play-md {
+.page-intro-videolink-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.page-intro-videolink-text {
+  display: block;
+  padding-top: $vs;
+  text-align: center;
+  font-size: $fz-deci;
+  line-height: $lh-base;
+  font-family: $heading-font-family;
+  font-weight: $fw-quadon-b;
 }
 
 
@@ -608,34 +801,42 @@ $browser-upgrade-bg: $yellow-supernova;
 
 .content-blocks {
   overflow: hidden;
-  @media (min-width: $bp-1) {
+  border-top: 10px solid #005db9;
+  @include breakpoint($bp-1) {
+    position: relative;
+
+  }
+}
+
+.content-blocks-header {
+  padding: 0 2*$vs 2*$vs;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #005db9;
+  @include breakpoint($bp-1) {
+    position: absolute;
+    top: 0;
+    left: 9.5%;
+    z-index: 2;
+    font-size: 32px;
+    font-size: 2rem;
   }
 }
 
 .content-blocks-columns-1 {
   background: $blue-rhino;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     float: left;
-    width: percentage(333/1218);
+    width: percentage(594/1218);
     margin: 0;
   }
 
 }
 
 .content-blocks-columns-2 {
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     float: left;
-    width: percentage(333/1218);
-  }
-}
-
-
-.content-blocks-columns-2-dark {
-  background: $blue-cornflower;
-
-  @media (min-width: $bp-1) {
-    float: left;
-    width: percentage(552/1218);
+    width: percentage(312/1218);
   }
 }
 
@@ -648,158 +849,101 @@ $browser-upgrade-bg: $yellow-supernova;
   height: 0;
   background-size: cover;
 
+
+
   &:hover,
   &:focus {
     @include _animate-hover;
-
-    &:after {
-      @include _animate-hover;
-      opacity: 1;
+    .block-stack-heading {
+      max-height: 75%;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
     }
   }
 
   &:after {
     @include _animate;
     content: '';
+    display: block;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba($blue-rhino, .5);
-    opacity: 0;
+    bottom: 1rem;
+    left: 1rem;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    background: url('../images/icon-info.svg') center center no-repeat;
+    border-radius: 100%;
 
-
+    .lt-ie9 & {
+      background-image: url('../images/icon-info.png');
+    }
   }
 }
 
 
 .content-blocks-columns-1 .block-stack {
-  padding-top: 100%;
-  @media (min-width: $bp-1) {
-    padding-top: 125%;
-  }
+  padding-top: 104%;
 }
 
 
 .content-blocks-columns-2 .block-stack {
-  padding-top: 50%;
-  @media (min-width: $bp-1) {
-    padding-top: 62.5%;
-  }
+  padding-top: 99%;
 }
 
 
 .block-stack-heading {
-  @include _animate;
+  @include _animate-news;
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
+  max-height: 0;
   z-index: $z-content;
   width: 100%;
-  padding: $vs*3 $vs*4 $vs*4;
-  font-size: $fz-deci;
+  padding: 0 1rem;
+  overflow: hidden;
+
+  font-size: 18px;
   line-height: $lh-thin;
-  color: $grey-ebb;
-  background-color: $blue-rhino;
-  background-color: rgba($blue-rhino, .8);
+  color: $white;
+  background-color: #e5e2e0;
 
   .block-stack:hover &,
   .block-stack:focus & {
-    @include _animate-hover;
-    background-color: $black
+    @include _animate-news-hover;
   }
 }
 
 
-
-.block-quote {
-  position: relative;
-  display: block;
-  width: 100%;
-  @media (min-width: $bp-1) {
-    height: 0;
-  }
+.block-stack-build .block-stack-heading {
+  background-color: $red-roughy;
 }
 
-.content-blocks-columns-2-dark .block-quote {
-  @media (min-width: $bp-1) {
-    padding-top: 75.4068894%;
-  }
+.block-stack-hire .block-stack-heading {
+  background-color: $green-half-baked;
 }
 
-.block-quote-text {
-  @include _cms;
-  padding: $vs*8;
-  font-family: $heading-font-family;
-  font-weight: $fw-quadon-bl;
-  @media (min-width: $bp-1) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
-
-    &:before,
-  > :last-child:after {
-    z-index: $z-base;
-    font-family: $heading-font-family;
-    font-size: $fz-giga;
-    line-height: $lh-base;
-    color: rgba($white, .2);
-  }
-
-  &:before {
-    content: '“';
-    position: absolute;
-    top: 0;
-    left: 2*$vs;
-
-  }
-
-  > * {
-    position: relative;
-    z-index: $z-content;
-  }
+.block-stack-buy .block-stack-heading {
+  background-color: $green-cucumber;
 }
 
 
-.block-quote-sources {
-  margin-top: 8*$vs;
-  font-family: $default-font-family;
-  font-size: $fz;
-  line-height: $lh-base;
-}
 
-
-.block-quote-source {
-  font-weight: $fw-gentona-bold;
-  color: $white;
-  color: rgba($white, .8);
-  & + & {
-    margin-top: 4*$vs;
-  }
-}
-
-
-.block-quote-source-position {
-  display: block;
-  font-size: $fz-centi;
-  font-weight: $fw-gentona-n;
-  color: $white;
-  color: rgba($white, .5);
-}
 
 .block-media-left {
   overflow: hidden;
-  color: $grey-ebb;
+  color: $black;
   background: $red-heath;
   .block-media-attach {
-    @media (min-width: $bp-1) {
+    @include breakpoint($bp-1) {
       float: left;
     }
   }
+}
+
+
+.t-home .block-media-left {
+  color: $grey-ebb
 }
 
 
@@ -808,7 +952,7 @@ $browser-upgrade-bg: $yellow-supernova;
   color: $grey-ebb;
   background: $blue-jacarta;
   .block-media-attach {
-    @media (min-width: $bp-1) {
+    @include breakpoint($bp-1) {
       float: right;
     }
   }
@@ -817,7 +961,7 @@ $browser-upgrade-bg: $yellow-supernova;
 
 .block-media-attach {
   position: relative;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     width: 50%;
   }
 }
@@ -825,7 +969,7 @@ $browser-upgrade-bg: $yellow-supernova;
 
 .block-media-ratio {
   overflow: hidden;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     position: relative;
     width: 100%;
     height: 0;
@@ -835,7 +979,7 @@ $browser-upgrade-bg: $yellow-supernova;
 
 
 .block-media-src {
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     position: absolute;
     top: 0;
     left: 0;
@@ -857,7 +1001,7 @@ $browser-upgrade-bg: $yellow-supernova;
 .map {
   display: none;
   position: relative;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     display: block;
   }
 }
@@ -893,7 +1037,7 @@ $browser-upgrade-bg: $yellow-supernova;
   font-weight: $fw-gentona-bold;
   color: $grey-ebb;
   background: $blue-jacarta;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     width: percentage(552/1218);
     margin: 0 auto;
   }
@@ -913,7 +1057,7 @@ $browser-upgrade-bg: $yellow-supernova;
   padding-left: $vs;
   background: $white;
 
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     display: inline-block;
     width: percentage(336/1218);
     min-height: 94*$vs;
@@ -944,11 +1088,18 @@ $browser-upgrade-bg: $yellow-supernova;
 .focus-item-content {
   overflow: hidden;
   padding: 3*$vs;
+  font-size: 18px;
   font-weight: $fw-gentona-medium;
 }
 
+.focus-item-src {
+  display: block;
+  margin: 16px auto;
+}
+
 .focus-item-text {
-  @media (min-width: $bp-1) {
+  color: $black;
+  @include breakpoint($bp-1) {
     min-height: 26*$vs;
   }
 }
@@ -977,7 +1128,7 @@ $browser-upgrade-bg: $yellow-supernova;
   font-size: $fz-deci;
   line-height: $lh-thin;
   border: $vs solid transparent;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     float: left;
     width: percentage(151/310);
   }
@@ -989,7 +1140,7 @@ $browser-upgrade-bg: $yellow-supernova;
 
   & + & {
     margin-top: 4*$vs;
-    @media (min-width: $bp-1) {
+    @include breakpoint($bp-1) {
       float: right;
       margin-top: 0;
     }
@@ -1001,7 +1152,7 @@ $browser-upgrade-bg: $yellow-supernova;
   @include _focus-item;
   color: $red-roughy;
 
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     margin-top: 0;
       margin-left: percentage(77/1218);
     }
@@ -1034,7 +1185,7 @@ $browser-upgrade-bg: $yellow-supernova;
     margin-top: 8*$vs;
   color: $green-half-baked;
 
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     margin-top: 0;
     margin-left: percentage(26/1218);
   }
@@ -1068,7 +1219,7 @@ $browser-upgrade-bg: $yellow-supernova;
   margin-top: 8*$vs;
   color: $green-cucumber;
 
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     margin-top: 0;
     margin-left: percentage(26/1218);
   }
@@ -1095,12 +1246,148 @@ $browser-upgrade-bg: $yellow-supernova;
   }
 }
 
+.quote {
+  padding: 32px 0;
+  background: url("../images/hopkins-local-pattern-sparta-on-jay.png");
+  background-size: 400px;
+}
 
+@media (min-width: 48em) {
+  .quote {
+    padding: 0;
+  }
+}
 
+.block-quote-text {
+  position: relative;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-right: 6.3218390805%;
+  padding-left: 12.64%;
 
+  font-size: 20px;
+  font-size: 1.25rem;
+  font-family: quadon, gentona, "proxima nova", "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.25;
+  color: #fff;
+}
+
+@media (min-width: 48em) {
+  .block-quote-text {
+    margin-right: 6.3218390805%;
+    margin-left: 6.3218390805%;
+  }
+}
+
+.block-quote-text > * + * {
+  margin-top: .5em;
+}
+
+.block-quote-text > img,
+.block-quote-text > video,
+.block-quote-text > audio,
+.block-quote-text > iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (min-width: 48em) {
+  .block-quote-text {
+    padding-top: 48px;
+    padding-bottom: 48px;
+    font-size: 32px;
+    font-size: 2rem;
+  }
+}
+
+.block-quote-text:before,
+.block-quote-text > p:after {
+  z-index: 1;
+  line-height: 1;
+  color: #005db9;
+}
+
+.block-quote-text:before {
+  content: '“';
+  position: absolute;
+  top: 16px;
+  left: 6.3218390805%;
+  font-family: gentona, "proxima nova", "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 144px;
+  font-size: 9rem;
+}
+
+.block-quote-text > p:after {
+  content: '”';
+  font-family: quadon, gentona, "proxima nova", "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 32px;
+  font-size: 2rem;
+}
+
+@media (min-width: 48em) {
+  .block-quote-text > p:after {
+    font-size: 48px;
+    font-size: 3rem;
+  }
+}
+
+.block-quote-text > * {
+  position: relative;
+  z-index: 5;
+}
+
+.block-quote-sources {
+  margin-top: 32px;
+  font-family: gentona, "proxima nova", "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1.25;
+
+}
+
+@media (min-width: 48em) {
+  .block-quote-sources {
+    display: table;
+    width: 100%;
+  }
+}
+
+.block-quote-source {
+  font-weight: 600;
+  font-style: normal;
+  color: #fff;
+}
+
+@media (min-width: 48em) {
+  .block-quote-source {
+    display: table-cell;
+  }
+}
+
+.block-quote-source + .block-quote-source {
+  margin-top: 16px;
+}
+
+@media (min-width: 48em) {
+  .block-quote-source + .block-quote-source {
+    margin-top: 0;
+
+  }
+}
+
+.block-quote-source-position {
+  display: block;
+  font-weight: 400;
+  color: #fff;
+}
 
 .page-overlay {
-  @include _animate;
   opacity: 0;
   position: fixed;
   top: 0;
@@ -1111,15 +1398,23 @@ $browser-upgrade-bg: $yellow-supernova;
   overflow: auto;
 
   background-color: $blue-cornflower;
+
+  .no-opacity & {
+    display: none;
+  }
 }
 
 .has-overlay {
   position: relative;
   overflow: hidden;
   .page-overlay {
-    @include _animate-hover;
+  @include _animate;
     opacity: 1;
     z-index: 2000;
+
+    .no-opacity & {
+      display: block;
+    }
   }
 }
 
@@ -1150,7 +1445,7 @@ $browser-upgrade-bg: $yellow-supernova;
 
 .page-overlay-content {
   @include _cms;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     width: percentage(758/1218);
     padding-bottom: 20*$vs;
     margin: 0 auto;
@@ -1193,6 +1488,10 @@ $browser-upgrade-bg: $yellow-supernova;
     width: 341px;
     height: 151px;
     background: transparent url('../images/jhu-enterprise-logo-white.svg') center center no-repeat;
+
+    .lt-ie9 & {
+      background-image: url('../images/jhu-enterprise-logo-white.png');
+    }
 }
 
 
@@ -1205,27 +1504,38 @@ $browser-upgrade-bg: $yellow-supernova;
 
 
 .site-footer-contact {
+  display: table;
+  width: 100%;
   font-size: $fz-centi;
   line-height: $lh-thin;
   color: $white;
-  @media (min-width: $bp-1) {
+
+  @include breakpoint($bp-1) {
+    display: block;
     float: right;
     width: percentage(286/1218);
     padding-top: 12*$vs;
+    margin: 0;
     overflow: hidden;
   }
 }
 
 
 .contact-01 {
-  @media (min-width: $bp-1) {
+  display: table-cell;
+  @include breakpoint($bp-1) {
+
     float: left;
     width: 48.7096774194%;
   }
 }
 
 .contact-02 {
-  @media (min-width: $bp-1) {
+  display: table-cell;
+
+
+  @include breakpoint($bp-1) {
+    margin-top: 0;
     float: right;
     width: 48.7096774194%;
   }
@@ -1238,23 +1548,25 @@ $browser-upgrade-bg: $yellow-supernova;
 .site-content {
   padding-top: 10*$vs;
   padding-bottom: 16*$vs;
+  background: $white;
 }
 
 
-.t-build .site-content {
-  color: $red-heath
-}
+// .t-build .site-content {
+//   color: $red-heath
+// }
 
 
-.t-hire .site-content {
-  color: $green-persian
-}
+// .t-hire .site-content {
+//   color: $green-persian
+// }
 
 
 
 
 
 .page-heading {
+  max-width: 85%;
   margin-bottom: 4*$vs;
   font-size: $fz-kilo;
   line-height: $lh-thin;
@@ -1268,6 +1580,7 @@ $browser-upgrade-bg: $yellow-supernova;
 
 
 .page-content-intro {
+  max-width: 85%;
   margin-bottom: 8*$vs;
   font-weight: $fw-gentona-medium;
   font-size: $fz-deca;
@@ -1279,35 +1592,45 @@ $browser-upgrade-bg: $yellow-supernova;
   padding-left: 30px;
   font-size: $fz;
   line-height: $lh-thin;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     float: left;
     width: 48.7096774194%;
+  }
+
+  .lt-ie9 & {
+    width: 45%;
   }
 }
 
 .goal-list-02 {
   padding-left: 30px;
   margin-top: 8*$vs;
-  font-size: $fz;
-  line-height: $lh-thin;
+  font-size: 18px;
+  line-height: 1.5;
 
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     float: right;
     width: 48.7096774194%;
     margin-top: 0;
   }
 
+  .lt-ie9 & {
+    width: 45%;
+  }
+
+}
+
+.goal-list-01 li + li,
+.goal-list-02 li + li {
+  margin-top: .5em;
 }
 
 
-
-
-
 .success-story {
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     float: left;
     width: percentage(850/1218);
-    margin-right: (26/1218);
+    margin-right: 32px;
   }
 }
 
@@ -1318,7 +1641,7 @@ $browser-upgrade-bg: $yellow-supernova;
 
 
 .success-story .block-media-attach {
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     margin-right: 4*$vs;
   }
 }
@@ -1344,43 +1667,46 @@ $browser-upgrade-bg: $yellow-supernova;
   font-size: $fz-centi;
   text-transform: uppercase;
   letter-spacing: .1em;
+  color: $black;
 }
 
 
 .success-story .block-media-heading {
   padding: 0;
+  font-weight: 500;
   font-size: $fz;
+  color: $black;
 }
 
 
-.t-build .block-media-left {
-  color: $red-heath
-}
+// .t-build .block-media-left {
+//   color: $red-heath
+// }
 
 
-.t-build .block-media-type {
-  color: $red-roughy
-}
+// .t-build .block-media-type {
+//   color: $red-roughy
+// }
 
 
-.t-hire .block-media-left {
-  color: $green-persian
-}
+// .t-hire .block-media-left {
+//   color: $green-persian
+// }
 
 
-.t-hire .block-media-type {
-  color: $green-half-baked
-}
+// .t-hire .block-media-type {
+//   color: $green-half-baked
+// }
 
 
-.t-buy .block-media-left {
-  color: $green-cucumber
-}
+// .t-buy .block-media-left {
+//   color: $green-cucumber
+// }
 
 
-.t-buy .block-media-type {
-  color: $green-chalet
-}
+// .t-buy .block-media-type {
+//   color: $green-chalet
+// }
 
 
 
@@ -1389,7 +1715,7 @@ $browser-upgrade-bg: $yellow-supernova;
 .page-actions {
   overflow: hidden;
   padding-top: 4*$vs;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     padding-top: 12*$vs;
   }
 }
@@ -1414,6 +1740,10 @@ $browser-upgrade-bg: $yellow-supernova;
 
   + .focus-link-option {
     margin-top: 4*$vs;
+  }
+
+  .lt-ie9 & {
+    width: 90%;
   }
 }
 
@@ -1474,7 +1804,7 @@ $browser-upgrade-bg: $yellow-supernova;
   padding-top: 8*$vs;
   padding-bottom: 8*$vs;
   background: $grey-ebb;
-  @media (min-width: $bp-1) {
+  @include breakpoint($bp-1) {
     padding-top: 16*$vs;
     padding-bottom: 16*$vs;
   }
@@ -1485,32 +1815,39 @@ $browser-upgrade-bg: $yellow-supernova;
   font-size: $fz-deca;
   line-height: $lh-thin;
 }
-d
 
 .about-local-heading {
+  margin-bottom: .5em;
   font-size: $fz-hecto;
 }
 
 
 .about-local-content {
   @include _cms;
+  max-width: 90%;
+  margin-bottom: 1em;
   font-weight: $fw-gentona-medium;
   color: $blue-rhino;
 }
 
 
 .about-local-link {
-  @include _animate;
-  display: inline-block;
-  padding: 3*$vs 3*$vs 4*$vs;
-  margin: 0;
-  line-height: 1;
-  font-family: $heading-font-family;
-  font-weight: $fw-quadon-eb;
-  font-size: $fz-deca;
-  text-align: center;
-  color: $blue-cornflower;
-  border: $vs solid ;
+  &:link,
+  &:active,
+  &:visited {
+    @include _animate;
+    display: inline-block;
+    padding: 3*$vs 3*$vs 4*$vs;
+    margin: 0;
+    line-height: 1;
+    font-family: $heading-font-family;
+    font-weight: $fw-quadon-eb;
+    font-size: $fz-deca;
+    text-align: center;
+    text-decoration: none;
+    color: $blue-cornflower;
+    border: $vs solid ;
+  }
 
   &:hover,
   &:focus {
@@ -1523,6 +1860,6 @@ d
 
 
 
-.t-buy {
-  color: $green-cucumber;
-}
+// .t-buy {
+//   color: $green-cucumber;
+// }

@@ -58,14 +58,14 @@
     aboutControl.on('click', function(e) {
       e.preventDefault();
       $body.toggleClass('has-overlay');
-      $('#js-overlay-mark').fitText(0.8);
+      $('#js-overlay-fit-local').fitText(.84);
     });
 
     if (learnAboutControl) {
       learnAboutControl.on('click', function(e) {
         e.preventDefault();
         $body.toggleClass('has-overlay');
-        $('#js-overlay-mark').fitText(0.8);
+        $('#js-overlay-fit-local').fitText(.84);
       });
     }
 
