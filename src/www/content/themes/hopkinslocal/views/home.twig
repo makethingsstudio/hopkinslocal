@@ -7,7 +7,7 @@
       #action-{{ item.id }} {
         background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');
         filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{{ item.thumbnail.src|resize(500, 500) }}', sizingMethod='scale');
-        -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{{ item.thumbnail.src|resize(500, 500) }}', sizingMethod='scale');
+        -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{{ item.thumbnail.src|resize(500, 500) }}', sizingMethod='scale')
       }
     {% endfor %}
   {% endif %}
@@ -140,7 +140,7 @@
         {% set blockClass = '' %}
     {% endif %}
     {% if item.story_url|length %}
-    <a class="block-stack {{ blockClass }}" id="action-{{ post.id }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+    <a class="block-stack {{ blockClass }}" id="action-{{ item.id }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
       <h2 class="block-stack-heading">
         {% if item.post_excerpt|length %}
             {{ item.post_excerpt }}
@@ -150,7 +150,7 @@
       </h2>
     </a>
     {% else %}
-    <div class="block-stack {{ blockClass }}" id="action-{{ post.id }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+    <div class="block-stack {{ blockClass }}" id="action-{{ item.id }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
       <h2 class="block-stack-heading">
         {% if item.post_excerpt|length %}
             {{ item.post_excerpt }}
@@ -170,7 +170,7 @@
   <div class="focuses">
     <div class="focuses-canister">
     {% for focus in focuses %}
-      <div class="focus-item-{{ focus.slug }}">
+      <div class="focus-item focus-item-{{ focus.slug }}">
         <h2 class="focus-item-heading">{{ focus.title}}</h2>
         <div class="focus-item-content">
           <img class="focus-item-src" src="{{ focus.thumbnail.src }}" alt="">
