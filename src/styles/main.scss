@@ -421,6 +421,12 @@ a:visited {
   }
 }
 
+.lt-ie8 .masthead-brand-interior {
+  width: 600px;
+  padding-left: 0;
+  margin-left: 0;
+}
+
 
 .masthead-logo {
   @include _ir;
@@ -461,12 +467,12 @@ a:visited {
     padding-left: 48px;
   }
 
-  // .lt-ie9 & {
-  //   float: left;
-  //   width: 245px;
-  //   padding-top: 56px;
-  //   padding-left: 48px;
-  // }
+  .lt-ie8 & {
+    float: left;
+    width: 245px;
+    padding: 56px 0 0;
+    margin: 0;
+  }
 }
 
 
@@ -629,6 +635,9 @@ a:visited {
 .lt-ie8 .hopkins-local {
   float: left;
   width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+  text-align: center;
 }
 
 
@@ -1009,6 +1018,20 @@ a:visited {
   position: relative;
   @include breakpoint($bp-1) {
     width: 50%;
+  }
+}
+
+
+.block-media-link {
+  &:link,
+  &:active,
+  &:visited {
+    color: $black;
+  }
+
+  &:hover,
+  &:focus {
+    color: $blue-jacarta
   }
 }
 
@@ -1507,6 +1530,7 @@ a:visited {
 
 
 .site-footer {
+  overflow: hidden;
   padding-top: 10*$vs;
   padding-bottom: 10*$vs;
   background: #4A484C;
@@ -1537,6 +1561,7 @@ a:visited {
     background: transparent url('../images/jhu-enterprise-logo-white.svg') center center no-repeat;
 
     .lt-ie9 & {
+      text-indent: -9999px;
       background-image: url('../images/jhu-enterprise-logo-white.png');
     }
 }
@@ -1596,6 +1621,7 @@ a:visited {
   padding-top: 10*$vs;
   padding-bottom: 16*$vs;
   background: $white;
+  overflow: hidden;
 }
 
 
@@ -1858,6 +1884,12 @@ a:visited {
 }
 
 
+.lt-ie9 .about-local {
+  float: left;
+  width: 100%;
+}
+
+
 .about-local {
   font-size: $fz-deca;
   line-height: $lh-thin;
@@ -1875,6 +1907,11 @@ a:visited {
   margin-bottom: 1em;
   font-weight: $fw-gentona-medium;
   color: $blue-rhino;
+}
+
+.lt-ie9 .about-local-content {
+  float: left;
+  width: 90%;
 }
 
 
