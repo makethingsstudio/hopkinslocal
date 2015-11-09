@@ -8,7 +8,8 @@
     "jquery": "~1.11.3",
     "colorbox": "~1.6.3",
     "FitText.js": "~1.2.0",
-    "modernizr": "2.8.3"
+    "modernizr": "2.8.3",
+    "formstone": "~0.8.26"
   },
   "devDependencies": {
     "chai": "~3.2.0",
