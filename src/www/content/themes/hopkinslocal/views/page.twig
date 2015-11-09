@@ -17,7 +17,7 @@
               </li>
             {% endfor %}
 	      <li class="masthead-nav-item">
-		      <a class=masthead-nav-link id=js-show-about href=/about title="About with Baltimore and Area Businesses">About</a> </li>
+		      <a class=masthead-nav-link id=js-show-about href=/about title="About with Baltimore and Area Businesses" data-analytics-event="about_local, click, header">About</a> </li>
 	      </li>
             </ul>
           </nav>
@@ -97,14 +97,14 @@
       <div class="page-actions">
       {% if post.get_field('more_information_link') %}
         {% for item in post.get_field('more_information_link') %}
-        <a class="focus-link-option" href="{{ item.link_url }}" title="{{ item.link_text }}">
+        <a class="focus-link-option" href="{{ item.link_url }}" title="{{ item.link_text }}" data-analytics-event="more_info, click, {{ item.link_url|e('html_attr') }}">
           {{ item.link_text }}
         </a>
         {% endfor %}
       {% endif %}
       {% if post.get_field('focus_link') %}
         {% for item in post.get_field('focus_link') %}
-        <a class="focus-link-option" href="{{ item.link_url }}" title="{{ item.link_text }}">
+        <a class="focus-link-option" href="{{ item.link_url }}" title="{{ item.link_text }}" data-analytics-event="focus_link, click, {{ item.link_url|e('html_attr') }}">
           {{ item.link_text }}
         </a>
         {% endfor %}
