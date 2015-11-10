@@ -97,14 +97,14 @@
       <div class="page-actions">
       {% if post.get_field('more_information_link') %}
         {% for item in post.get_field('more_information_link') %}
-        <a class="focus-link-option" href="{{ item.link_url }}" title="{{ item.link_text }}" data-analytics-event="more_info, click, {{ item.link_url|e('html_attr') }}">
+        <a class="focus-link-option" href="{{ item.link_url }}" title="{{ item.link_text }}" data-analytics-event="more_info, click, {{ item.link_url|e('html_attr') }}" target="_blank">
           {{ item.link_text }}
         </a>
         {% endfor %}
       {% endif %}
       {% if post.get_field('focus_link') %}
         {% for item in post.get_field('focus_link') %}
-        <a class="focus-link-option" href="{{ item.link_url }}" title="{{ item.link_text }}" data-analytics-event="focus_link, click, {{ item.link_url|e('html_attr') }}">
+        <a class="focus-link-option" href="{{ item.link_url }}" title="{{ item.link_text }}" data-analytics-event="focus_link, click, {{ item.link_url|e('html_attr') }}" target="_blank">
           {{ item.link_text }}
         </a>
         {% endfor %}
