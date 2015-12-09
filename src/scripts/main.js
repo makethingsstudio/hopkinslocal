@@ -76,3 +76,21 @@
   });
 
 })();
+
+
+$(document).ready(function() {
+  $("a[data-analytics-event]").each(function() {
+    var href = $(this).attr("href");
+    var target = $(this).attr("target");
+    var text = $(this).text();
+    $(this).click(function(event) { // when someone clicks these links
+      event.preventDefault(); // don't open the link yet
+      _gaq.push(["_trackEvent", "External Links", "Clicked", href, , false]); // create a custom event
+      if ( ! href == "/about" ) {
+        setTimeout(function() { // now wait 300 milliseconds...
+          window.open(href,(!target?"_self":target)); // ...and open the link as usual
+        },300);
+      };
+    });
+  });
+});
