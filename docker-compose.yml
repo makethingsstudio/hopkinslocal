@@ -9,7 +9,7 @@ web:
   hostname: hopkinslocal
   domainname: hopkinslocal.jhu.dev
   volumes:
-    - /vagrant/Documents/projects/jhu-hopkinslocal-dev/src/www:/app
+    - /vagrant/makethings/jhu-hopkinslocal-dev/src/www:/app
   volumes_from:
     - data
   links:
