@@ -13,7 +13,9 @@
   var mapE;
 
 
-
+  $.analytics({
+    autoEvents: true
+  });
 
 
   $(function () {

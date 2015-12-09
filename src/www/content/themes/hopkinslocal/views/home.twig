@@ -4,7 +4,7 @@
 <style type="text/css">
   {% if posts|length %}
     {% for item in posts %}
-      #action-{{ post.id }} {
+      #action-{{ item.id }} {
         background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');
         filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{{ item.thumbnail.src|resize(500, 500) }}', sizingMethod='scale');
         -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{{ item.thumbnail.src|resize(500, 500) }}', sizingMethod='scale')
@@ -29,14 +29,15 @@
                 <a class="masthead-nav-link {{ item.classes|join(' ') }}" href="{{ item.get_link }}" title="{{ item.title }}">{{ item.title }}</a>
               </li>
             {% endfor %}
-            <li class=masthead-nav-item> <a class=masthead-nav-link id=js-show-about href=#about title="About with Baltimore and Area Businesses">About</a> </li>
+            <li class=masthead-nav-item>
+              <a class=masthead-nav-link id=js-show-about href=/about title="About with Baltimore and Area Businesses" data-analytics-event="about_local, click, header">About</a> </li>
           </ul>
         </nav>
       </header>
       <div class="hopkins-local">
         <h1 class="hopkins-local-mark" id="js-fit-local">
-            <span style="display: inline-block;">Hopkins </span>
-            <strong class="hopkins-local-emphasis" style="display: inline-block;">Local
+            <span style="">Hopkins </span>
+            <strong class="hopkins-local-emphasis" style="">Local
             <span class="hopkins-local-tagline" style="display: block; font-size: .359em">Build. Hire. Buy.</span></strong>
         </h1>
 
@@ -55,7 +56,7 @@
 
       </div>
       <div class="page-intro-video">
-        <a class="page-intro-videolink" id="js-video-gallery" href="{{ post.video_link_url }}" title="">
+        <a class="page-intro-videolink" id="js-video-gallery" href="{{ post.video_link_url }}" title="" data-analytics-event="video, click, homepage">
             <img class="page-intro-videolink-image" src="{{site.theme.link}}/images/play-video.jpg" alt="{{ post.video_link_text }}">
             <strong class="page-intro-videolink-text">{{ post.video_link_text }}</strong>
         </a>
@@ -77,7 +78,7 @@
     {% endif %}
     <div class="content-blocks-columns-1">
       {% if item.story_url|length %}
-      <a class="block-stack {{ blockClass }}" id="action-{{ post.id }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+      <a class="block-stack {{ blockClass }}" id="action-{{ item.id }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank" data-analytics-event="news, click, {{ item.story_url|e('html_attr') }}">
         <h2 class="block-stack-heading">
           {% if item.post_excerpt|length %}
             {{ item.post_excerpt }}
@@ -87,7 +88,7 @@
         </h2>
       </a>
       {% else %}
-      <div class="block-stack {{ blockClass }}" id="action-{{ post.id }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+      <div class="block-stack {{ blockClass }}" id="action-{{ item.id }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
         <h2 class="block-stack-heading">
           {% if item.post_excerpt|length %}
             {{ item.post_excerpt }}
@@ -108,7 +109,7 @@
       {% set blockClass = '' %}
       {% endif %}
       {% if item.story_url|length %}
-      <a class="block-stack {{ blockClass }}" id="action-{{ post.id }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+      <a class="block-stack {{ blockClass }}" id="action-{{ item.id }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank" data-analytics-event="news, click, {{ item.story_url|e('html_attr') }}">
         <h2 class="block-stack-heading">
           {% if item.post_excerpt|length %}
             {{ item.post_excerpt }}
@@ -118,7 +119,7 @@
         </h2>
       </a>
       {% else %}
-      <div class="block-stack {{ blockClass }}" id="action-{{ post.id }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+      <div class="block-stack {{ blockClass }}" id="action-{{ item.id }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
         <h2 class="block-stack-heading">
           {% if item.post_excerpt|length %}
             {{ item.post_excerpt }}
@@ -139,7 +140,7 @@
         {% set blockClass = '' %}
     {% endif %}
     {% if item.story_url|length %}
-    <a class="block-stack {{ blockClass }}" id="action-{{ post.id }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+    <a class="block-stack {{ blockClass }}" id="action-{{ item.id }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank" data-analytics-event="news, click, {{ item.story_url|e('html_attr') }}">
       <h2 class="block-stack-heading">
         {% if item.post_excerpt|length %}
             {{ item.post_excerpt }}
@@ -149,7 +150,7 @@
       </h2>
     </a>
     {% else %}
-    <div class="block-stack {{ blockClass }}" id="action-{{ post.id }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+    <div class="block-stack {{ blockClass }}" id="action-{{ item.id }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
       <h2 class="block-stack-heading">
         {% if item.post_excerpt|length %}
             {{ item.post_excerpt }}
@@ -169,7 +170,7 @@
   <div class="focuses">
     <div class="focuses-canister">
     {% for focus in focuses %}
-      <div class="focus-item-{{ focus.slug }}">
+      <div class="focus-item focus-item-{{ focus.slug }}">
         <h2 class="focus-item-heading">{{ focus.title}}</h2>
         <div class="focus-item-content">
           <img class="focus-item-src" src="{{ focus.thumbnail.src }}" alt="">

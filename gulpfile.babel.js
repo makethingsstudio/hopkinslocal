@@ -101,7 +101,7 @@ gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 gulp.task('serve', ['styles', 'fonts'], () => {
   browserSync({
     proxy: "http://hopkinslocal.jhu.dev/",
-    serveStatic: ['./bower_components/']
+    serveStatic: ['./']
   });
 
   gulp.watch([
