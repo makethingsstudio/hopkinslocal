@@ -91,7 +91,7 @@ $(document).ready(function() {
                 setTimeout(function() { // now wait 300 milliseconds...
                     window.open(href, (!target ? "_self" : target)); // ...and open the link as usual
                 }, 300);
-            };
+            }
         });
     });
 });
