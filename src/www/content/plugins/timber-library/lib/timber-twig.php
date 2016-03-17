@@ -5,15 +5,18 @@ class TimberTwig {
 	public static $dir_name;
 
 	/**
-	 * Initialization
+	 * @codeCoverageIgnore
 	 */
 	public static function init() {
 		new TimberTwig();
 	}
 
+	/**
+	 * @codeCoverageIgnore
+	 */
 	function __construct() {
-		add_action( 'twig_apply_filters', array( $this, 'add_timber_filters_deprecated' ) );
-		add_action( 'twig_apply_filters', array( $this, 'add_timber_filters' ) );
+		add_action( 'timber/twig/filters', array( $this, 'add_timber_filters_deprecated' ) );
+		add_action( 'timber/twig/filters', array( $this, 'add_timber_filters' ) );
 	}
 
 	/**
@@ -28,6 +31,9 @@ class TimberTwig {
 		$twig->addFilter( new Twig_SimpleFilter( 'wp_body_class', array( $this, 'body_class' ) ) );
 		$twig->addFilter( new Twig_SimpleFilter( 'twitterify', array( 'TimberHelper', 'twitterify' ) ) );
 		$twig->addFilter( new Twig_SimpleFilter( 'twitterfy', array( 'TimberHelper', 'twitterify' ) ) );
+		$twig->addFilter( new Twig_SimpleFilter( 'string', function($arr, $glue = ' '){
+			return twig_join_filter($arr, $glue);
+		} ) );
 		return $twig;
 	}
 
@@ -58,7 +64,6 @@ class TimberTwig {
 		/* other filters */
 		$twig->addFilter( new Twig_SimpleFilter( 'stripshortcodes', 'strip_shortcodes' ) );
 		$twig->addFilter( new Twig_SimpleFilter( 'array', array( $this, 'to_array' ) ) );
-		$twig->addFilter( new Twig_SimpleFilter( 'string', array( $this, 'to_string' ) ) );
 		$twig->addFilter( new Twig_SimpleFilter( 'excerpt', 'wp_trim_words' ) );
 		$twig->addFilter( new Twig_SimpleFilter( 'function', array( $this, 'exec_function' ) ) );
 		$twig->addFilter( new Twig_SimpleFilter( 'pretags', array( $this, 'twig_pretags' ) ) );
@@ -66,6 +71,7 @@ class TimberTwig {
 		$twig->addFilter( new Twig_SimpleFilter( 'shortcodes', 'do_shortcode' ) );
 		$twig->addFilter( new Twig_SimpleFilter( 'time_ago', array( $this, 'time_ago' ) ) );
 		$twig->addFilter( new Twig_SimpleFilter( 'wpautop', 'wpautop' ) );
+		$twig->addFilter( new Twig_SimpleFilter( 'list', array( $this, 'add_list_separators' ) ) );
 
 		$twig->addFilter( new Twig_SimpleFilter( 'relative', function ( $link ) {
 					return TimberURLHelper::get_rel_url( $link, true );
@@ -93,6 +99,8 @@ class TimberTwig {
 				} ) );
 		$twig->addFunction( new Twig_SimpleFunction( 'function', array( &$this, 'exec_function' ) ) );
 		$twig->addFunction( new Twig_SimpleFunction( 'fn', array( &$this, 'exec_function' ) ) );
+
+		$twig->addFunction( new Twig_SimpleFunction( 'shortcode', 'do_shortcode' ) );
 
 		/* TimberObjects */
 		$twig->addFunction( new Twig_SimpleFunction( 'TimberPost', function ( $pid, $PostClass = 'TimberPost' ) {
@@ -177,9 +185,9 @@ class TimberTwig {
 		$twig->addFunction( '__', new Twig_SimpleFunction( '__', function ( $text, $domain = 'default' ) {
 					return __( $text, $domain );
 				} ) );
-
+		/* get_twig is deprecated, use timber/twig */
 		$twig = apply_filters( 'get_twig', $twig );
-
+		$twig = apply_filters( 'timber/twig', $twig );
 		return $twig;
 	}
 
@@ -195,26 +203,6 @@ class TimberTwig {
 		}
 		$arr = array( $arr );
 		return $arr;
-	}
-
-	/**
-	 *
-	 *
-	 * @param mixed   $arr
-	 * @param string  $glue
-	 * @return string
-	 */
-	function to_string( $arr, $glue = ' ' ) {
-		if ( is_string( $arr ) ) {
-			return $arr;
-		}
-		if ( is_array( $arr ) && count( $arr ) == 1 ) {
-			return $arr[0];
-		}
-		if ( is_array( $arr ) ) {
-			return implode( $glue, $arr );
-		}
-		return null;
 	}
 
 	/**
@@ -253,9 +241,8 @@ class TimberTwig {
 	}
 
 	/**
-	 *
-	 *
 	 * @param mixed   $body_classes
+	 * @deprecated 0.20.7
 	 * @return string
 	 */
 	function body_class( $body_classes ) {
@@ -283,6 +270,8 @@ class TimberTwig {
 
 		if ( $date instanceof DateTime ) {
 			$timestamp = $date->getTimestamp();
+		} else if (is_numeric( $date ) && strtotime( $date ) === false ) {
+			$timestamp = intval( $date );
 		} else {
 			$timestamp = strtotime( $date );
 		}
@@ -297,6 +286,7 @@ class TimberTwig {
 	 *
 	 * @param mixed   $obj
 	 * @param bool    $methods
+	 * @deprecated since 0.20.7
 	 * @return string
 	 */
 	function object_docs( $obj, $methods = true ) {
@@ -330,6 +320,28 @@ class TimberTwig {
 		} else {
 			return sprintf( $format_future, human_time_diff( $to, $from ) );
 		}
+	}
+
+	/**
+	 * @param array $arr
+	 * @param string $first_delimiter
+	 * @param string $second_delimiter
+	 * @return string
+	 */
+	function add_list_separators( $arr, $first_delimiter = ',', $second_delimiter = 'and' ) {
+		$length = count( $arr );
+		$list = '';
+		foreach( $arr as $index => $item ) {
+			if ( $index < $length - 2 ) {
+				$delimiter = $first_delimiter.' ';
+			} elseif ( $index == $length - 2 ) {
+				$delimiter = ' '.$second_delimiter.' ';
+			} else {
+				$delimiter = '';
+			}
+			$list = $list.$item.$delimiter;
+		}
+		return $list;
 	}
 
 }
