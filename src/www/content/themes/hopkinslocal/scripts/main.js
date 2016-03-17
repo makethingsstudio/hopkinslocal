@@ -24,8 +24,8 @@
         });
 
 
-        $('#js-fit-local').fitText(0.9);
-        $('#js-overlay-fit-local').fitText(0.9);
+        $('#js-fit-local').fitText(0.84);
+        $('#js-overlay-mark').fitText(0.82);
 
         // // Get Height of Browser, apply it to map.
         // mapE = document.getElementById('map');
@@ -87,7 +87,7 @@ $(document).ready(function() {
             event.preventDefault(); // don't open the link yet
             // _gaq.push(["_trackEvent", "External Links", "Clicked", href, , false]); // create a custom event
             ga('send', 'event', 'External Links', 'Clicked', href, false);
-            if (!href == "/about") {
+            if (href != "/about") {
                 setTimeout(function() { // now wait 300 milliseconds...
                     window.open(href, (!target ? "_self" : target)); // ...and open the link as usual
                 }, 300);
