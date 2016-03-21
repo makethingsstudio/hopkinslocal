@@ -619,7 +619,11 @@ a:visited {
 .page-hero--blocal {
   background-color: $blue-steel;
   background-image: url('../images/blocal-pattern.jpg');
-  background-size: 50%
+  background-size: 50%;
+
+  @include breakpoint($bp-1) {
+    padding-bottom: 48px;
+  }
 }
 
 
@@ -772,6 +776,12 @@ a:visited {
   }
 }
 
+.page-intro--blocal {
+    @include breakpoint($bp-1) {
+        margin-top: 48px;
+    }
+}
+
 
 .page-intro-heading {
   margin-bottom: .25em;
@@ -806,6 +816,11 @@ a:visited {
     font-size: 24px;
     font-weight: $fw-gentona-bold;
     line-height: $lh-thin;
+  }
+  .page-intro--blocal & {
+    font-family: $heading-font-family;
+    font-weight: $fw-quadon-b;
+    color: $blue-rhino;
   }
 }
 
@@ -1947,7 +1962,7 @@ a:visited {
     @include _animate;
 
     display: inline-block;
-    padding: 3*$vs 3*$vs 4*$vs;
+    padding: 3*$vs 3*$vs 3*$vs;
     margin: 0;
     font-family: $heading-font-family;
     font-size: $fz-deca;
@@ -2003,12 +2018,13 @@ a:visited {
 
 
 .blocal-intro {
+  overflow: hidden;
   padding-top: 24px;
   padding-bottom: 24px;
 
   @include breakpoint($bp-1) {
-    padding-top: 72px;
-    padding-bottom: 72px;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }
 
@@ -2026,4 +2042,123 @@ a:visited {
   font-family: $default-font-family;
   font-size: $fz-hecto;
   font-weight: $fw-gentona-medium;
+}
+
+.blocal-intro__attach {
+    @include breakpoint( $bp-1) {
+        float: left;
+
+    }
+}
+
+.blocal-intro__body {
+    @include breakpoint($bp-1) {
+        padding-top: 88px;
+        margin-right: 6.32%;
+    }
+}
+
+
+.success-story {
+    position: relative;
+
+    @include breakpoint($bp-1) {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+}
+
+.success-story__left,
+.success-story__right {
+    display: table-cell;
+    width: 50%;
+    background-color: $yellow-supernova;
+}
+
+
+.success-story__attach {
+    @include breakpoint($bp-1) {
+        position: relative;
+        overflow: hidden;
+        height: 0;
+        padding-top: 60%;
+    }
+}
+
+.success-story__src {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+}
+
+
+.success-story__body {
+    padding: 20px 24px 24px;
+    color: $blue-rhino;
+}
+
+.success-story__body .block-media-link {
+    &:link,
+    &:active,
+    &:visited {
+        color: $blue-rhino;
+    }
+    &:hover,
+    &:focus {
+        color: $blue-curious;
+    }
+}
+
+.success-story__body .block-media-type {
+    font-family: $default-font-family;
+}
+
+.success-story__body .block-media-heading-blocal {
+    font-family: $heading-font-family;
+    font-size: 20px;
+}
+
+.success-story__content {
+    @include _cms;
+
+    @include breakpoint($bp-1) {
+        width: 75%;
+    }
+
+    .success-story__more {
+        &:link,
+        &:active,
+        &:visited {
+            text-decoration: none;
+        }
+    }
+}
+
+.success-story__more {
+    &:link,
+    &:active,
+    &:visited {
+      @include _animate;
+
+      display: inline-block;
+      padding: 3*$vs 3*$vs 3*$vs;
+      margin: 0;
+      font-family: $heading-font-family;
+      font-size: $fz;
+      font-weight: $fw-quadon-b;
+      line-height: 1;
+      text-align: center;
+      text-decoration: none;
+      color: $blue-cornflower;
+      border: $vs solid $white;
+    }
+    &:hover,
+    &:focus {
+      @include _animate-hover;
+
+      color: $blue-rhino;
+    }
 }

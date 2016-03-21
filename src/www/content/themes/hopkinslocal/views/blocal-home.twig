@@ -35,10 +35,10 @@
 
 
       <div class="blocal-intro">
-        <blocal-intro__attach>
+        <div class="blocal-intro__attach">
           <h1 class="blocal-brand">B Local</h1>
           <!-- /.blocal-brand ir -->
-        </blocal-intro__attach>
+        </div>
         <div class="blocal-intro__body">
           <h2 class="blocal-intro__heading">{{ post.headline }}</h2>
           <!-- /.blocal__heading -->
@@ -57,7 +57,7 @@
 
 {% block content %}
   <div class="container">
-    <div class="page-intro">
+    <div class="page-intro page-intro--blocal">
       <div class="page-intro-content">
         {{ post.intro_content }}
       </div>
@@ -80,35 +80,40 @@
 
   {% if successStories | length %}
     {% if successStories | length == 1 %}
-    <div class="container">
-            <div class="success-story">
-            {% for item in successStories %}
-            <div class="block-media-left">
-              {% if item.thumbnail|length %}
-              <a class="block-media-attach">
-                <div class="block-media-ratio">
-                  <img class="block-media-src" src="{{ item.thumbnail.src() }}" alt="{{ item.thumbnail.alt }}">
+
+        <div class="success-story">
+            {% for item in successStories | slice( 0, 1 ) %}
+            <div class="success-story__left">
+                <div class="success-story__attach">
+                    <img class="success-story__src" src="{{ item.thumbnail.src() }}" alt="{{ item.thumbnail.alt }}">
                 </div>
-              </a>
-              {% endif %}
-              <p class="block-media-type">HopkinsLocal in Action</p>
-              <h2 class="block-media-heading">
-                <a class="block-media-link" href="http://hub.jhu.edu/gazette/2014/september-october/focus-malone-hall" title="{{ item.title }}">
-                {% if item.post_excerpt|length %}
-                  {{ item.post_excerpt }}
-                {% else %}
-                  {{ item.title }}
-                {% endif %}
-
-                </a>
-              </h2>
-
+                <!-- /.success-story__attach -->
             </div>
+            <!-- /.success-story__left -->
+            <div class="success-story__right">
+                <div class="success-story__body">
+                    <p class="block-media-type">Success Story</p>
+                    <h2 class="block-media-heading block-media-heading-blocal">
+                      <a class="block-media-link" href="" title="{{ item.title }}">
+                        {{ item.title }}
+                      </a>
+                    </h2>
+                    <div class="success-story__content u-cms">
+                        {{ item.post_excerpt | wpautop }}
+                        <p>
+                            <a class="success-story__more" href="" title="{{ item.title }}">
+                                Read More
+                            </a>
+                        </p>
+                    </div>
+                    <!-- /.success-story__content u-cms -->
+                </div>
+                <!-- /.success-story__body -->
+            </div>
+            <!-- /.success-story__right -->
             {% endfor %}
-      </div>
-      <!-- /.success-story -->
-    </div>
-    <!-- /.container -->
+        </div>
+        <!-- /.success-story -->
     {% endif %}
   {% endif %}
 
