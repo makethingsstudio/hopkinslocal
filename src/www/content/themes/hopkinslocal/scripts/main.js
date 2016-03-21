@@ -95,3 +95,26 @@ $(document).ready(function() {
         });
     });
 });
+
+
+// Load Partner Details via json
+$( document ).ready( function() {
+    $('#js-partner-list').on('click', '.js-partner-link', function (event) {
+        var partnerId = $( this ).data( 'partner-id' );
+        var request;
+        var tmplDef;
+        var pageFn;
+
+        tmplDef = doT.template( document.getElementById('tmpl-partner-detail').text );
+
+
+        request = $.ajax( {
+            url: '/wp-json/wp/v2/partner/' + partnerId
+        } ).done( function ( data ) {
+            console.log( data );
+            $('#js-panel-content').html( tmplDef( data ) );
+        } );
+
+        event.preventDefault();
+    })
+} );

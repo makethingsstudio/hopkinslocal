@@ -9,7 +9,8 @@
     "colorbox": "~1.6.3",
     "FitText.js": "~1.2.0",
     "modernizr": "2.8.3",
-    "formstone": "~0.8.26"
+    "formstone": "~0.8.26",
+    "doT": "^1.0.1"
   },
   "devDependencies": {
     "chai": "~3.2.0",
