@@ -71,22 +71,22 @@ $fw-gentona-t: 100;
 
 
 $black: #000;
-$grey-ebb: #e5e2e0;
-$white: #fff;
-$grey-gravel: #4a484c;
 $blue-cornflower: #68ace5;
-$blue-jacarta: #34276d;
 $blue-curious: #3b8ede;
+$blue-jacarta: #34276d;
 $blue-rhino: #2a455c;
+$blue-steel: #4A82B3;
+$green-chalet: #44693d;
 $green-cucumber: #74aa50;
 $green-half-baked: #86c8bc;
 $green-persian: #00ab8e;
-$green-chalet: #44693d;
+$grey-ebb: #e5e2e0;
+$grey-gravel: #4a484c;
 $red-heath: #531c10;
 $red-roughy: #cf4520;
+$white: #fff;
 $yellow-goldenrod: #fbd872;
 $yellow-supernova: #ffcd00;
-
 
 $browser-upgrade-co: $black;
 $browser-upgrade-bg: $yellow-supernova;
@@ -136,18 +136,19 @@ $browser-upgrade-bg: $yellow-supernova;
 //
 @mixin _ir($w: null, $h: null) {
   overflow: hidden;
-  @if type-of($w) == 'number' {
 
-    width: $w*1px;
-  }
-  @if type-of($h) == 'number' {
-    height: $h*1px;
-  }
   &:before {
     content: '';
     display: block;
     width: 1px;
     height: 150%;
+  }
+
+  @if type-of($w) == 'number' {
+    width: $w*1px;
+  }
+  @if type-of($h) == 'number' {
+    height: $h*1px;
   }
 }
 
@@ -158,12 +159,12 @@ $browser-upgrade-bg: $yellow-supernova;
 // @TODO: Add docs to _vh!
 //
 @mixin _vh {
+  position: static;
+  overflow: visible;
   clip: auto;
+  width: auto;
   height: auto;
   margin: 0;
-  overflow: visible;
-  position: static;
-  width: auto;
 }
 
 
@@ -186,6 +187,7 @@ $browser-upgrade-bg: $yellow-supernova;
   -1px 0 $background,
   -2px 0 $background,
   -3px 0 $background;
+
   // Tweak position + thickness for high res (1.75x and up) displays
   @include breakpoint(-webkit-min-device-pixel-ratio 1.75, min-resolution 168dpi) {
     background-image: linear-gradient(rgba($default-underline-color, 0.25) 0%, $default-underline-color 100%);
@@ -204,7 +206,6 @@ $browser-upgrade-bg: $yellow-supernova;
   > * + * {
     margin-top: .5em;
   }
-
   > img,
   > video,
   > audio,
@@ -212,7 +213,6 @@ $browser-upgrade-bg: $yellow-supernova;
     max-width: 100%;
     height: auto;
   }
-
   a:link,
   a:active,
   a:visited {
@@ -250,18 +250,20 @@ $browser-upgrade-bg: $yellow-supernova;
     Colorbox Core Style:
     The following CSS is consistent between example themes and should not be altered.
 */
-#colorbox, #cboxOverlay, #cboxWrapper{position:absolute; top:0; left:0; z-index:9999; overflow:hidden;}
+#colorbox, #cboxOverlay, #cboxWrapper{position:absolute; z-index:9999; top:0; left:0; overflow:hidden;}
 #cboxWrapper {max-width:none;}
 #cboxOverlay{position:fixed; width:100%; height:100%;}
 #cboxMiddleLeft, #cboxBottomLeft{clear:left;}
 #cboxContent{position:relative;}
-#cboxLoadedContent{overflow:auto; -webkit-overflow-scrolling: touch;}
+#cboxLoadedContent{overflow:auto;
+
+ -webkit-overflow-scrolling: touch;}
 #cboxTitle{margin:0;}
 #cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%; height:100%;}
 #cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
-.cboxPhoto{float:left; margin:auto; border:0; display:block; max-width:none; -ms-interpolation-mode:bicubic;}
-.cboxIframe{width:100%; height:100%; display:block; border:0; padding:0; margin:0;}
-#colorbox, #cboxContent, #cboxLoadedContent{box-sizing:content-box; -moz-box-sizing:content-box; -webkit-box-sizing:content-box;}
+.cboxPhoto{ display:block;float:left; max-width:none; margin:auto; -ms-interpolation-mode:bicubic; border:0;}
+.cboxIframe{ display:block;width:100%; height:100%; padding:0; margin:0; border:0;}
+#colorbox, #cboxContent, #cboxLoadedContent{ -webkit-box-sizing:content-box; -moz-box-sizing:content-box;box-sizing:content-box;}
 
 #cboxOverlay {
   background-color: #000;
@@ -365,13 +367,14 @@ a:visited {
 
 
 .masthead {
-  margin: 0 auto;
   overflow: hidden;
+  margin: 0 auto;
 
 }
 
 .lt-ie8 .masthead {
   zoom: 1;
+
   &:before,
   &:after {
     content: " "; /* 1 */
@@ -382,17 +385,12 @@ a:visited {
 
 .masthead-brand {
   text-align: center;
+
   @include breakpoint($bp-1) {
     float: left;
     padding-left: 51px; // @NOTE magic number, from logo
     margin-left: -51px;
   }
-
-  // .lt-ie9 & {
-  //   float: left;
-  //   padding-left: 51px; // @NOTE magic number, from logo
-  //   margin-left: -51px;
-  // }
 }
 
 
@@ -400,6 +398,7 @@ a:visited {
 .masthead-brand-interior {
   margin: 0 auto;
   text-align: center;
+
   @include breakpoint($bp-1) {
     float: left;
     width: 586px; // 341+245
@@ -418,6 +417,7 @@ a:visited {
 
 .masthead-logo {
   @include _ir;
+
   display: block;
   width: 341px;
   height: 151px;
@@ -442,8 +442,8 @@ a:visited {
   display: block;
   position: relative;
   font-family: $heading-font-family;
-  font-weight: 300;
   font-size: $fz-hecto;
+  font-weight: 300;
   line-height: 1;
   text-transform: uppercase;
   color: $white;
@@ -470,8 +470,8 @@ a:visited {
     position: absolute;
     top: 51px;
     left: 0;
-    height: 51px;
     width: 1px;
+    height: 51px;
     background: $white;
   }
 }
@@ -501,8 +501,9 @@ a:visited {
 .masthead-nav {
   font-weight: $fw-gentona-bold;
   text-align: center;
-  text-transform: uppercase;
   letter-spacing: .1em;
+  text-transform: uppercase;
+
   @include breakpoint($bp-1) {
     padding-top: $vs*14; // @NOTE magic number. (151-24)/2
     text-align: right;
@@ -512,6 +513,7 @@ a:visited {
 
 .masthead-nav-item {
   display: inline-block;
+
   & + & {
     @include breakpoint($bp-1) {
       margin-left: $vs*3;
@@ -534,10 +536,20 @@ a:visited {
     text-decoration: none;
     color: $black;
   }
-
   &:hover,
   &:focus {
     color: $yellow-supernova
+  }
+  .masthead-nav--blocal & {
+    &:link,
+    &:active,
+    &:visited {
+      color: $white;
+    }
+    &:hover,
+    &:focus {
+      color: $yellow-supernova;
+    }
   }
 }
 
@@ -574,8 +586,8 @@ a:visited {
   padding-bottom: 18*$vs;
   color: $grey-ebb;
   background: $yellow-supernova url('../images/hopkins-local-pattern-orange-on-academic-gold.png') center center repeat;
-  background-size: 500px;
   background-attachment: fixed;
+  background-size: 500px;
 }
 
 .lt-ie9 .page-hero {
@@ -584,23 +596,30 @@ a:visited {
 
 
 .t-build .page-hero {
+  background-color: $red-roughy;
   background-image: url("../images/hopkins-local-pattern-white-on-burnt-orange.png");
   background-size: 500px;
-  background-color: $red-roughy;
 }
 
 .t-hire .page-hero {
   color: $black;
+  background-color: $green-half-baked;
   background-image: url("../images/hopkins-local-pattern-white-on-copper-petina.png");
   background-size: 500px;
-  background-color: $green-half-baked;
 }
 
 
 .t-buy .page-hero {
+  background-color: $green-cucumber;
   background-image: url("../images/hopkins-local-pattern-white-on-oak-leaves.png");
   background-size: 500px;
-  background-color: $green-cucumber;
+}
+
+
+.page-hero--blocal {
+  background-color: $blue-steel;
+  background-image: url('../images/blocal-pattern.jpg');
+  background-size: 50%
 }
 
 
@@ -609,15 +628,15 @@ a:visited {
 .hopkins-local {
   display: block;
   position: relative;
+  clear: both;
   padding-top: 72px;
   padding-right: 6.3218390805%;
   padding-bottom: 72px;
   padding-left: 6.3218390805%;
-  text-transform: uppercase;
   font-family: $heading-font-family;
   font-style: normal;
   line-height: $lh-base;
-  clear: both;
+  text-transform: uppercase;
 }
 
 .lt-ie8 .hopkins-local {
@@ -636,10 +655,10 @@ a:visited {
 
 
 .about-local-heading {
-  text-transform: uppercase;
   font-family: $heading-font-family;
   font-weight: 300;
   line-height: $lh-base;
+  text-transform: uppercase;
   color: $black;
 }
 
@@ -647,10 +666,11 @@ a:visited {
 .hopkins-local-mark {
   display: inline-block;
   width: 100%;
-  text-align: center;
-  font-weight: 300;
   font-size: 37px;
+  font-weight: 300;
+  text-align: center;
   color: $black;
+
   @include breakpoint($bp-1) {
     font-size: 99px;
   }
@@ -658,9 +678,10 @@ a:visited {
 
 
 .overlay-hopkins-local-mark {
-  text-align: center;
-  font-weight: $fw-quadon-l;
   font-size: 37px;
+  font-weight: $fw-quadon-l;
+  text-align: center;
+
   @include breakpoint($bp-1) {
     font-size: 99px;
   }
@@ -696,11 +717,12 @@ a:visited {
 .hopkins-local-tagline {
   display: block;
   font-family: $default-font-family;
-  font-weight: $fw-gentona-medium;
   font-size: 14px;
-  letter-spacing: .1em;
+  font-weight: $fw-gentona-medium;
   text-align: right;
+  letter-spacing: .1em;
   color: $black;
+
   @include breakpoint($bp-1) {
     // font-size: $fz-kilo;
     font-size: 36px;
@@ -716,11 +738,12 @@ a:visited {
 .overlay-hopkins-local-tagline {
   display: block;
   font-family: $default-font-family;
-  font-weight: $fw-gentona-medium;
   font-size: 30px;
-  letter-spacing: .1em;
+  font-weight: $fw-gentona-medium;
   text-align: right;
+  letter-spacing: .1em;
   color: $black;
+
   .lt-ie9 & {
     text-align: center;
   }
@@ -740,11 +763,12 @@ a:visited {
 .page-intro {
   padding-top: 32px;
   margin-bottom: 32px;
+
   @include breakpoint($bp-1) {
+    overflow: hidden;
     padding-top: 0;
     padding-bottom: 0;
     margin: 32px 6.3218390805% 64px;
-    overflow: hidden;
   }
 }
 
@@ -752,9 +776,10 @@ a:visited {
 .page-intro-heading {
   margin-bottom: .25em;
   font-family: $heading-font-family;
-  font-weight: $fw-quadon-n;
   font-size: 48px;
+  font-weight: $fw-quadon-n;
   line-height: $lh-base;
+
   @include breakpoint($bp-1) {
     font-size: $fz-mega;
   }
@@ -767,13 +792,14 @@ a:visited {
 
 .page-intro-content {
   @include _cms;
+
   font-size: 20px;
   font-size: 1.25rem;
   color: $grey-gravel;
 
   @include breakpoint($bp-1) {
-    width: 58.5205992509%;
     float: left;
+    width: 58.5205992509%;
   }
 
   h3 {
@@ -798,8 +824,9 @@ a:visited {
 
 .page-intro-videolink {
   @include _animate;
-  position: relative;
+
   display: block;
+  position: relative;
   overflow: hidden;
   padding: 2*$vs;
   background: $grey-ebb;
@@ -807,6 +834,7 @@ a:visited {
   &:hover,
   &:focus {
     @include _animate-hover;
+
     color: $white;
     border-color: $blue-rhino;
     background-color: $blue-rhino;
@@ -822,11 +850,11 @@ a:visited {
 .page-intro-videolink-text {
   display: block;
   padding-top: $vs;
-  text-align: center;
-  font-size: $fz-deci;
-  line-height: $lh-base;
   font-family: $heading-font-family;
+  font-size: $fz-deci;
   font-weight: $fw-quadon-b;
+  line-height: $lh-base;
+  text-align: center;
 }
 
 
@@ -836,6 +864,7 @@ a:visited {
 .content-blocks {
   overflow: hidden;
   border-top: 10px solid #005db9;
+
   @include breakpoint($bp-1) {
     position: relative;
 
@@ -847,11 +876,12 @@ a:visited {
   text-transform: uppercase;
   color: #fff;
   background-color: #005db9;
+
   @include breakpoint($bp-1) {
     position: absolute;
+    z-index: 2;
     top: 0;
     left: 9.5%;
-    z-index: 2;
     font-size: 32px;
     font-size: 2rem;
   }
@@ -859,6 +889,7 @@ a:visited {
 
 .content-blocks-columns-1 {
   background: $blue-rhino;
+
   @include breakpoint($bp-1) {
     float: left;
     width: percentage(594/1218);
@@ -877,26 +908,25 @@ a:visited {
 
 
 .block-stack {
-  position: relative;
   display: block;
+  position: relative;
   width: 100%;
   height: 0;
   background-size: cover;
 
-
-
   &:hover,
   &:focus {
     @include _animate-hover;
+
     .block-stack-heading {
       max-height: 75%;
       padding-top: 1rem;
       padding-bottom: 1rem;
     }
   }
-
   &:after {
     @include _animate;
+
     content: '';
     display: block;
     position: absolute;
@@ -905,8 +935,8 @@ a:visited {
     width: 24px;
     height: 24px;
     text-align: center;
-    background: url('../images/icon-info.svg') center center no-repeat;
     border-radius: 100%;
+    background: url('../images/icon-info.svg') center center no-repeat;
 
     .lt-ie9 & {
       background-image: url('../images/icon-info.png');
@@ -927,16 +957,16 @@ a:visited {
 
 .block-stack-heading {
   @include _animate-news;
+
   position: absolute;
+  z-index: $z-content;
   bottom: 0;
   left: 0;
+  overflow: hidden;
+  width: 100%;
   width: 100%;
   max-height: 0;
-  z-index: $z-content;
-  width: 100%;
   padding: 0 1rem;
-  overflow: hidden;
-
   font-size: 18px;
   line-height: $lh-thin;
   color: $white;
@@ -977,6 +1007,7 @@ a:visited {
   overflow: hidden;
   color: $black;
   background: $red-heath;
+
   .block-media-attach {
     @include breakpoint($bp-1) {
       float: left;
@@ -994,6 +1025,7 @@ a:visited {
   overflow: hidden;
   color: $grey-ebb;
   background: $blue-jacarta;
+
   .block-media-attach {
     @include breakpoint($bp-1) {
       float: right;
@@ -1004,6 +1036,7 @@ a:visited {
 
 .block-media-attach {
   position: relative;
+
   @include breakpoint($bp-1) {
     width: 50%;
   }
@@ -1016,7 +1049,6 @@ a:visited {
   &:visited {
     color: $black;
   }
-
   &:hover,
   &:focus {
     color: $blue-jacarta
@@ -1026,6 +1058,7 @@ a:visited {
 
 .block-media-ratio {
   overflow: hidden;
+
   @include breakpoint($bp-1) {
     position: relative;
     width: 100%;
@@ -1058,6 +1091,7 @@ a:visited {
 .map {
   display: none;
   position: relative;
+
   @include breakpoint($bp-1) {
     display: block;
   }
@@ -1070,21 +1104,20 @@ a:visited {
 
 .map-overlay {
   position: absolute;
+  z-index: $z-content;
   top: 0;
   left: 0;
-  z-index: $z-content;
   padding-top: 18*$vs;
 }
 
 .map-overlay-canister {
-
   @include _container;
 }
 
 
 .map-overlay-heading {
-  font-weight: $fw-gentona-bold;
   font-size: $fz-deca;
+  font-weight: $fw-gentona-bold;
   line-height: $lh-thin;
 }
 
@@ -1094,6 +1127,7 @@ a:visited {
   font-weight: $fw-gentona-bold;
   color: $grey-ebb;
   background: $blue-jacarta;
+
   @include breakpoint($bp-1) {
     width: percentage(552/1218);
     margin: 0 auto;
@@ -1134,8 +1168,8 @@ a:visited {
 
 
 .focus-item-heading {
-  font-weight: $fw-gentona-bold;
   font-size: $fz-mega;
+  font-weight: $fw-gentona-bold;
   line-height: $lh-thin;
   text-align: center;
   border-top: 2*$vs solid;
@@ -1156,6 +1190,7 @@ a:visited {
 
 .focus-item-text {
   color: $black;
+
   @include breakpoint($bp-1) {
     min-height: 26*$vs;
   }
@@ -1163,12 +1198,13 @@ a:visited {
 
 .focus-link-more {
   @include _animate;
+
   display: block;
   padding: 3*$vs 3*$vs 4*$vs;
   margin: 4*$vs 0;
-  line-height: 1;
   font-family: $heading-font-family;
   font-weight: $fw-quadon-b;
+  line-height: 1;
   text-align: center;
   border: $vs solid;
 
@@ -1180,11 +1216,13 @@ a:visited {
 
 .focus-link-option {
   @include _animate;
+
   display: block;
   padding: 2*$vs 3*$vs 3*$vs;
   font-size: $fz-deci;
   line-height: $lh-thin;
   border: $vs solid transparent;
+
   @include breakpoint($bp-1) {
     float: left;
     width: percentage(151/310);
@@ -1194,9 +1232,9 @@ a:visited {
   &:focus {
     @include _animate-hover;
   }
-
   & + & {
     margin-top: 4*$vs;
+
     @include breakpoint($bp-1) {
       float: right;
       margin-top: 0;
@@ -1207,6 +1245,7 @@ a:visited {
 
 .focus-item-build {
   @include _focus-item;
+
   color: $red-roughy;
 
   @include breakpoint($bp-1) {
@@ -1222,7 +1261,6 @@ a:visited {
       background: $red-roughy;
     }
   }
-
   .focus-link-option {
     color: $white;
     background: $red-roughy;
@@ -1239,6 +1277,7 @@ a:visited {
 
 .focus-item-hire {
   @include _focus-item;
+
     margin-top: 8*$vs;
   color: $green-half-baked;
 
@@ -1255,7 +1294,6 @@ a:visited {
       background: $green-half-baked;
     }
   }
-
   .focus-link-option {
     color: $white;
     background: $green-half-baked;
@@ -1289,7 +1327,6 @@ a:visited {
       background: $green-cucumber;
     }
   }
-
   .focus-link-option {
     color: $white;
     background: $green-cucumber;
@@ -1319,13 +1356,12 @@ a:visited {
 .block-quote-text {
   position: relative;
   padding-top: 16px;
-  padding-bottom: 16px;
   padding-right: 6.3218390805%;
+  padding-bottom: 16px;
   padding-left: 12.64%;
-
+  font-family: quadon, gentona, "proxima nova", "Helvetica Neue", Helvetica, sans-serif;
   font-size: 20px;
   font-size: 1.25rem;
-  font-family: quadon, gentona, "proxima nova", "Helvetica Neue", Helvetica, sans-serif;
   font-weight: 300;
   font-style: italic;
   line-height: 1.25;
@@ -1373,19 +1409,19 @@ a:visited {
   top: 16px;
   left: 6.3218390805%;
   font-family: gentona, "proxima nova", "Helvetica Neue", Helvetica, sans-serif;
-  font-weight: 700;
-  font-style: normal;
   font-size: 144px;
   font-size: 9rem;
+  font-weight: 700;
+  font-style: normal;
 }
 
 .block-quote-text > p:after {
   content: '”';
   font-family: quadon, gentona, "proxima nova", "Helvetica Neue", Helvetica, sans-serif;
-  font-weight: 500;
-  font-style: italic;
   font-size: 32px;
   font-size: 2rem;
+  font-weight: 500;
+  font-style: italic;
 }
 
 @include breakpoint($bp-1) {
@@ -1446,15 +1482,14 @@ a:visited {
 }
 
 .page-overlay {
-  opacity: 0;
   position: fixed;
+  z-index: -1;
   top: 0;
   left: 0;
-  z-index: -1;
+  overflow: auto;
   width: 100%;
   height: 100%;
-  overflow: auto;
-
+  opacity: 0;
   background-color: $blue-cornflower;
 
   .no-opacity & {
@@ -1465,10 +1500,12 @@ a:visited {
 .has-overlay {
   position: relative;
   overflow: hidden;
+
   .page-overlay {
   @include _animate;
-    opacity: 1;
+
     z-index: 2000;
+    opacity: 1;
 
     .no-opacity & {
       display: block;
@@ -1478,6 +1515,7 @@ a:visited {
 
 .page-overlay-canister {
   @include _container;
+
   position: relative;
   padding-top: 20*$vs;
   color: $white;
@@ -1487,14 +1525,14 @@ a:visited {
   position: absolute;
   top: 8*$vs;
   right: 0;
-  text-align: right;
-  font-weight: $fw-gentona-bold;
   font-size: $fz-deca;
+  font-weight: $fw-gentona-bold;
+  text-align: right;
 
   &:before {
     content: '✖︎';
-    margin-right: 2*$vs;
     display: inline-block;
+    margin-right: 2*$vs;
     font-family: arial;
     font-size: $fz;
   }
@@ -1503,12 +1541,13 @@ a:visited {
 
 .page-overlay-content {
   @include _cms;
+
   @include breakpoint($bp-1) {
     width: percentage(758/1218);
     padding-bottom: 20*$vs;
     margin: 0 auto;
-    font-weight: $fw-gentona-medium;
     font-size: $fz-hecto;
+    font-weight: $fw-gentona-medium;
     line-height: $lh-wide;
   }
 }
@@ -1527,6 +1566,7 @@ a:visited {
 
 .site-footer-canister {
   @include _container;
+
   overflow: hidden;
 }
 
@@ -1543,6 +1583,7 @@ a:visited {
 
 .footer-logo {
     @include _ir;
+
     display: block;
     width: 341px;
     height: 151px;
@@ -1558,8 +1599,8 @@ a:visited {
 .footer-link {
   display: block;
   margin: 0 auto;
-  color: #fff;
   text-align: center;
+  color: #fff;
 }
 
 
@@ -1573,18 +1614,18 @@ a:visited {
   @include breakpoint($bp-1) {
     display: block;
     float: right;
+    overflow: hidden;
     width: percentage(286/1218);
     padding-top: 12*$vs;
     margin: 0;
-    overflow: hidden;
   }
 }
 
 
 .contact-01 {
   display: table-cell;
-  @include breakpoint($bp-1) {
 
+  @include breakpoint($bp-1) {
     float: left;
     width: 48.7096774194%;
   }
@@ -1593,11 +1634,10 @@ a:visited {
 .contact-02 {
   display: table-cell;
 
-
   @include breakpoint($bp-1) {
-    margin-top: 0;
     float: right;
     width: 48.7096774194%;
+    margin-top: 0;
   }
 }
 
@@ -1606,10 +1646,10 @@ a:visited {
 
 
 .site-content {
+  overflow: hidden;
   padding-top: 10*$vs;
   padding-bottom: 16*$vs;
   background: $white;
-  overflow: hidden;
 }
 
 
@@ -1643,8 +1683,8 @@ a:visited {
 .page-content-intro {
   max-width: 85%;
   margin-bottom: 8*$vs;
-  font-weight: $fw-gentona-medium;
   font-size: $fz-deca;
+  font-weight: $fw-gentona-medium;
   line-height: $lh-wide;
 }
 
@@ -1653,6 +1693,7 @@ a:visited {
   padding-left: 30px;
   font-size: $fz;
   line-height: $lh-thin;
+
   @include breakpoint($bp-1) {
     float: left;
     width: 48.7096774194%;
@@ -1724,18 +1765,18 @@ a:visited {
 
 .success-story .block-media-type {
   font-family: $heading-font-family;
-  font-weight: $fw-quadon-eb;
   font-size: $fz-centi;
-  text-transform: uppercase;
+  font-weight: $fw-quadon-eb;
   letter-spacing: .1em;
+  text-transform: uppercase;
   color: $black;
 }
 
 
 .success-story .block-media-heading {
   padding: 0;
-  font-weight: 500;
   font-size: $fz;
+  font-weight: 500;
   color: $black;
 }
 
@@ -1776,6 +1817,7 @@ a:visited {
 .page-actions {
   overflow: hidden;
   padding-top: 4*$vs;
+
   @include breakpoint($bp-1) {
     padding-top: 12*$vs;
   }
@@ -1784,13 +1826,14 @@ a:visited {
 
 .page-actions .focus-link-option {
   @include _animate;
+
   display: block;
   width: 100%;
   padding: 3*$vs 3*$vs 4*$vs;
   margin: 0;
-  line-height: 1;
   font-family: $heading-font-family;
   font-weight: $fw-quadon-b;
+  line-height: 1;
   text-align: center;
   border: $vs solid;
 
@@ -1798,11 +1841,9 @@ a:visited {
   &:focus {
     @include _animate-hover;
   }
-
   + .focus-link-option {
     margin-top: 4*$vs;
   }
-
   .lt-ie9 & {
     width: 90%;
   }
@@ -1810,14 +1851,12 @@ a:visited {
 
 
 .t-build .focus-link-option {
-
   &:link,
   &:active,
   &:visited {
     color: $red-roughy;
     border-color: $red-roughy;
   }
-
   &:hover,
   &:focus {
     color: $white;
@@ -1827,14 +1866,12 @@ a:visited {
 
 
 .t-hire .focus-link-option {
-
   &:link,
   &:active,
   &:visited {
     color: $green-half-baked;
     border-color: $green-half-baked;
   }
-
   &:hover,
   &:focus {
     color: $white;
@@ -1844,14 +1881,12 @@ a:visited {
 
 
 .t-buy .focus-link-option {
-
   &:link,
   &:active,
   &:visited {
     color: $green-cucumber;
     border-color: $green-cucumber;
   }
-
   &:hover,
   &:focus {
     color: $white;
@@ -1865,6 +1900,7 @@ a:visited {
   padding-top: 8*$vs;
   padding-bottom: 8*$vs;
   background: $grey-ebb;
+
   @include breakpoint($bp-1) {
     padding-top: 16*$vs;
     padding-bottom: 16*$vs;
@@ -1891,6 +1927,7 @@ a:visited {
 
 .about-local-content {
   @include _cms;
+
   max-width: 90%;
   margin-bottom: 1em;
   font-weight: $fw-gentona-medium;
@@ -1908,22 +1945,23 @@ a:visited {
   &:active,
   &:visited {
     @include _animate;
+
     display: inline-block;
     padding: 3*$vs 3*$vs 4*$vs;
     margin: 0;
-    line-height: 1;
     font-family: $heading-font-family;
-    font-weight: $fw-quadon-eb;
     font-size: $fz-deca;
+    font-weight: $fw-quadon-eb;
+    line-height: 1;
     text-align: center;
     text-decoration: none;
     color: $blue-cornflower;
     border: $vs solid ;
   }
-
   &:hover,
   &:focus {
     @include _animate-hover;
+
     color: $blue-rhino;
   }
 }
@@ -1935,3 +1973,57 @@ a:visited {
 // .t-buy {
 //   color: $green-cucumber;
 // }
+
+
+
+
+
+// Blocal
+//
+
+//
+// Blocal Brand
+.blocal-brand {
+  overflow: hidden;
+  width: 301px;
+  height: 301px;
+  margin: 0 auto;
+  background: url('../images/blocal-logo.png') center center no-repeat;
+
+  &:before {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 150%;
+  }
+}
+
+
+
+
+
+.blocal-intro {
+  padding-top: 24px;
+  padding-bottom: 24px;
+
+  @include breakpoint($bp-1) {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+}
+
+.blocal-intro__heading,
+.blocal-intro__lead {
+  font-family: $heading-font-family;
+  font-size: $fz-mega;
+  font-weight: $fw-quadon-b;
+  line-height: $lh-base;
+  color: $white;
+}
+
+
+.blocal-intro__lead {
+  font-family: $default-font-family;
+  font-size: $fz-hecto;
+  font-weight: $fw-gentona-medium;
+}

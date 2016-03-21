@@ -23,7 +23,8 @@
 
 
   register_nav_menus( array(
-    'primary' => 'Primary Site Navigation'
+    'primary' => 'Primary Site Navigation',
+    'blocal'  => 'BLocal Navigation'
   ) );
 
 
@@ -57,6 +58,7 @@
       // $context['menu'] = new TimberMenu();
       // $context['site'] = $this;
       $context['primary'] = new TimberMenu('primary');
+      $context['blocal'] = new TimberMenu('blocal');
       $context['option'] = get_fields('option');
       return $context;
     }
