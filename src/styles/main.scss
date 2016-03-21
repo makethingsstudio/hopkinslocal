@@ -2118,7 +2118,7 @@ a:visited {
 
 .success-story__body .block-media-heading-blocal {
     font-family: $heading-font-family;
-    font-size: 20px;
+    font-size: $fz-dec;
 }
 
 .success-story__content {
@@ -2161,4 +2161,145 @@ a:visited {
 
       color: $blue-rhino;
     }
+}
+
+
+.partners {
+        margin-top: 24px;
+        margin-bottom: 24px;
+
+    @include breakpoint($bp-1) {
+        margin: 54px 6.3218390805% 72px;
+    }
+}
+
+.partners__header {
+    margin-bottom: $vs*4;
+    font-size: $fz-dec;
+    color: $blue-rhino;
+}
+
+.partners__heading {
+    font-family: $heading-font-family;
+    font-size: $fz-kilo;
+    font-weight: $fw-quadon-b;
+    line-height: $lh-thin;
+    color: $blue-rhino;
+}
+
+
+.partners__list {
+    font-size: 0;
+    line-height: 0;
+    text-align: justify;
+
+    &:after {
+        content: '';
+        display: inline-block;
+        width: 100%;
+    }
+}
+
+.partner-item {
+    display: block;
+    position: relative;
+    border-top: 1px solid $blue-rhino;
+
+    @include breakpoint($bp-1) {
+        display: inline-block;
+        width: 24%;
+        margin-top: 0;
+        margin-bottom: $vs*3;
+        font-size: $fz;
+    }
+}
+
+.partner-item--placeholder {
+    @include breakpoint($bp-1) {
+        display: inline-block;
+        width: 23%;
+    }
+}
+
+.partner-item + .partner-item {
+    margin-top: $vs*3;
+
+    @include breakpoint($bp-1) {
+        margin-top: 0;
+    }
+}
+
+.partner-item__link {
+    display: block;
+    height: 0;
+    padding-top: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 75%;
+
+}
+
+.partner-panel {
+    @include _animate;
+
+    position: fixed;
+    z-index: $z-modal;
+    // z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    // opacity: 0;
+    background: rgba( $blue-rhino, .9 );
+}
+
+[data-panel-active] .partner-panel {
+    z-index: $z-modal;
+    opacity: 1;
+}
+
+.partner-panel__body {
+    border-top: 16px solid $yellow-supernova;
+    background: $white;
+
+    @include breakpoint($bp-1) {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 33%;
+        padding: 48px 60px;
+        box-shadow: -2px 0 6px rgba( $black, .4 );
+    }
+}
+
+.partner-panel__heading {
+    margin-bottom: $vs*3;
+    font-family: $heading-font-family;
+    font-size: $fz-deca;
+    font-weight: $fw-quadon-b;
+    color: $blue-rhino;
+}
+
+.partner-panel__commitment {
+    margin-bottom: $vs*6;
+}
+
+.partner-commitment__heading {
+    font-family: $heading-font-family;
+    font-size: $fz-dec;
+    font-weight: $fw-quadon-b;
+
+}
+
+.partner-commitment__heading--build {
+    color: $red-roughy;
+}
+
+.partner-commitment__heading--hire {
+    color: $green-half-baked;
+}
+
+.partner-commitment__heading--buy {
+    color: $green-cucumber;
 }

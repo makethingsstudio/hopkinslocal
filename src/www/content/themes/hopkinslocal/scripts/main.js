@@ -99,6 +99,12 @@ $(document).ready(function() {
 
 // Load Partner Details via json
 $( document ).ready( function() {
+    $('#js-panel').on('click', function (event) {
+        $(document.body).removeAttr('data-panel-active');
+
+        event.preventDefault();
+    });
+
     $('#js-partner-list').on('click', '.js-partner-link', function (event) {
         var partnerId = $( this ).data( 'partner-id' );
         var request;
@@ -111,7 +117,7 @@ $( document ).ready( function() {
         request = $.ajax( {
             url: '/wp-json/wp/v2/partner/' + partnerId
         } ).done( function ( data ) {
-            console.log( data );
+            $(document.body).attr('data-panel-active', '');
             $('#js-panel-content').html( tmplDef( data ) );
         } );
 
