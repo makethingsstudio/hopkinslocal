@@ -64,7 +64,7 @@
       <!-- /.page-intro-content -->
       {% if post.video %}
       <div class="page-intro-video">
-        <a class="page-intro-videolink" id="js-video-gallery" href="{{ post.video }}" title="" data-analytics-event="video, click, homepage">
+        <a class="page-intro-videolink" id="js-video-gallery" href="{{ post.video }}" title="" data-analytics-event="video, click, blocal">
             <img class="page-intro-videolink-image" src="{{ TimberImage(post.video_thumbnail).src }}" alt="{{ post.video_link_text }}">
             <strong class="page-intro-videolink-text">{{ post.video_link_text }}</strong>
         </a>
@@ -131,19 +131,9 @@
         <div class="partners__list" id="js-partner-list">
             {% for item in partners %}
             <div class="partner-item">
-                <a class="partner-item__link js-partner-link" id="{{ 'partner-' ~ item.ID }}" href="{{ item.link }}" style="background-image: url( {{ item.thumbnail.src }} );" data-partner-id="{{ item.ID }}"></a>
-            </div>
-            <!-- /.partner-item -->
-            <div class="partner-item">
-                <a class="partner-item__link js-partner-link" id="{{ 'partner-' ~ item.ID }}" href="{{ item.link }}" style="background-image: url( {{ item.thumbnail.src }} );" data-partner-id="{{ item.ID }}"></a>
-            </div>
-            <!-- /.partner-item -->
-            <div class="partner-item">
-                <a class="partner-item__link js-partner-link" id="{{ 'partner-' ~ item.ID }}" href="{{ item.link }}" style="background-image: url( {{ item.thumbnail.src }} );" data-partner-id="{{ item.ID }}"></a>
-            </div>
-            <!-- /.partner-item -->
-            <div class="partner-item">
-                <a class="partner-item__link js-partner-link" id="{{ 'partner-' ~ item.ID }}" href="{{ item.link }}" style="background-image: url( {{ item.thumbnail.src }} );" data-partner-id="{{ item.ID }}"></a>
+                <a class="partner-item__link js-partner-link" id="{{ 'partner-' ~ item.ID }}" href="{{ item.link }}" style="background-image: url( {{ item.thumbnail.src }} );" data-partner-id="{{ item.ID }}">
+                    <span class="partner-item__more"></span>
+                </a>
             </div>
             <!-- /.partner-item -->
             {% endfor %}
@@ -158,45 +148,33 @@
   </div>
   <!-- /.container -->
 
-  <div class="partner-panel" id="js-panel">
-      <div class="partner-panel__body" id="js-panel-content">  <div class="column column-left"> <h2 class="partner-panel__heading">1st Mariner</h2><div class="partner-panel__commitment partner-commitment">
-            <h3 class="partner-commitment__heading partner-commitment__heading--build">Build</h3> <ul class="partner-commitment__list">
-          <li class="partner-commitment__item">Require 20% participation of $5 million renovation of corporate headquarters with Baltimore based subcontractors, including MBEs and WBEs.</li>
-          <li>Partner with BLocal companies to create a Contractors College that will provide support to growing Baltimore-based contractors.</li>
-          </ul>
-      </div>
-      <!-- /.partner-panel__commitment -->
-       <div class="partner-panel__commitment partner-commitment"> <h3 class="partner-commitment__heading partner-commitment__heading--hire">Hire</h3> <ul>
-             <li>Commit to hiring two summer interns from Baltimore’s most distressed communities.</li>
-             <li>Offer a structured program to educate participants on the full array of banking products and services and career opportunities in the financial services industry.</li>
-             <li>Assist in the career development of residents in the targeted communities with education around resume writing, financial literacy, and writing business plans.</li>
-             <li>Increase participation in various programs for first time home buyers.</li>
-             </ul></div>
-        <div class="partner-panel__about">
-            <h2>About 1st Mariner</h2> <p>1st Mariner is the largest independently owned bank headquartered in Baltimore City, with 15 branches across Baltimore, Harford, Howard and Anne Arundel counties. For more than 20 years, we have been serving the financial needs of Baltimore’s families and businesses. With decades of experience, we have developed a deep understanding of the local neighborhoods and business climate, which makes us uniquely positioned to serve the Baltimore community.</p>
-        </div>
-       </div> <div class="column column-right"> <p><strong>Erica Starr</strong><br>
-      Director of Marketing<br>
-      <a href="mailto:estarr@1stMarinerBank.com">estarr@1stMarinerBank.com</a><br>
-      <a href="http://1stMarinerBank.com" target="_blank">1stMarinerBank.com</a></p>
-       </div>  </div>
-      <!-- /.partner-panel__content -->
-  </div>
-  <!-- /.partner-panel -->
+<div class="partner-panel" id="js-panel">
+    <div class="partner-panel__body" id="js-panel-content">
+
+    </div>
+    <!-- /.partner-panel__content -->
+</div>
+<!-- /.partner-panel -->
 
   <script id="tmpl-partner-detail" type="text/x-dot-template">
     {% verbatim %}
-    <div class="column column-left">
-        <h2>{{=it.title.rendered }}</h2>
-        {{~ it.acf.commitment_details :c }}
-            <h3>{{=c.commitment_type}}</h3>
-            {{=c.commitment_content}}
-        {{~}}
-        <h2>About {{=it.title.rendered}}</h2>
-        {{=it.content.rendered}}
-    </div>
     <div class="column column-right">
-        {{=it.acf.partner_details}}
+        <h2 class="partner-panel__heading">{{=it.content.title.rendered }}</h2>
+        {{~ it.content.acf.commitment_details :c }}
+            <div class="partner-panel__commitment partner-commitment">
+                <h3 class="partner-commitment__heading partner-commitment__heading--{{=c.commitment_type}}">{{=c.commitment_type}}</h3>
+                {{=c.commitment_content}}
+            </div>
+            <!-- /.partner-panel__commitment -->
+        {{~}}
+        <div class="partner-panel__about">
+            <h2>About {{=it.content.title.rendered}}</h2>
+            {{=it.content.content.rendered}}
+        </div>
+    </div>
+    <div class="column column-left">
+        <img class="partner-panel__image" src="{{=it.image.source_url}}" alt="{{=it.content.title.rendered}}">
+        {{=it.content.acf.partner_details}}
     </div>
     {% endverbatim %}
   </script>
@@ -205,14 +183,22 @@
 
 <div class="about-local">
 <div class="container">
-  <h2 class="about-local-heading">{{ option.blocal_title }}</h2>
+  <div class="about-local__body">
+      <h2 class="about-local-heading">{{ option.blocal_title }}</h2>
 
-  <div class="about-local-content">
-    {{ option.blocal_content }}
+      <div class="about-local-content">
+        {{ option.blocal_content }}
+      </div>
+      <p><a class="about-local-link" id="js-show-about-more" href="{{ option.blocal_link }}" data-analytics-event="about_local, click, footer">{{ option.blocal_link_text }}</a></p>
   </div>
-  <p><a class="about-local-link" id="js-show-about-more" href="{{ option.blocal_link }}" data-analytics-event="about_local, click, footer">{{ option.blocal_link_text }}</a></p>
+  <!-- /.about-local__body -->
 </div>
 </div>
 
 
+{% endblock %}
+
+
+{% block footer %}
+{% include 'blocal-footer.twig' %}
 {% endblock %}
