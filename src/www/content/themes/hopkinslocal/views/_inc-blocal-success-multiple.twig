@@ -1,0 +1,77 @@
+<div class="content-blocks">
+    <h2 class="content-blocks-header">
+        BLocal in Action
+    </h2>
+
+    {% for item in successStories | slice(0, 1) %}
+        {% set blockClass %}
+            {{ item.associated_program | length ? 'block-stack-' ~ item.associated_program : '' }}
+        {% endset %}
+        <div class="content-blocks-columns-1">
+            {% if item.story_url|length %}
+            <a class="block-stack {{ blockClass }}" id="action-{{ item.id }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank" data-analytics-event="news, click, {{ item.story_url|e('html_attr') }}">
+              <h2 class="block-stack-heading">
+                {% if item.post_excerpt|length %}
+                  {{ item.post_excerpt }}
+                {% else %}
+                  {{ item.title }}
+                {% endif %}
+              </h2>
+            </a>
+            {% else %}
+            <div class="block-stack {{ blockClass }}" id="action-{{ item.id }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+              <h2 class="block-stack-heading">
+                {% if item.post_excerpt|length %}
+                  {{ item.post_excerpt }}
+                {% else %}
+                  {{ item.title }}
+                {% endif %}
+              </h2>
+            </div>
+            {% endif %}
+        </div>
+        <!-- /.content-blocks-columns-1 -->
+    {% endfor %}
+
+    {% for columns in successStories|slice(1,5)|batch(2) %}
+        {% set columnCount = loop.length %}
+
+        {% for item in columns %}
+            {% set itemCount = loop.length %}
+            {% if loop.first %}
+            <div class="{{ columnCount == 1 ? 'content-blocks-columns-1' : 'content-blocks-columns-2' }} {{ itemCount > 1 ? 'content-blocks-horizontal' : 'content-blocks-vertical' }}">
+            {% endif %}
+
+
+            {% if item.story_url|length %}
+            <a class="block-stack {{ blockClass }}" id="action-{{ item.id }}" href="{{ item.story_url }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank" data-analytics-event="news, click, {{ item.story_url|e('html_attr') }}">
+              <h2 class="block-stack-heading">
+                {% if item.post_excerpt|length %}
+                    {{ item.post_excerpt }}
+                  {% else %}
+                    {{ item.title }}
+                  {% endif %}
+              </h2>
+            </a>
+            {% else %}
+            <div class="block-stack {{ blockClass }}" id="action-{{ item.id }}" style="background-image: url('{{ item.thumbnail.src|resize(500, 500) }}');" target="_blank">
+              <h2 class="block-stack-heading">
+                {% if item.post_excerpt|length %}
+                    {{ item.post_excerpt }}
+                  {% else %}
+                    {{ item.title }}
+                  {% endif %}
+              </h2>
+            </div>
+            {% endif %}
+
+
+            {% if loop.last %}
+            </div>
+            {% endif %}
+
+        {% endfor %}
+    {% endfor %}
+
+</div>
+<!-- /.content-blocks -->

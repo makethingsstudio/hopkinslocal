@@ -80,41 +80,11 @@
 
   {% if successStories | length %}
     {% if successStories | length == 1 %}
-
-        <div class="success-story">
-            {% for item in successStories | slice( 0, 1 ) %}
-            <div class="success-story__left">
-                <div class="success-story__attach">
-                    <img class="success-story__src" src="{{ item.thumbnail.src() }}" alt="{{ item.thumbnail.alt }}">
-                </div>
-                <!-- /.success-story__attach -->
-            </div>
-            <!-- /.success-story__left -->
-            <div class="success-story__right">
-                <div class="success-story__body">
-                    <p class="block-media-type">Success Story</p>
-                    <h2 class="block-media-heading block-media-heading-blocal">
-                      <a class="block-media-link" href="" title="{{ item.title }}">
-                        {{ item.title }}
-                      </a>
-                    </h2>
-                    <div class="success-story__content u-cms">
-                        {{ item.post_excerpt | wpautop }}
-                        <p>
-                            <a class="success-story__more" href="" title="{{ item.title }}">
-                                Read More
-                            </a>
-                        </p>
-                    </div>
-                    <!-- /.success-story__content u-cms -->
-                </div>
-                <!-- /.success-story__body -->
-            </div>
-            <!-- /.success-story__right -->
-            {% endfor %}
-        </div>
-        <!-- /.success-story -->
+        {% include '_inc-blocal-success-single.twig' %}
+    {% else %}
+        {% include '_inc-blocal-success-multiple.twig' %}
     {% endif %}
+
   {% endif %}
 
   {% if partners | length %}

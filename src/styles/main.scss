@@ -923,10 +923,17 @@ select {
     width: percentage(594/1218);
     margin: 0;
   }
+}
 
+.content-blocks-columns-1 + .content-blocks-columns-1 {
+    @include breakpoint($bp-1) {
+        width: percentage(624/1218);
+    }
 }
 
 .content-blocks-columns-2 {
+  background: $blue-rhino;
+
   @include breakpoint($bp-1) {
     float: left;
     width: percentage(312/1218);
@@ -975,6 +982,15 @@ select {
 
 .content-blocks-columns-1 .block-stack {
   padding-top: 104%;
+}
+
+
+.content-blocks-columns-1.content-blocks-horizontal .block-stack {
+    padding-top: 52%;
+}
+
+.content-blocks-columns-2.content-blocks-vertical .block-stack {
+    padding-top: 198%;
 }
 
 
