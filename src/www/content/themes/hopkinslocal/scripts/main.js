@@ -95,3 +95,40 @@ $(document).ready(function() {
         });
     });
 });
+
+
+// Load Partner Details via json
+$(document).ready(function() {
+    $('#js-panel').on('click', function(event) {
+        $(document.body).removeAttr('data-panel-active');
+
+        event.preventDefault();
+    });
+
+    $('#js-partner-list').on('click', '.js-partner-link', function(event) {
+        var partnerId = $(this).data('partner-id');
+        var request;
+        var response = {};
+        var tmplDef;
+        var pageFn;
+
+        tmplDef = doT.template(document.getElementById('tmpl-partner-detail').text);
+
+
+        request = $.ajax({
+            url: '/wp-json/wp/v2/partner/' + partnerId
+        }).done(function(data) {
+            var imageRequest;
+            response.content = data;
+            imageRequest = $.ajax({
+                url: '/wp-json/wp/v2/media/' + data.featured_media
+            }).done(function(data){
+                response.image = data;
+                $(document.body).attr('data-panel-active', '');
+                $('#js-panel-content').html(tmplDef(response));
+            });
+        });
+
+        event.preventDefault();
+    });
+});

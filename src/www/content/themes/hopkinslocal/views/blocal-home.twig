@@ -35,10 +35,10 @@
 
 
       <div class="blocal-intro">
-        <blocal-intro__attach>
+        <div class="blocal-intro__attach">
           <h1 class="blocal-brand">B Local</h1>
           <!-- /.blocal-brand ir -->
-        </blocal-intro__attach>
+        </div>
         <div class="blocal-intro__body">
           <h2 class="blocal-intro__heading">{{ post.headline }}</h2>
           <!-- /.blocal__heading -->
@@ -53,4 +53,152 @@
     </header>
   </div>
 </div>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="page-intro page-intro--blocal">
+      <div class="page-intro-content">
+        {{ post.intro_content }}
+      </div>
+      <!-- /.page-intro-content -->
+      {% if post.video %}
+      <div class="page-intro-video">
+        <a class="page-intro-videolink" id="js-video-gallery" href="{{ post.video }}" title="" data-analytics-event="video, click, blocal">
+            <img class="page-intro-videolink-image" src="{{ TimberImage(post.video_thumbnail).src }}" alt="{{ post.video_link_text }}">
+            <strong class="page-intro-videolink-text">{{ post.video_link_text }}</strong>
+        </a>
+      </div>
+      <!-- /.page-intro-video -->
+      {% endif %}
+    </div>
+    <!-- /.page-intro -->
+  </div>
+  <!-- /.container -->
+
+
+
+  {% if successStories | length %}
+    {% if successStories | length == 1 %}
+
+        <div class="success-story">
+            {% for item in successStories | slice( 0, 1 ) %}
+            <div class="success-story__left">
+                <div class="success-story__attach">
+                    <img class="success-story__src" src="{{ item.thumbnail.src() }}" alt="{{ item.thumbnail.alt }}">
+                </div>
+                <!-- /.success-story__attach -->
+            </div>
+            <!-- /.success-story__left -->
+            <div class="success-story__right">
+                <div class="success-story__body">
+                    <p class="block-media-type">Success Story</p>
+                    <h2 class="block-media-heading block-media-heading-blocal">
+                      <a class="block-media-link" href="" title="{{ item.title }}">
+                        {{ item.title }}
+                      </a>
+                    </h2>
+                    <div class="success-story__content u-cms">
+                        {{ item.post_excerpt | wpautop }}
+                        <p>
+                            <a class="success-story__more" href="" title="{{ item.title }}">
+                                Read More
+                            </a>
+                        </p>
+                    </div>
+                    <!-- /.success-story__content u-cms -->
+                </div>
+                <!-- /.success-story__body -->
+            </div>
+            <!-- /.success-story__right -->
+            {% endfor %}
+        </div>
+        <!-- /.success-story -->
+    {% endif %}
+  {% endif %}
+
+  {% if partners | length %}
+  <div class="container">
+      <section class="partners">
+        <header class="partners__header">
+            <h2 class="partners__heading">
+                Blocal Partners
+            </h2>
+            <!-- /.partners__heading -->
+            {{ post.partner_intro }}
+        </header>
+        <!-- /.partners__header -->
+        <div class="partners__list" id="js-partner-list">
+            {% for item in partners %}
+            <div class="partner-item">
+                <a class="partner-item__link js-partner-link" id="{{ 'partner-' ~ item.ID }}" href="{{ item.link }}" style="background-image: url( {{ item.thumbnail.src }} );" data-partner-id="{{ item.ID }}">
+                    <span class="partner-item__more"></span>
+                </a>
+            </div>
+            <!-- /.partner-item -->
+            {% endfor %}
+            <div class="partner-item--placeholder"></div>
+            <!-- /.partner-item--placeholder -->
+            <div class="partner-item--placeholder"></div>
+            <!-- /.partner-item--placeholder -->
+        </div>
+        <!-- /.partners__list -->
+      </section>
+      <!-- /.partners -->
+  </div>
+  <!-- /.container -->
+
+<div class="partner-panel" id="js-panel">
+    <div class="partner-panel__body" id="js-panel-content">
+
+    </div>
+    <!-- /.partner-panel__content -->
+</div>
+<!-- /.partner-panel -->
+
+  <script id="tmpl-partner-detail" type="text/x-dot-template">
+    {% verbatim %}
+    <div class="column column-right">
+        <h2 class="partner-panel__heading">{{=it.content.title.rendered }}</h2>
+        {{~ it.content.acf.commitment_details :c }}
+            <div class="partner-panel__commitment partner-commitment">
+                <h3 class="partner-commitment__heading partner-commitment__heading--{{=c.commitment_type}}">{{=c.commitment_type}}</h3>
+                {{=c.commitment_content}}
+            </div>
+            <!-- /.partner-panel__commitment -->
+        {{~}}
+        <div class="partner-panel__about">
+            <h2>About {{=it.content.title.rendered}}</h2>
+            {{=it.content.content.rendered}}
+        </div>
+    </div>
+    <div class="column column-left">
+        <img class="partner-panel__image" src="{{=it.image.source_url}}" alt="{{=it.content.title.rendered}}">
+        <div class="partner-panel__details">{{=it.content.acf.partner_details}}</div>
+    </div>
+    {% endverbatim %}
+  </script>
+{% endif %}
+
+
+<div class="about-local">
+<div class="container">
+  <div class="about-local__body">
+      <h2 class="about-local-heading">{{ option.blocal_title }}</h2>
+
+      <div class="about-local-content">
+        {{ option.blocal_content }}
+      </div>
+      <p><a class="about-local-link" id="js-show-about-more" href="{{ option.blocal_link }}" data-analytics-event="about_local, click, footer">{{ option.blocal_link_text }}</a></p>
+  </div>
+  <!-- /.about-local__body -->
+</div>
+</div>
+
+
+{% endblock %}
+
+
+{% block footer %}
+{% include 'blocal-footer.twig' %}
 {% endblock %}

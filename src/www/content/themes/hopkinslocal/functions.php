@@ -34,7 +34,31 @@
       // add_theme_support( 'post-formats' );
       add_theme_support( 'post-thumbnails' );
       add_theme_support( 'menus' );
+
       add_filter( 'timber_context', array( $this, 'add_to_context' ) );
+
+      add_filter( 'rest_query_vars', function ( $valid_vars ) {
+          return array_merge( $valid_vars, array( 'partnerId', 'meta_query' ) );
+      } );
+
+      add_filter( 'rest_posts_query', function( $args, $request ) {
+          $partnerId   = $request->get_param( 'partnerId' );
+
+          var_dump( $partnerId );
+
+          if ( ! empty( $partnerId ) ) {
+              $args['meta_query'] = array(
+                  array(
+                      'key'     => 'blocal_partner_success',
+                      'value'   => serialize( strval($partnerId) ),
+                      'compare' => 'LIKE',
+                  )
+              );
+          }
+
+          return $args;
+      }, 10, 2 );
+
       // add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
       add_action( 'init', array( $this, 'register_post_types' ) );
       add_action( 'init', array( $this, 'register_taxonomies' ) );
@@ -50,6 +74,8 @@
     function register_taxonomies() {
       //this is where you can register custom taxonomies
     }
+
+
 
     function add_to_context( $context ) {
       // $context['foo'] = 'bar';
@@ -84,15 +110,22 @@
         'redirect'    => false
       ));
 
-      acf_add_options_sub_page(array(
-        'page_title'  => 'Theme Header Settings',
-        'menu_title'  => 'Header',
-        'parent_slug' => 'hopkinslocal-settings',
-      ));
+      // acf_add_options_sub_page(array(
+      //   'page_title'  => 'Theme Header Settings',
+      //   'menu_title'  => 'Header',
+      //   'parent_slug' => 'hopkinslocal-settings',
+      // ));
 
-      acf_add_options_sub_page(array(
-        'page_title'  => 'Theme Footer Settings',
-        'menu_title'  => 'Footer',
-        'parent_slug' => 'hopkinslocal-settings',
-      ));
+      // acf_add_options_sub_page(array(
+      //   'page_title'  => 'Theme Footer Settings',
+      //   'menu_title'  => 'Footer',
+      //   'parent_slug' => 'hopkinslocal-settings',
+      // ));
+    acf_add_options_page( array(
+        'page_title'  => 'BLocal Settings',
+        'menu_title'  => 'BLocal Settings',
+        'menu_slug'   => 'blocal-settings',
+        'capability'  => 'edit_posts',
+        'redirect'    => false
+    ) );
   }
