@@ -1,0 +1,43 @@
+{% extends "_base.twig" %}
+
+
+{#
+    Header
+#}
+{% block header %}
+<div class="page-hero page-hero--blocal">
+  <div class="container">
+    <header class="masthead" role="banner">
+        <a class="blocal-brand blocal-brand--interior" href="/blocal">B Local</a>
+          <nav role="navigation">
+            <ul class="masthead-nav masthead-nav--blocal">
+              {% for item in blocal.get_items %}
+                <li class="masthead-nav-item">
+                  <a class="masthead-nav-link {{ item.classes|join(' ') }}" href="{{ item.get_link }}" title="{{ item.title }}">{{ item.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </nav>
+    </header>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="site-content">
+    <div class="container">
+        <div class="main-content">
+            <h1 class="page-heading">
+            {{ post.title }}
+            </h1>
+            <div class="page-content">
+                <div class="page-content-intro">
+                    {{ post.content }}
+                </div>
+            </div>
+        </div>
+        <!-- /.main-content -->
+    </div>
+</div>
+{% endblock %}

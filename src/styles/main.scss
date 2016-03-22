@@ -326,6 +326,19 @@ a:visited {
 
 
 
+input,
+select {
+    border: 1px solid $blue-rhino;
+}
+
+[type="submit"] {
+    padding: $vs*4;
+    color: $white;
+    background-color: $blue-rhino;
+}
+
+
+
 
 
 .container {
@@ -2013,6 +2026,12 @@ a:visited {
   }
 }
 
+.blocal-brand--interior {
+    @include breakpoint($bp-1) {
+        float: left;
+    }
+}
+
 
 
 
@@ -2169,7 +2188,8 @@ a:visited {
         margin-bottom: 24px;
 
     @include breakpoint($bp-1) {
-        margin: 54px 6.3218390805% 72px;
+        margin-top: 54px;
+        margin-bottom: 72px;
     }
 }
 
@@ -2230,26 +2250,62 @@ a:visited {
 }
 
 .partner-item__link {
+    @include _animate;
+
     display: block;
+    position: relative;
     height: 0;
     padding-top: 100%;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 75%;
 
+    &:hover,
+    &:focus {
+        .partner-item__more {
+            opacity: 1;
+        }
+    }
+}
+
+.partner-item__more {
+    @include _animate;
+
+    opacity: 0;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba( $blue-rhino, .9);
+    }
+    &:after {
+        content: 'Learn More';
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        padding: $vs*4 $vs*2;
+        color: $white;
+        border: 2px solid $white;
+        transform: translate3d(-50%, -50%, 0);
+    }
 }
 
 .partner-panel {
     @include _animate;
 
     position: fixed;
-    z-index: $z-modal;
-    // z-index: -1;
+    // z-index: $z-modal;
+    z-index: -1;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    // opacity: 0;
+    opacity: 0;
     background: rgba( $blue-rhino, .9 );
 }
 
@@ -2258,7 +2314,9 @@ a:visited {
     opacity: 1;
 }
 
+
 .partner-panel__body {
+    overflow: hidden;
     border-top: 16px solid $yellow-supernova;
     background: $white;
 
@@ -2270,6 +2328,47 @@ a:visited {
         left: 33%;
         padding: 48px 60px;
         box-shadow: -2px 0 6px rgba( $black, .4 );
+    }
+}
+
+.partner-panel__body .column {
+    @include breakpoint($bp-1) {
+        float: left;
+    }
+}
+
+.partner-panel__body .column-left {
+    @include breakpoint($bp-1) {
+        width: 35%
+    }
+}
+
+.partner-panel__body .column-right {
+    @include breakpoint($bp-1) {
+        float: right;
+        width: 55%;
+    }
+}
+
+.partner-panel__image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: $vs*3;
+}
+
+.partner-panel__details {
+    @include _cms;
+
+    a:link,
+    a:active,
+    a:visited {
+        font-weight: $fw-gentona-bold;
+        color: $blue-curious;
+    }
+    a:hover,
+    a:focus {
+        color: $blue-rhino;
     }
 }
 
@@ -2292,14 +2391,22 @@ a:visited {
 
 }
 
-.partner-commitment__heading--build {
+.partner-commitment__heading--Build {
     color: $red-roughy;
 }
 
-.partner-commitment__heading--hire {
+.partner-commitment__heading--Hire {
     color: $green-half-baked;
 }
 
-.partner-commitment__heading--buy {
+.partner-commitment__heading--Buy {
     color: $green-cucumber;
+}
+
+
+.main-content {
+    @include breakpoint($bp-1) {
+        margin-right: 6.32%;
+        margin-left: 6.32%;
+    }
 }

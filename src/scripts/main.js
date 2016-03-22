@@ -24,8 +24,8 @@
         });
 
 
-        $('#js-fit-local').fitText(0.9);
-        $('#js-overlay-fit-local').fitText(0.9);
+        $('#js-fit-local').fitText(0.84);
+        $('#js-overlay-mark').fitText(0.82);
 
         // // Get Height of Browser, apply it to map.
         // mapE = document.getElementById('map');
@@ -95,3 +95,32 @@ $(document).ready(function() {
         });
     });
 });
+
+
+// Load Partner Details via json
+$( document ).ready( function() {
+    $('#js-panel').on('click', function (event) {
+        $(document.body).removeAttr('data-panel-active');
+
+        event.preventDefault();
+    });
+
+    $('#js-partner-list').on('click', '.js-partner-link', function (event) {
+        var partnerId = $( this ).data( 'partner-id' );
+        var request;
+        var tmplDef;
+        var pageFn;
+
+        tmplDef = doT.template( document.getElementById('tmpl-partner-detail').text );
+
+
+        request = $.ajax( {
+            url: '/wp-json/wp/v2/partner/' + partnerId
+        } ).done( function ( data ) {
+            $(document.body).attr('data-panel-active', '');
+            $('#js-panel-content').html( tmplDef( data ) );
+        } );
+
+        event.preventDefault();
+    })
+} );
