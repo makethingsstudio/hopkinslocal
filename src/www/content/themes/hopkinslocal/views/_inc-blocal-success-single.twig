@@ -11,14 +11,14 @@
         <div class="success-story__body">
             <p class="block-media-type">Success Story</p>
             <h2 class="block-media-heading block-media-heading-blocal">
-              <a class="block-media-link" href="" title="{{ item.title }}">
+              <a class="block-media-link" href="{{ item.story_url|length ? item.story_url : item.permalink }}" title="{{ item.title }}">
                 {{ item.title }}
               </a>
             </h2>
             <div class="success-story__content u-cms">
                 {{ item.post_excerpt | wpautop }}
                 <p>
-                    <a class="success-story__more" href="" title="{{ item.title }}">
+                    <a class="success-story__more" href="{{ item.story_url|length ? item.story_url : item.permalink }}" title="{{ item.title }}">
                         Read More
                     </a>
                 </p>
