@@ -2076,6 +2076,7 @@ select {
 
     display: block;
     position: relative;
+    z-index: 1;
     height: 0;
     padding-top: 100%;
     background-repeat: no-repeat;
@@ -2084,9 +2085,29 @@ select {
 
     &:hover,
     &:focus {
-        .partner-item__more {
-            .no-touch & {
+        &:before {
+            .no-touch.csstransforms & {
                 opacity: 1;
+            }
+        }
+        .partner-item__more {
+            .no-touch.csstransforms & {
+                opacity: 1;
+            }
+        }
+    }
+    &:before {
+        .no-touch.csstransforms & {
+            @include breakpoint($bp-1) {
+                content: '';
+                position: absolute;
+                z-index: 2;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                opacity: 0;
+                background-color: rgba( $blue-rhino, .9);
             }
         }
     }
@@ -2095,40 +2116,20 @@ select {
 .partner-item__more {
     @include _animate;
 
-    .no-touch & {
-        opacity: 0;
-    }
-    &:before {
-        .no-touch & {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background-color: rgba( $blue-rhino, .9);
-        }
-    }
-    &:after {
-        content: 'Learn More';
-        display: block;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: $vs*4 $vs*2;
-        text-align: center;
-        color: $white;
-        background-color: $blue-rhino;
+    display: block;
+    padding: $vs*4 $vs*2;
+    text-align: center;
+    color: $white;
+    background-color: rgba( $blue-rhino, .9);
 
-        .no-touch & {
+    .no-touch.csstransforms & {
+        @include breakpoint($bp-1) {
             display: inline-block;
             position: absolute;
+            z-index: 5;
             top: 50%;
-            bottom: auto;
             left: 50%;
-            width: auto;
-            color: $white;
+            opacity: 0;
             border: 2px solid $white;
             transform: translate3d(-50%, -50%, 0);
         }
@@ -2145,13 +2146,14 @@ select {
     right: 0;
     bottom: 0;
     left: 0;
+    overflow: hidden;
     opacity: 0;
     background: rgba( $blue-rhino, .9);
 }
 
 .partner-panel .page-overlay-close {
     top: 40px;
-    right: 12px;
+    right: 24px;
 }
 
 [data-panel-active] {
@@ -2160,10 +2162,8 @@ select {
 
 [data-panel-active] .partner-panel {
     z-index: $z-modal;
-    overflow-y: scroll;
     opacity: 1;
 
-    -webkit-overflow-scrolling: touch;
 }
 
 .partner-panel__bg {
@@ -2188,8 +2188,15 @@ select {
         right: 0;
         bottom: 0;
         left: 33%;
+        overflow-y:scroll;
         box-shadow: -2px 0 6px rgba( $black, .4);
+
+        -webkit-overflow-scrolling: touch;
     }
+}
+
+.partner-panel__body {
+
 }
 
 .partner-panel__body .column {

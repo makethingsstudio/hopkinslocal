@@ -102,8 +102,9 @@
             {% for item in partners %}
             <div class="partner-item">
                 <a class="partner-item__link js-partner-link" id="{{ 'partner-' ~ item.ID }}" href="{{ item.link }}" style="background-image: url( {{ item.thumbnail.src }} );" data-partner-id="{{ item.ID }}">
-                    <span class="partner-item__more"></span>
+                    <span class="partner-item__more">Learn More</span>
                 </a>
+
             </div>
             <!-- /.partner-item -->
             {% endfor %}
@@ -119,8 +120,11 @@
   <!-- /.container -->
 
 <div class="partner-panel" id="js-panel">
-    <div class="partner-panel__body" id="js-panel-content">
+    <div class="partner-panel__body">
+        <div class="partner-panel__content" id="js-panel-content">
 
+        </div>
+        <!-- /#js-panel-content.partner-panel__content -->
     </div>
     <!-- /.partner-panel__content -->
     <div class="partner-panel__bg" id="js-panel-close"></div>
