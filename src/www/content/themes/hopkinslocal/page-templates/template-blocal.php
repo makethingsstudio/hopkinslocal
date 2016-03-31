@@ -24,7 +24,8 @@
   $partnerArgs = array(
     'post_type' => array(
       'partner'
-    )
+    ),
+    'posts_per_page' => -1
   );
 
 
