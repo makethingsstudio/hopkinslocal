@@ -99,7 +99,7 @@ $(document).ready(function() {
 
 // Load Partner Details via json
 $(document).ready(function() {
-    $('#js-panel').on('click', function(event) {
+    $('#js-panel').on('click', '#js-close-partner, #js-panel-close', function(event) {
         $(document.body).removeAttr('data-panel-active');
 
         event.preventDefault();
