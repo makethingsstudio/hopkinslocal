@@ -2106,9 +2106,12 @@ select {
 
 .success-story__left,
 .success-story__right {
-    display: table-cell;
-    width: 50%;
     background-color: $yellow-supernova;
+
+    @include breakpoint($bp-1) {
+        display: table-cell;
+        width: 50%;
+    }
 }
 
 
@@ -2122,11 +2125,13 @@ select {
 }
 
 .success-story__src {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
+    @include breakpoint($bp-1) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: auto;
+        height: 100%;
+    }
 }
 
 
@@ -2314,15 +2319,19 @@ select {
 .partner-panel {
     @include _animate;
 
-    position: fixed;
+    position: absolute;
     // z-index: $z-modal;
     z-index: -1;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
     opacity: 0;
     background: rgba( $blue-rhino, .9 );
+}
+
+[data-panel-active] {
+    overflow: hidden;
 }
 
 [data-panel-active] .partner-panel {
@@ -2333,6 +2342,7 @@ select {
 
 .partner-panel__body {
     overflow: hidden;
+    padding: 48px 60px;
     border-top: 16px solid $yellow-supernova;
     background: $white;
 
@@ -2342,7 +2352,6 @@ select {
         right: 0;
         bottom: 0;
         left: 33%;
-        padding: 48px 60px;
         box-shadow: -2px 0 6px rgba( $black, .4 );
     }
 }
