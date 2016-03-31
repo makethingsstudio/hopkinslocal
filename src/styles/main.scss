@@ -2122,10 +2122,12 @@ select {
         background-color: $blue-rhino;
 
         .no-touch & {
+            display: inline-block;
             position: absolute;
             top: 50%;
             bottom: auto;
             left: 50%;
+            width: auto;
             color: $white;
             border: 2px solid $white;
             transform: translate3d(-50%, -50%, 0);
@@ -2162,6 +2164,16 @@ select {
     opacity: 1;
 
     -webkit-overflow-scrolling: touch;
+}
+
+.partner-panel__bg {
+    @include breakpoint($bp-1) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 33%;
+        height: 100%;
+    }
 }
 
 .partner-panel__body {
@@ -2222,6 +2234,7 @@ select {
 }
 
 .partner-panel__heading {
+    width: 75%;
     margin-bottom: $vs*3;
     font-family: $heading-font-family;
     font-size: $fz-deca;
