@@ -51,7 +51,7 @@ gulp.task('lint', lint('src/scripts/**/*.js'));
 gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
 
 gulp.task('html', ['styles'], () => {
-  const assets = $.useref.assets({searchPath: ['.tmp', 'src', '.']});
+  const assets = $.useref({searchPath: ['.tmp', 'src', '.']});
 
   return gulp.src('src/*.html')
     .pipe(assets)
@@ -76,7 +76,7 @@ gulp.task('images', () => {
       console.log(err);
       this.end();
     })))
-    .pipe(gulp.dest('src/www/content/themes/hopkinslocal/'));
+    .pipe(gulp.dest('src/www/content/themes/hopkinslocal/images/'));
 });
 
 gulp.task('fonts', () => {
