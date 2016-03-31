@@ -1,39 +1,22 @@
 $breakpoint-no-query-fallbacks: true;
-
 @import "../../bower_components/compass-breakpoint/stylesheets/_breakpoint.scss";
-
-
-
-$default-font-family: gentona, 'proxima nova', 'Helvetica Neue', Helvetica, arial, sans-serif;
+$default-font-family: gentona,
+'proxima nova',
+'Helvetica Neue',
+Helvetica,
+arial,
+sans-serif;
 $default-selection-background-color: #2a455c;
 $default-underline-color: #2a455c;
-$heading-font-family: quadon, $default-font-family;
-
-
-
-
-
+$heading-font-family: quadon,
+$default-font-family;
 $z-bottom: -1;
 $z-base: 1;
 $z-content: 5;
 $z-modal: 100;
-
-
-
-
-
 $vs: 4px;
-
-
-
-
-
-$bp-1: 48em, 'no-query' '.lt-ie9';
-
-
-
-
-
+$bp-1: 48em,
+'no-query' '.lt-ie9';
 $fz-giga: 99px;
 $fz-mega: 48px;
 $fz-kilo: 37px;
@@ -43,12 +26,9 @@ $fz-dec: 20px;
 $fz: 16px;
 $fz-deci: 14px;
 $fz-centi: 12px;
-
 $lh-base: 1;
 $lh-wide: 1.5;
 $lh-thin: 1.25;
-
-
 $fw-quadon-h: 900;
 $fw-quadon-bl: 800;
 $fw-quadon-eb: 700;
@@ -57,19 +37,12 @@ $fw-quadon-b: 500;
 $fw-quadon-n: 400;
 $fw-quadon-l: 200;
 $fw-quadon-t: 100;
-
-
 $fw-gentona-bold: 700;
 $fw-gentona-medium: 500;
 $fw-gentona-n: 400;
 $fw-gentona-l: 300;
 $fw-gentona-xl: 200;
 $fw-gentona-t: 100;
-
-
-
-
-
 $black: #000;
 $blue-cornflower: #68ace5;
 $blue-curious: #3b8ede;
@@ -87,244 +60,254 @@ $red-roughy: #cf4520;
 $white: #fff;
 $yellow-goldenrod: #fbd872;
 $yellow-supernova: #ffcd00;
-
 $browser-upgrade-co: $black;
 $browser-upgrade-bg: $yellow-supernova;
-
-
-
-
-
 //
 // @TODO: Add docs to _animate!
 //
 @mixin _animate {
-  transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
 }
-
 
 //
 // @TODO: Add docs to _animate!
 //
 @mixin _animate-hover {
-  transition-duration: .15s;
+    transition-duration: .15s;
 }
-
 
 //
 // @TODO: Add docs to _animate!
 //
 @mixin _animate-news {
-  transition: max-height 350ms ease-in-out,
-              padding 500ms ease-in-out;
+    transition: max-height 350ms ease-in-out, padding 500ms ease-in-out;
 }
-
 
 //
 // @TODO: Add docs to _animate!
 //
 @mixin _animate-news-hover {
-  transition-duration: 500ms, 350ms;
+    transition-duration: 500ms, 350ms;
 }
-
-
-
-
 
 //
 // @TODO: Add docs to _ir!
 //
 @mixin _ir($w: null, $h: null) {
-  overflow: hidden;
+    overflow: hidden;
 
-  &:before {
-    content: '';
-    display: block;
-    width: 1px;
-    height: 150%;
-  }
+    &:before {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 150%;
+    }
 
-  @if type-of($w) == 'number' {
-    width: $w*1px;
-  }
-  @if type-of($h) == 'number' {
-    height: $h*1px;
-  }
+    @if type-of($w)=='number' {
+        width: $w*1px;
+    }
+    @if type-of($h)=='number' {
+        height: $h*1px;
+    }
 }
-
-
-
 
 //
 // @TODO: Add docs to _vh!
 //
 @mixin _vh {
-  position: static;
-  overflow: visible;
-  clip: auto;
-  width: auto;
-  height: auto;
-  margin: 0;
+    position: static;
+    overflow: visible;
+    clip: auto;
+    width: auto;
+    height: auto;
+    margin: 0;
 }
-
-
 
 //
 // @TODO: Add docs to fancy-underline!
 //
-@mixin _fancy-underline($weight: 1px ,$underline: $default-underline-color, $background: white) {
-  background-image: linear-gradient(
-  rgba($default-underline-color, 0.25) 0%,
-  $default-underline-color 100%
-  );
-  background-repeat: repeat-x;
-  background-position: 0 95%;
-  background-size: $weight $weight;
-  // Clear descendors from underline
-  text-shadow: 3px 0 $background,
-  2px 0 $background,
-  1px 0 $background,
-  -1px 0 $background,
-  -2px 0 $background,
-  -3px 0 $background;
+@mixin _fancy-underline($weight: 1px, $underline: $default-underline-color, $background: white) {
+    background-image: linear-gradient( rgba($default-underline-color, 0.25) 0%, $default-underline-color 100%);
+    background-repeat: repeat-x;
+    background-position: 0 95%;
+    background-size: $weight $weight;
+    // Clear descendors from underline
+    text-shadow: 3px 0 $background, 2px 0 $background, 1px 0 $background, -1px 0 $background, -2px 0 $background, -3px 0 $background;
 
-  // Tweak position + thickness for high res (1.75x and up) displays
-  @include breakpoint(-webkit-min-device-pixel-ratio 1.75, min-resolution 168dpi) {
-    background-image: linear-gradient(rgba($default-underline-color, 0.25) 0%, $default-underline-color 100%);
-    background-position: 0 93%;
-  }
+    // Tweak position + thickness for high res (1.75x and up) displays
+    @include breakpoint(-webkit-min-device-pixel-ratio 1.75, min-resolution 168dpi) {
+        background-image: linear-gradient(rgba($default-underline-color, 0.25) 0%, $default-underline-color 100%);
+        background-position: 0 93%;
+    }
 }
-
-
-
-
 
 //
 // @TODO: Add docs to _cms!
 //
 @mixin _cms {
-  > * + * {
-    margin-top: .5em;
-  }
-  > img,
-  > video,
-  > audio,
-  > iframe {
-    max-width: 100%;
-    height: auto;
-  }
-  a:link,
-  a:active,
-  a:visited {
-    text-decoration: underline;
-  }
+    > * + * {
+        margin-top: .5em;
+    }
+    > img,
+    > video,
+    > audio,
+    > iframe {
+        max-width: 100%;
+        height: auto;
+    }
+    a:link,
+    a:active,
+    a:visited {
+        text-decoration: underline;
+    }
 }
-
-
-
-
 
 //
 // @TODO: Add docs to _container!
 //
 @mixin _container {
-  overflow: hidden;
-  max-width: 1320px;
-  padding-right: percentage(51/1320);
-  padding-left: percentage(51/1320);
-  margin: 0 auto;
+    overflow: hidden;
+    max-width: 1320px;
+    padding-right: percentage(51/1320);
+    padding-left: percentage(51/1320);
+    margin: 0 auto;
 }
-
-
-
-
 
 // bower:scss
 @import 'bower_components/sanitize-css/sanitize.scss';
-
-
-
-
 
 /*
     Colorbox Core Style:
     The following CSS is consistent between example themes and should not be altered.
 */
-#colorbox, #cboxOverlay, #cboxWrapper{position:absolute; z-index:9999; top:0; left:0; overflow:hidden;}
-#cboxWrapper {max-width:none;}
-#cboxOverlay{position:fixed; width:100%; height:100%;}
-#cboxMiddleLeft, #cboxBottomLeft{clear:left;}
-#cboxContent{position:relative;}
-#cboxLoadedContent{overflow:auto;
 
- -webkit-overflow-scrolling: touch;}
-#cboxTitle{margin:0;}
-#cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%; height:100%;}
-#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
-.cboxPhoto{ display:block;float:left; max-width:none; margin:auto; -ms-interpolation-mode:bicubic; border:0;}
-.cboxIframe{ display:block;width:100%; height:100%; padding:0; margin:0; border:0;}
-#colorbox, #cboxContent, #cboxLoadedContent{ -webkit-box-sizing:content-box; -moz-box-sizing:content-box;box-sizing:content-box;}
+#colorbox,
+#cboxOverlay,
+#cboxWrapper {
+    position: absolute;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+#cboxWrapper {
+    max-width: none;
+}
 
 #cboxOverlay {
-  background-color: #000;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+#cboxMiddleLeft,
+#cboxBottomLeft {
+    clear: left;
+}
+
+#cboxContent {
+    position: relative;
+}
+
+#cboxLoadedContent {
+    overflow: auto;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+#cboxTitle {
+    margin: 0;
+}
+
+#cboxLoadingOverlay,
+#cboxLoadingGraphic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#cboxPrevious,
+#cboxNext,
+#cboxClose,
+#cboxSlideshow {
+    cursor: pointer;
+}
+
+.cboxPhoto {
+    display: block;
+    float: left;
+    max-width: none;
+    margin: auto;
+    -ms-interpolation-mode: bicubic;
+    border: 0;
+}
+
+.cboxIframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+#colorbox,
+#cboxContent,
+#cboxLoadedContent {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+#cboxOverlay {
+    background-color: #000;
 }
 
 html {
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility !important;
-  -webkit-font-smoothing: antialiased !important;
-  -moz-font-smoothing: antialiased !important;
-  -o-font-smoothing: antialiased !important;
-  -ms-font-smoothing: antialiased !important;
-  font-smoothing: antialiased !important;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-font-smoothing: antialiased !important;
+    -o-font-smoothing: antialiased !important;
+    -ms-font-smoothing: antialiased !important;
+    font-smoothing: antialiased !important;
 }
 
 body {
-  background: $white;
+    background: $white;
 }
-
-
-
-
 
 ::selection {
-  color: $white;
-  background-color: $default-selection-background-color; // required when declaring ::selection
-  text-shadow: none;
+    color: $white;
+    background-color: $default-selection-background-color; // required when declaring ::selection
+    text-shadow: none;
 }
-
-
 
 .icon-play-md {
-  display: inline-block;
-  width: 21px;
-  height: 22px;
-  background: url('../images/icon-play.svg') center center no-repeat;
+    display: inline-block;
+    width: 21px;
+    height: 22px;
+    background: url('../images/icon-play.svg') center center no-repeat;
 
-  .lt-ie9 & {
-    background-image: url('../images/icon-play.png');
-  }
+    .lt-ie9 & {
+        background-image: url('../images/icon-play.png');
+    }
 }
-
-
-
 
 html,
 body {
-  font-family: $default-font-family;
+    font-family: $default-font-family;
 }
-
-
-
 
 a:link,
 a:active,
 a:visited {
-  text-decoration: none;
+    text-decoration: none;
 }
-
-
 
 input,
 select {
@@ -337,456 +320,403 @@ select {
     background-color: $blue-rhino;
 }
 
-
-
-
-
 .container {
-  @include _container;
+    @include _container;
 }
-
-
-
-
 
 .browser-upgrade {
-  padding: 1em 0 1.2em;
-  font-size: $fz-deca;
-  color: #000;
-  background: $white;
+    padding: 1em 0 1.2em;
+    font-size: $fz-deca;
+    color: #000;
+    background: $white;
 }
-
 
 .browser-upgrade-link {
-  &:link,
-  &:active,
-  &:visited {
-    @include _fancy-underline($weight: 2px, $background: rgba($browser-upgrade-bg, 1));
+    &:link,
+    &:active,
+    &:visited {
+        @include _fancy-underline($weight: 2px, $background: rgba($browser-upgrade-bg, 1));
 
-    display: inline-block;
-    background-repeat: no-repeat;
-    background-position: center 95%;
-    background-size: 0 0;
-    transition: all 0.2s ease-in;
-  }
-  &:hover,
-  &:focus {
-    background-size: 100% 2px;
-  }
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-position: center 95%;
+        background-size: 0 0;
+        transition: all 0.2s ease-in;
+    }
+    &:hover,
+    &:focus {
+        background-size: 100% 2px;
+    }
 }
 
-
-
-
-
 .masthead {
-  overflow: hidden;
-  margin: 0 auto;
-
+    overflow: hidden;
+    margin: 0 auto;
 }
 
 .lt-ie8 .masthead {
-  zoom: 1;
+    zoom: 1;
 
-  &:before,
-  &:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
-  }
+    &:before,
+    &:after {
+        content: " ";
+        /* 1 */
+        display: table;
+    }
 }
-
 
 .masthead-brand {
-  text-align: center;
+    text-align: center;
 
-  @include breakpoint($bp-1) {
-    float: left;
-    padding-left: 51px; // @NOTE magic number, from logo
-    margin-left: -51px;
-  }
+    @include breakpoint($bp-1) {
+        float: left;
+        padding-left: 51px; // @NOTE magic number, from logo
+        margin-left: -51px;
+    }
 }
 
-
-
 .masthead-brand-interior {
-  margin: 0 auto;
-  text-align: center;
+    margin: 0 auto;
+    text-align: center;
 
-  @include breakpoint($bp-1) {
-    float: left;
-    width: 586px; // 341+245
-    padding-left: 51px; // @NOTE magic number, from logo
-    margin-left: -51px;
-    text-align: left;
-  }
+    @include breakpoint($bp-1) {
+        float: left;
+        width: 586px; // 341+245
+        padding-left: 51px; // @NOTE magic number, from logo
+        margin-left: -51px;
+        text-align: left;
+    }
 }
 
 .lt-ie8 .masthead-brand-interior {
-  width: 600px;
-  padding-left: 0;
-  margin-left: 0;
+    width: 600px;
+    padding-left: 0;
+    margin-left: 0;
 }
-
 
 .masthead-logo {
-  @include _ir;
+    @include _ir;
 
-  display: block;
-  width: 341px;
-  height: 151px;
-  margin: 0 auto;
-  background: transparent url('../images/jhu-enterprise-logo-black.svg') center center no-repeat;
+    display: block;
+    width: 341px;
+    height: 151px;
+    margin: 0 auto;
+    background: transparent url('../images/jhu-enterprise-logo-black.svg') center center no-repeat;
 
-  @include breakpoint($bp-1) {
-    float: left;
-    margin-left: -51px;
-  }
+    @include breakpoint($bp-1) {
+        float: left;
+        margin-left: -51px;
+    }
 
-  .lt-ie9 & {
-    float: left;
-    margin-left: 0;
-    text-indent: -9999px;
-    background-image: url('../images/jhu-enterprise-logo-black.png')
-  }
+    .lt-ie9 & {
+        float: left;
+        margin-left: 0;
+        text-indent: -9999px;
+        background-image: url('../images/jhu-enterprise-logo-black.png')
+    }
 }
-
 
 .masthead-property {
-  display: block;
-  position: relative;
-  font-family: $heading-font-family;
-  font-size: $fz-hecto;
-  font-weight: 300;
-  line-height: 1;
-  text-transform: uppercase;
-  color: $white;
+    display: block;
+    position: relative;
+    font-family: $heading-font-family;
+    font-size: $fz-hecto;
+    font-weight: 300;
+    line-height: 1;
+    text-transform: uppercase;
+    color: $white;
 
-  @include breakpoint($bp-1) {
-    float: left;
-    width: 245px;
-    padding-top: 56px;
-    padding-left: 48px;
-  }
+    @include breakpoint($bp-1) {
+        float: left;
+        width: 245px;
+        padding-top: 56px;
+        padding-left: 48px;
+    }
 
-  .lt-ie8 & {
-    float: left;
-    width: 245px;
-    padding: 56px 0 0;
-    margin: 0;
-  }
+    .lt-ie8 & {
+        float: left;
+        width: 245px;
+        padding: 56px 0 0;
+        margin: 0;
+    }
 }
-
 
 .masthead-property:before {
-  @include breakpoint($bp-1) {
-    content: '';
-    position: absolute;
-    top: 51px;
-    left: 0;
-    width: 1px;
-    height: 51px;
-    background: $white;
-  }
+    @include breakpoint($bp-1) {
+        content: '';
+        position: absolute;
+        top: 51px;
+        left: 0;
+        width: 1px;
+        height: 51px;
+        background: $white;
+    }
 }
-
 
 .t-hire .masthead-property,
 .t-build .masthead-property,
 .t-buy .masthead-property {
-  color: #000;
+    color: #000;
 }
 
 .t-hire .masthead-property:before,
 .t-build .masthead-property:before,
 .t-buy .masthead-property:before {
-  background: $black
+    background: $black
 }
-
-
-
-
 
 .masthead-menu {
-  overflow: hidden;
+    overflow: hidden;
 }
-
 
 .masthead-nav {
-  font-weight: $fw-gentona-bold;
-  text-align: center;
-  letter-spacing: .1em;
-  text-transform: uppercase;
+    font-weight: $fw-gentona-bold;
+    text-align: center;
+    letter-spacing: .1em;
+    text-transform: uppercase;
 
-  @include breakpoint($bp-1) {
-    padding-top: $vs*14; // @NOTE magic number. (151-24)/2
-    text-align: right;
-  }
+    @include breakpoint($bp-1) {
+        padding-top: $vs*14; // @NOTE magic number. (151-24)/2
+        text-align: right;
+    }
 }
 
-
 .masthead-nav-item {
-  display: inline-block;
+    display: inline-block;
 
-  & + & {
-    @include breakpoint($bp-1) {
-      margin-left: $vs*3;
+    & + & {
+        @include breakpoint($bp-1) {
+            margin-left: $vs*3;
+        }
     }
-  }
 }
 
 .lt-ie8 .masthead-nav-item {
-  display: inline;
+    display: inline;
 }
 
-
 .masthead-nav-link {
-  display: block;
-  padding: $vs;
+    display: block;
+    padding: $vs;
 
-  &:link,
-  &:active,
-  &:visited {
-    text-decoration: none;
-    color: $black;
-  }
-  &:hover,
-  &:focus {
-    color: $yellow-supernova
-  }
-  .masthead-nav--blocal & {
     &:link,
     &:active,
     &:visited {
-      color: $white;
+        text-decoration: none;
+        color: $black;
     }
     &:hover,
     &:focus {
-      color: $yellow-supernova;
+        color: $yellow-supernova
     }
-  }
+    .masthead-nav--blocal & {
+        &:link,
+        &:active,
+        &:visited {
+            color: $white;
+        }
+        &:hover,
+        &:focus {
+            color: $yellow-supernova;
+        }
+    }
 }
-
 
 .masthead-nav-link.is-active,
 .masthead-nav-link.current-menu-item {
-  color: $black;
+    color: $black;
 }
 
-
 .t-homepage .masthead-nav-link {
-  color: $black;
+    color: $black;
 }
 
 .t-homepage .masthead-nav-link:hover,
 .t-homepage .masthead-nav-link:focus {
-  color: $blue-curious;
+    color: $blue-curious;
 }
-
 
 .t-hire .masthead-nav-link.is-active,
 .t-hire .masthead-nav-link.current-menu-item,
 .t-build .masthead-nav-link.current-menu-item,
 .t-buy .masthead-nav-link.current-menu-item {
-  color: $white;
+    color: $white;
 }
 
-
-
-
-
-
 .page-hero {
-  padding-bottom: 18*$vs;
-  color: $grey-ebb;
-  background: $yellow-supernova url('../images/hopkins-local-pattern-orange-on-academic-gold.png') center center repeat;
-  background-attachment: fixed;
-  background-size: 500px;
+    padding-bottom: 18*$vs;
+    color: $grey-ebb;
+    background: $yellow-supernova url('../images/hopkins-local-pattern-orange-on-academic-gold.png') center center repeat;
+    background-attachment: fixed;
+    background-size: 500px;
 }
 
 .lt-ie9 .page-hero {
-  overflow: hidden;
+    overflow: hidden;
 }
 
-
 .t-build .page-hero {
-  background-color: $red-roughy;
-  background-image: url("../images/hopkins-local-pattern-white-on-burnt-orange.png");
-  background-size: 500px;
+    background-color: $red-roughy;
+    background-image: url("../images/hopkins-local-pattern-white-on-burnt-orange.png");
+    background-size: 500px;
 }
 
 .t-hire .page-hero {
-  color: $black;
-  background-color: $green-half-baked;
-  background-image: url("../images/hopkins-local-pattern-white-on-copper-petina.png");
-  background-size: 500px;
+    color: $black;
+    background-color: $green-half-baked;
+    background-image: url("../images/hopkins-local-pattern-white-on-copper-petina.png");
+    background-size: 500px;
 }
-
 
 .t-buy .page-hero {
-  background-color: $green-cucumber;
-  background-image: url("../images/hopkins-local-pattern-white-on-oak-leaves.png");
-  background-size: 500px;
+    background-color: $green-cucumber;
+    background-image: url("../images/hopkins-local-pattern-white-on-oak-leaves.png");
+    background-size: 500px;
 }
-
 
 .page-hero--blocal {
-  background-color: $blue-steel;
-  background-image: url('../images/blocal-pattern.jpg');
-  background-size: 50%;
+    background-color: $blue-steel;
+    background-image: url('../images/blocal-pattern.jpg');
+    background-size: 50%;
 
-  @include breakpoint($bp-1) {
-    padding-bottom: 48px;
-  }
+    @include breakpoint($bp-1) {
+        padding-bottom: 48px;
+    }
 }
 
-
-
-
 .hopkins-local {
-  display: block;
-  position: relative;
-  clear: both;
-  padding-top: 72px;
-  padding-right: 6.3218390805%;
-  padding-bottom: 72px;
-  padding-left: 6.3218390805%;
-  font-family: $heading-font-family;
-  font-style: normal;
-  line-height: $lh-base;
-  text-transform: uppercase;
+    display: block;
+    position: relative;
+    clear: both;
+    padding-top: 72px;
+    padding-right: 6.3218390805%;
+    padding-bottom: 72px;
+    padding-left: 6.3218390805%;
+    font-family: $heading-font-family;
+    font-style: normal;
+    line-height: $lh-base;
+    text-transform: uppercase;
 }
 
 .lt-ie8 .hopkins-local {
-  float: left;
-  width: 100%;
-  padding-right: 0;
-  padding-left: 0;
-  text-align: center;
+    float: left;
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    text-align: center;
 }
-
 
 .overlay-hopkins-local {
-  padding-right: 0;
-  padding-left: 0;
+    padding-right: 0;
+    padding-left: 0;
 }
-
 
 .about-local-heading {
-  font-family: $heading-font-family;
-  font-weight: 300;
-  line-height: $lh-base;
-  text-transform: uppercase;
-  color: $black;
+    font-family: $heading-font-family;
+    font-weight: 300;
+    line-height: $lh-base;
+    text-transform: uppercase;
+    color: $black;
 }
-
 
 .hopkins-local-mark {
-  display: inline-block;
-  width: 100%;
-  font-size: 37px;
-  font-weight: 300;
-  text-align: center;
-  color: $black;
+    display: inline-block;
+    width: 100%;
+    font-size: 37px;
+    font-weight: 300;
+    text-align: center;
+    color: $black;
 
-  @include breakpoint($bp-1) {
-    font-size: 99px;
-  }
+    @include breakpoint($bp-1) {
+        font-size: 99px;
+    }
 }
-
 
 .overlay-hopkins-local-mark {
-  font-size: 37px;
-  font-weight: $fw-quadon-l;
-  text-align: center;
+    font-size: 37px;
+    font-weight: $fw-quadon-l;
+    text-align: center;
 
-  @include breakpoint($bp-1) {
-    font-size: 99px;
-  }
+    @include breakpoint($bp-1) {
+        font-size: 99px;
+    }
 }
 
-
 .hopkins-local-emphasis {
-  font-style: normal;
-  color: $blue-curious;
+    font-style: normal;
+    color: $blue-curious;
 }
 
 .t-build .hopkins-local-emphasis {
-  color: $black;
+    color: $black;
 }
 
 .t-hire .hopkins-local-emphasis {
-  color: $black;
+    color: $black;
 }
 
 .t-buy .hopkins-local-emphasis {
-  color: $black;
+    color: $black;
 }
 
 .overlay-hopkins-local-emphasis {
-  color: $black;
+    color: $black;
 }
 
 .local-heading-emphasis {
-  color: $blue-cornflower
+    color: $blue-cornflower
 }
-
 
 .hopkins-local-tagline {
-  display: block;
-  font-family: $default-font-family;
-  font-size: 14px;
-  font-weight: $fw-gentona-medium;
-  text-align: right;
-  letter-spacing: .1em;
-  color: $black;
-
-  @include breakpoint($bp-1) {
-    // font-size: $fz-kilo;
-    font-size: 36px;
+    display: block;
+    font-family: $default-font-family;
+    font-size: 14px;
+    font-weight: $fw-gentona-medium;
+    text-align: right;
     letter-spacing: .1em;
-  }
+    color: $black;
 
-  .lt-ie9 & {
-    text-align: center;
-  }
+    @include breakpoint($bp-1) {
+        // font-size: $fz-kilo;
+        font-size: 36px;
+        letter-spacing: .1em;
+    }
+
+    .lt-ie9 & {
+        text-align: center;
+    }
 }
-
 
 .overlay-hopkins-local-tagline {
-  display: block;
-  font-family: $default-font-family;
-  font-size: 30px;
-  font-weight: $fw-gentona-medium;
-  text-align: right;
-  letter-spacing: .1em;
-  color: $black;
+    display: block;
+    font-family: $default-font-family;
+    font-size: 30px;
+    font-weight: $fw-gentona-medium;
+    text-align: right;
+    letter-spacing: .1em;
+    color: $black;
 
-  .lt-ie9 & {
-    text-align: center;
-  }
+    .lt-ie9 & {
+        text-align: center;
+    }
 }
-
 
 .overlay-hopkins-local-prefix {
-  font-family: $default-font-family;
-  text-transform: capitalize;
-  color: $black;
+    font-family: $default-font-family;
+    text-transform: capitalize;
+    color: $black;
 }
 
-
-
-
-
 .page-intro {
-  padding-top: 32px;
-  margin-bottom: 32px;
+    padding-top: 32px;
+    margin-bottom: 32px;
 
-  @include breakpoint($bp-1) {
-    overflow: hidden;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin: 32px 6.3218390805% 64px;
-  }
+    @include breakpoint($bp-1) {
+        overflow: hidden;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin: 32px 6.3218390805% 64px;
+    }
 }
 
 .page-intro--blocal {
@@ -795,134 +725,126 @@ select {
     }
 }
 
-
 .page-intro-heading {
-  margin-bottom: .25em;
-  font-family: $heading-font-family;
-  font-size: 48px;
-  font-weight: $fw-quadon-n;
-  line-height: $lh-base;
+    margin-bottom: .25em;
+    font-family: $heading-font-family;
+    font-size: 48px;
+    font-weight: $fw-quadon-n;
+    line-height: $lh-base;
 
-  @include breakpoint($bp-1) {
-    font-size: $fz-mega;
-  }
+    @include breakpoint($bp-1) {
+        font-size: $fz-mega;
+    }
 }
 
 .page-intro-heading strong {
-  font-weight: 500;
+    font-weight: 500;
 }
 
-
 .page-intro-content {
-  @include _cms;
+    @include _cms;
 
-  font-size: 20px;
-  font-size: 1.25rem;
-  color: $grey-gravel;
+    font-size: 20px;
+    font-size: 1.25rem;
+    color: $grey-gravel;
 
-  @include breakpoint($bp-1) {
-    float: left;
-    width: 58.5205992509%;
-  }
+    @include breakpoint($bp-1) {
+        float: left;
+        width: 58.5205992509%;
+    }
 
-  h3 {
-    font-size: 24px;
-    font-weight: $fw-gentona-bold;
-    line-height: $lh-thin;
-  }
-  .page-intro--blocal & {
-    font-family: $heading-font-family;
-    font-weight: $fw-quadon-b;
-    color: $blue-rhino;
-  }
+    h3 {
+        font-size: 24px;
+        font-weight: $fw-gentona-bold;
+        line-height: $lh-thin;
+    }
+    .page-intro--blocal & {
+        font-family: $heading-font-family;
+        font-weight: $fw-quadon-b;
+        color: $blue-rhino;
+    }
 }
 
 .page-intro-video {
-  margin-top: 16px;
+    margin-top: 16px;
 }
 
 @include breakpoint($bp-1) {
-  .page-intro-video {
-    float: right;
-    width: 31.8352059925%;
-    margin-top: 0;
-  }
+    .page-intro-video {
+        float: right;
+        width: 31.8352059925%;
+        margin-top: 0;
+    }
 }
 
-
 .page-intro-videolink {
-  @include _animate;
+    @include _animate;
 
-  display: block;
-  position: relative;
-  overflow: hidden;
-  padding: 2*$vs;
-  background: $grey-ebb;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    padding: 2*$vs;
+    background: $grey-ebb;
 
-  &:hover,
-  &:focus {
-    @include _animate-hover;
+    &:hover,
+    &:focus {
+        @include _animate-hover;
 
-    color: $white;
-    border-color: $blue-rhino;
-    background-color: $blue-rhino;
-  }
+        color: $white;
+        border-color: $blue-rhino;
+        background-color: $blue-rhino;
+    }
 }
 
 .page-intro-videolink-image {
-  display: block;
-  max-width: 100%;
-  height: auto;
+    display: block;
+    max-width: 100%;
+    height: auto;
 }
 
 .page-intro-videolink-text {
-  display: block;
-  padding-top: $vs;
-  font-family: $heading-font-family;
-  font-size: $fz-deci;
-  font-weight: $fw-quadon-b;
-  line-height: $lh-base;
-  text-align: center;
+    display: block;
+    padding-top: $vs;
+    font-family: $heading-font-family;
+    font-size: $fz-deci;
+    font-weight: $fw-quadon-b;
+    line-height: $lh-base;
+    text-align: center;
 }
 
-
-
-
-
 .content-blocks {
-  overflow: hidden;
-  border-top: 10px solid #005db9;
+    overflow: hidden;
+    border-top: 10px solid #005db9;
 
-  @include breakpoint($bp-1) {
-    position: relative;
-
-  }
+    @include breakpoint($bp-1) {
+        position: relative;
+    }
 }
 
 .content-blocks-header {
-  padding: 0 2*$vs 2*$vs;
-  text-transform: uppercase;
-  color: #fff;
-  background-color: #005db9;
+    padding: 0 2*$vs 2*$vs;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #005db9;
 
-  @include breakpoint($bp-1) {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 9.5%;
-    font-size: 32px;
-    font-size: 2rem;
-  }
+    @include breakpoint($bp-1) {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 9.5%;
+        font-size: 32px;
+        font-size: 2rem;
+    }
 }
 
 .content-blocks-columns-1 {
-  background: $blue-rhino;
+    background: $blue-rhino;
 
-  @include breakpoint($bp-1) {
-    float: left;
-    width: percentage(594/1218);
-    margin: 0;
-  }
+    @include breakpoint($bp-1) {
+        float: left;
+        width: percentage(594/1218);
+        margin: 0;
+    }
 }
 
 .content-blocks-columns-1 + .content-blocks-columns-1 {
@@ -932,58 +854,54 @@ select {
 }
 
 .content-blocks-columns-2 {
-  background: $blue-rhino;
+    background: $blue-rhino;
 
-  @include breakpoint($bp-1) {
-    float: left;
-    width: percentage(312/1218);
-  }
+    @include breakpoint($bp-1) {
+        float: left;
+        width: percentage(312/1218);
+    }
 }
-
-
 
 .block-stack {
-  display: block;
-  position: relative;
-  width: 100%;
-  height: 0;
-  background-size: cover;
-
-  &:hover,
-  &:focus {
-    @include _animate-hover;
-
-    .block-stack-heading {
-      max-height: 75%;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-    }
-  }
-  &:after {
-    @include _animate;
-
-    content: '';
     display: block;
-    position: absolute;
-    bottom: 1rem;
-    left: 1rem;
-    width: 24px;
-    height: 24px;
-    text-align: center;
-    border-radius: 100%;
-    background: url('../images/icon-info.svg') center center no-repeat;
+    position: relative;
+    width: 100%;
+    height: 0;
+    background-size: cover;
 
-    .lt-ie9 & {
-      background-image: url('../images/icon-info.png');
+    &:hover,
+    &:focus {
+        @include _animate-hover;
+
+        .block-stack-heading {
+            max-height: 75%;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
     }
-  }
-}
+    &:after {
+        @include _animate;
 
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        border-radius: 100%;
+        background: url('../images/icon-info.svg') center center no-repeat;
+
+        .lt-ie9 & {
+            background-image: url('../images/icon-info.png');
+        }
+    }
+}
 
 .content-blocks-columns-1 .block-stack {
-  padding-top: 104%;
+    padding-top: 104%;
 }
-
 
 .content-blocks-columns-1.content-blocks-horizontal .block-stack {
     padding-top: 49.5%;
@@ -993,637 +911,594 @@ select {
     padding-top: 198%;
 }
 
-
 .content-blocks-columns-2 .block-stack {
-  padding-top: 99%;
+    padding-top: 99%;
 }
-
 
 .block-stack-heading {
-  @include _animate-news;
+    @include _animate-news;
 
-  position: absolute;
-  z-index: $z-content;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
-  width: 100%;
-  width: 100%;
-  max-height: 0;
-  padding: 0 1rem;
-  font-size: 18px;
-  line-height: $lh-thin;
-  color: $white;
-  background-color: #e5e2e0;
+    position: absolute;
+    z-index: $z-content;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+    width: 100%;
+    max-height: 0;
+    padding: 0 1rem;
+    font-size: 18px;
+    line-height: $lh-thin;
+    color: $white;
+    background-color: #e5e2e0;
 
-  .block-stack:hover &,
-  .block-stack:focus & {
-    @include _animate-news-hover;
-  }
+    .block-stack:hover &,
+    .block-stack:focus & {
+        @include _animate-news-hover;
+    }
 }
 
-
 .block-stack-build {
-  &,
-  .block-stack-heading {
-    background-color: $red-roughy;
-  }
+    &,
+    .block-stack-heading {
+        background-color: $red-roughy;
+    }
 }
 
 .block-stack-hire {
-  &,
-  .block-stack-heading {
-    background-color: $green-half-baked;
-  }
+    &,
+    .block-stack-heading {
+        background-color: $green-half-baked;
+    }
 }
 
 .block-stack-buy {
-  &,
-  .block-stack-heading {
-    background-color: $green-cucumber;
-  }
+    &,
+    .block-stack-heading {
+        background-color: $green-cucumber;
+    }
 }
-
-
-
 
 .block-media-left {
-  overflow: hidden;
-  color: $black;
-  background: $red-heath;
+    overflow: hidden;
+    color: $black;
+    background: $red-heath;
 
-  .block-media-attach {
-    @include breakpoint($bp-1) {
-      float: left;
+    .block-media-attach {
+        @include breakpoint($bp-1) {
+            float: left;
+        }
     }
-  }
 }
-
 
 .t-home .block-media-left {
-  color: $grey-ebb
+    color: $grey-ebb
 }
-
 
 .block-media-right {
-  overflow: hidden;
-  color: $grey-ebb;
-  background: $blue-jacarta;
+    overflow: hidden;
+    color: $grey-ebb;
+    background: $blue-jacarta;
 
-  .block-media-attach {
-    @include breakpoint($bp-1) {
-      float: right;
+    .block-media-attach {
+        @include breakpoint($bp-1) {
+            float: right;
+        }
     }
-  }
 }
-
 
 .block-media-attach {
-  position: relative;
+    position: relative;
 
-  @include breakpoint($bp-1) {
-    width: 50%;
-  }
+    @include breakpoint($bp-1) {
+        width: 50%;
+    }
 }
-
 
 .block-media-link {
-  &:link,
-  &:active,
-  &:visited {
-    color: $black;
-  }
-  &:hover,
-  &:focus {
-    color: $blue-jacarta
-  }
+    &:link,
+    &:active,
+    &:visited {
+        color: $black;
+    }
+    &:hover,
+    &:focus {
+        color: $blue-jacarta
+    }
 }
-
 
 .block-media-ratio {
-  overflow: hidden;
+    overflow: hidden;
 
-  @include breakpoint($bp-1) {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-top: 94%;
-  }
+    @include breakpoint($bp-1) {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-top: 94%;
+    }
 }
-
 
 .block-media-src {
-  @include breakpoint($bp-1) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: auto;
-    height: 100%;
-  }
+    @include breakpoint($bp-1) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: auto;
+        height: 100%;
+    }
 }
-
 
 .block-media-heading {
-  overflow: hidden;
-  padding: $vs*3 $vs*4 $vs*4;
-  font-size: $fz-deci;
-  line-height: $lh-thin;
+    overflow: hidden;
+    padding: $vs*3 $vs*4 $vs*4;
+    font-size: $fz-deci;
+    line-height: $lh-thin;
 }
-
-
 
 .map {
-  display: none;
-  position: relative;
+    display: none;
+    position: relative;
 
-  @include breakpoint($bp-1) {
-    display: block;
-  }
+    @include breakpoint($bp-1) {
+        display: block;
+    }
 }
 
-.map-viewport {
-
-}
-
+.map-viewport {}
 
 .map-overlay {
-  position: absolute;
-  z-index: $z-content;
-  top: 0;
-  left: 0;
-  padding-top: 18*$vs;
+    position: absolute;
+    z-index: $z-content;
+    top: 0;
+    left: 0;
+    padding-top: 18*$vs;
 }
 
 .map-overlay-canister {
-  @include _container;
+    @include _container;
 }
-
 
 .map-overlay-heading {
-  font-size: $fz-deca;
-  font-weight: $fw-gentona-bold;
-  line-height: $lh-thin;
+    font-size: $fz-deca;
+    font-weight: $fw-gentona-bold;
+    line-height: $lh-thin;
 }
-
 
 .map-overlay-content {
-  padding: 5*$vs 6*$vs;
-  font-weight: $fw-gentona-bold;
-  color: $grey-ebb;
-  background: $blue-jacarta;
+    padding: 5*$vs 6*$vs;
+    font-weight: $fw-gentona-bold;
+    color: $grey-ebb;
+    background: $blue-jacarta;
 
-  @include breakpoint($bp-1) {
-    width: percentage(552/1218);
-    margin: 0 auto;
-  }
+    @include breakpoint($bp-1) {
+        width: percentage(552/1218);
+        margin: 0 auto;
+    }
 }
-
-
-
-
 
 //
 // @TODO: Add docs to _focus-item!
 //
 @mixin _focus-item {
-  padding-top: $vs;
-  padding-right: $vs;
-  padding-bottom: 8*$vs;
-  padding-left: $vs;
-  background: $white;
+    padding-top: $vs;
+    padding-right: $vs;
+    padding-bottom: 8*$vs;
+    padding-left: $vs;
+    background: $white;
 
-  @include breakpoint($bp-1) {
-    display: inline-block;
-    width: percentage(336/1218);
-    min-height: 94*$vs;
-  }
+    @include breakpoint($bp-1) {
+        display: inline-block;
+        width: percentage(336/1218);
+        min-height: 94*$vs;
+    }
 }
 
 .focuses {
-  padding-top: 8*$vs;
-  padding-bottom: 8*$vs;
-  background: $grey-ebb;
+    padding-top: 8*$vs;
+    padding-bottom: 8*$vs;
+    background: $grey-ebb;
 }
-
 
 .focuses-canister {
-  @include _container;
+    @include _container;
 }
-
 
 .focus-item-heading {
-  font-size: $fz-mega;
-  font-weight: $fw-gentona-bold;
-  line-height: $lh-thin;
-  text-align: center;
-  border-top: 2*$vs solid;
+    font-size: $fz-mega;
+    font-weight: $fw-gentona-bold;
+    line-height: $lh-thin;
+    text-align: center;
+    border-top: 2*$vs solid;
 }
 
-
 .focus-item-content {
-  overflow: hidden;
-  padding: 3*$vs;
-  font-size: 18px;
-  font-weight: $fw-gentona-medium;
+    overflow: hidden;
+    padding: 3*$vs;
+    font-size: 18px;
+    font-weight: $fw-gentona-medium;
 }
 
 .focus-item-src {
-  display: block;
-  margin: 16px auto;
+    display: block;
+    margin: 16px auto;
 }
 
 .focus-item-text {
-  color: $black;
+    color: $black;
 
-  @include breakpoint($bp-1) {
-    min-height: 26*$vs;
-  }
+    @include breakpoint($bp-1) {
+        min-height: 26*$vs;
+    }
 }
 
 .focus-link-more {
-  @include _animate;
+    @include _animate;
 
-  display: block;
-  padding: 3*$vs 3*$vs 4*$vs;
-  margin: 4*$vs 0;
-  font-family: $heading-font-family;
-  font-weight: $fw-quadon-b;
-  line-height: 1;
-  text-align: center;
-  border: $vs solid;
+    display: block;
+    padding: 3*$vs 3*$vs 4*$vs;
+    margin: 4*$vs 0;
+    font-family: $heading-font-family;
+    font-weight: $fw-quadon-b;
+    line-height: 1;
+    text-align: center;
+    border: $vs solid;
 
-  &:hover,
-  &:focus {
-    @include _animate-hover;
-  }
+    &:hover,
+    &:focus {
+        @include _animate-hover;
+    }
 }
 
 .focus-link-option {
-  @include _animate;
+    @include _animate;
 
-  display: block;
-  padding: 2*$vs 3*$vs 3*$vs;
-  font-size: $fz-deci;
-  line-height: $lh-thin;
-  border: $vs solid transparent;
-
-  @include breakpoint($bp-1) {
-    float: left;
-    width: percentage(151/310);
-  }
-
-  &:hover,
-  &:focus {
-    @include _animate-hover;
-  }
-  & + & {
-    margin-top: 4*$vs;
+    display: block;
+    padding: 2*$vs 3*$vs 3*$vs;
+    font-size: $fz-deci;
+    line-height: $lh-thin;
+    border: $vs solid transparent;
 
     @include breakpoint($bp-1) {
-      float: right;
-      margin-top: 0;
+        float: left;
+        width: percentage(151/310);
     }
-  }
-}
 
+    &:hover,
+    &:focus {
+        @include _animate-hover;
+    }
+    & + & {
+        margin-top: 4*$vs;
+
+        @include breakpoint($bp-1) {
+            float: right;
+            margin-top: 0;
+        }
+    }
+}
 
 .focus-item-build {
-  @include _focus-item;
+    @include _focus-item;
 
-  color: $red-roughy;
+    color: $red-roughy;
 
-  @include breakpoint($bp-1) {
-    margin-top: 0;
-      margin-left: percentage(77/1218);
+    @include breakpoint($bp-1) {
+        margin-top: 0;
+        margin-left: percentage(77/1218);
     }
 
-  .focus-link-more {
-    &:hover,
-    &:focus {
-      color: $white;
-      border-color: $red-roughy;
-      background: $red-roughy;
+    .focus-link-more {
+        &:hover,
+        &:focus {
+            color: $white;
+            border-color: $red-roughy;
+            background: $red-roughy;
+        }
     }
-  }
-  .focus-link-option {
-    color: $white;
-    background: $red-roughy;
+    .focus-link-option {
+        color: $white;
+        background: $red-roughy;
 
-    &:hover,
-    &:focus {
-      color: $red-roughy;
-      border-color: $red-roughy;
-      background: $white;
+        &:hover,
+        &:focus {
+            color: $red-roughy;
+            border-color: $red-roughy;
+            background: $white;
+        }
     }
-  }
 }
-
 
 .focus-item-hire {
-  @include _focus-item;
+    @include _focus-item;
 
     margin-top: 8*$vs;
-  color: $green-half-baked;
+    color: $green-half-baked;
 
-  @include breakpoint($bp-1) {
-    margin-top: 0;
-    margin-left: percentage(26/1218);
-  }
-
-  .focus-link-more {
-    &:hover,
-    &:focus {
-      color: $white;
-      border-color: $green-half-baked;
-      background: $green-half-baked;
+    @include breakpoint($bp-1) {
+        margin-top: 0;
+        margin-left: percentage(26/1218);
     }
-  }
-  .focus-link-option {
-    color: $white;
-    background: $green-half-baked;
 
-    &:hover,
-    &:focus {
-      color: $green-half-baked;
-      border-color: $green-half-baked;
-      background: $white;
+    .focus-link-more {
+        &:hover,
+        &:focus {
+            color: $white;
+            border-color: $green-half-baked;
+            background: $green-half-baked;
+        }
     }
-  }
+    .focus-link-option {
+        color: $white;
+        background: $green-half-baked;
+
+        &:hover,
+        &:focus {
+            color: $green-half-baked;
+            border-color: $green-half-baked;
+            background: $white;
+        }
+    }
 }
 
-
 .focus-item-buy {
-  @include _focus-item;
+    @include _focus-item;
 
-  margin-top: 8*$vs;
-  color: $green-cucumber;
+    margin-top: 8*$vs;
+    color: $green-cucumber;
 
-  @include breakpoint($bp-1) {
-    margin-top: 0;
-    margin-left: percentage(26/1218);
-  }
-
-  .focus-link-more {
-    &:hover,
-    &:focus {
-      color: $white;
-      border-color: $green-cucumber;
-      background: $green-cucumber;
+    @include breakpoint($bp-1) {
+        margin-top: 0;
+        margin-left: percentage(26/1218);
     }
-  }
-  .focus-link-option {
-    color: $white;
-    background: $green-cucumber;
 
-    &:hover,
-    &:focus {
-      color: $green-cucumber;
-      border-color: $green-cucumber;
-      background: $white;
+    .focus-link-more {
+        &:hover,
+        &:focus {
+            color: $white;
+            border-color: $green-cucumber;
+            background: $green-cucumber;
+        }
     }
-  }
+    .focus-link-option {
+        color: $white;
+        background: $green-cucumber;
+
+        &:hover,
+        &:focus {
+            color: $green-cucumber;
+            border-color: $green-cucumber;
+            background: $white;
+        }
+    }
 }
 
 .quote {
-  overflow: hidden;
-  padding: 32px 0;
-  background: url("../images/hopkins-local-pattern-sparta-on-jay.png");
-  background-size: 400px;
+    overflow: hidden;
+    padding: 32px 0;
+    background: url("../images/hopkins-local-pattern-sparta-on-jay.png");
+    background-size: 400px;
 }
 
 @include breakpoint($bp-1) {
-  .quote {
-    padding: 0;
-  }
+    .quote {
+        padding: 0;
+    }
 }
 
 .block-quote-text {
-  position: relative;
-  padding-top: 16px;
-  padding-right: 6.3218390805%;
-  padding-bottom: 16px;
-  padding-left: 12.64%;
-  font-family: quadon, gentona, "proxima nova", "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 20px;
-  font-size: 1.25rem;
-  font-weight: 300;
-  font-style: italic;
-  line-height: 1.25;
-  color: #fff;
+    position: relative;
+    padding-top: 16px;
+    padding-right: 6.3218390805%;
+    padding-bottom: 16px;
+    padding-left: 12.64%;
+    font-family: quadon, gentona, "proxima nova", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 20px;
+    font-size: 1.25rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.25;
+    color: #fff;
 }
 
 @include breakpoint($bp-1) {
-  .block-quote-text {
-    margin-right: 6.3218390805%;
-    margin-left: 6.3218390805%;
-  }
+    .block-quote-text {
+        margin-right: 6.3218390805%;
+        margin-left: 6.3218390805%;
+    }
 }
 
 .block-quote-text > * + * {
-  margin-top: .5em;
+    margin-top: .5em;
 }
 
 .block-quote-text > img,
 .block-quote-text > video,
 .block-quote-text > audio,
 .block-quote-text > iframe {
-  max-width: 100%;
-  height: auto;
+    max-width: 100%;
+    height: auto;
 }
 
 @include breakpoint($bp-1) {
-  .block-quote-text {
-    padding-top: 48px;
-    padding-bottom: 48px;
-    font-size: 32px;
-    font-size: 2rem;
-  }
+    .block-quote-text {
+        padding-top: 48px;
+        padding-bottom: 48px;
+        font-size: 32px;
+        font-size: 2rem;
+    }
 }
 
 .block-quote-text:before,
 .block-quote-text > p:after {
-  z-index: 1;
-  line-height: 1;
-  color: #005db9;
+    z-index: 1;
+    line-height: 1;
+    color: #005db9;
 }
 
 .block-quote-text:before {
-  content: '“';
-  position: absolute;
-  top: 16px;
-  left: 6.3218390805%;
-  font-family: gentona, "proxima nova", "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 144px;
-  font-size: 9rem;
-  font-weight: 700;
-  font-style: normal;
+    content: '“';
+    position: absolute;
+    top: 16px;
+    left: 6.3218390805%;
+    font-family: gentona, "proxima nova", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 144px;
+    font-size: 9rem;
+    font-weight: 700;
+    font-style: normal;
 }
 
 .block-quote-text > p:after {
-  content: '”';
-  font-family: quadon, gentona, "proxima nova", "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 32px;
-  font-size: 2rem;
-  font-weight: 500;
-  font-style: italic;
+    content: '”';
+    font-family: quadon, gentona, "proxima nova", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 32px;
+    font-size: 2rem;
+    font-weight: 500;
+    font-style: italic;
 }
 
 @include breakpoint($bp-1) {
-  .block-quote-text > p:after {
-    font-size: 48px;
-    font-size: 3rem;
-  }
+    .block-quote-text > p:after {
+        font-size: 48px;
+        font-size: 3rem;
+    }
 }
 
 .block-quote-text > * {
-  position: relative;
-  z-index: 5;
+    position: relative;
+    z-index: 5;
 }
 
 .block-quote-sources {
-  margin-top: 32px;
-  font-family: gentona, "proxima nova", "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 18px;
-  font-size: 1.125rem;
-  line-height: 1.25;
-
+    margin-top: 32px;
+    font-family: gentona, "proxima nova", "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 18px;
+    font-size: 1.125rem;
+    line-height: 1.25;
 }
 
 @include breakpoint($bp-1) {
-  .block-quote-sources {
-    display: table;
-    width: 100%;
-  }
+    .block-quote-sources {
+        display: table;
+        width: 100%;
+    }
 }
 
 .block-quote-source {
-  font-weight: 600;
-  font-style: normal;
-  color: #fff;
+    font-weight: 600;
+    font-style: normal;
+    color: #fff;
 }
 
 @include breakpoint($bp-1) {
-  .block-quote-source {
-    display: table-cell;
-  }
+    .block-quote-source {
+        display: table-cell;
+    }
 }
 
 .block-quote-source + .block-quote-source {
-  margin-top: 16px;
+    margin-top: 16px;
 }
 
 @include breakpoint($bp-1) {
-  .block-quote-source + .block-quote-source {
-    margin-top: 0;
-
-  }
+    .block-quote-source + .block-quote-source {
+        margin-top: 0;
+    }
 }
 
 .block-quote-source-position {
-  display: block;
-  font-weight: 400;
-  color: #fff;
+    display: block;
+    font-weight: 400;
+    color: #fff;
 }
 
 .page-overlay {
-  position: fixed;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  overflow: auto;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  background-color: $blue-cornflower;
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: $blue-cornflower;
 
-  .no-opacity & {
-    display: none;
-  }
+    .no-opacity & {
+        display: none;
+    }
 }
 
 .has-overlay {
-  position: relative;
-  overflow: hidden;
+    position: relative;
+    overflow: hidden;
 
-  .page-overlay {
-  @include _animate;
+    .page-overlay {
+        @include _animate;
 
-    z-index: 2000;
-    opacity: 1;
+        z-index: 2000;
+        opacity: 1;
 
-    .no-opacity & {
-      display: block;
+        .no-opacity & {
+            display: block;
+        }
     }
-  }
 }
 
 .page-overlay-canister {
-  @include _container;
+    @include _container;
 
-  position: relative;
-  padding-top: 20*$vs;
-  color: $white;
+    position: relative;
+    padding-top: 20*$vs;
+    color: $white;
 }
 
 .page-overlay-close {
-  position: absolute;
-  top: 8*$vs;
-  right: 0;
-  font-size: $fz-deca;
-  font-weight: $fw-gentona-bold;
-  text-align: right;
+    position: absolute;
+    top: 8*$vs;
+    right: 0;
+    font-size: $fz-deca;
+    font-weight: $fw-gentona-bold;
+    text-align: right;
 
-  &:before {
-    content: '✖︎';
-    display: inline-block;
-    margin-right: 2*$vs;
-    font-family: arial;
-    font-size: $fz;
-  }
+    &:before {
+        content: '✖︎';
+        display: inline-block;
+        margin-right: 2*$vs;
+        font-family: arial;
+        font-size: $fz;
+    }
 }
-
 
 .page-overlay-content {
-  @include _cms;
+    @include _cms;
 
-  @include breakpoint($bp-1) {
-    width: percentage(758/1218);
-    padding-bottom: 20*$vs;
-    margin: 0 auto;
-    font-size: $fz-hecto;
-    font-weight: $fw-gentona-medium;
-    line-height: $lh-wide;
-  }
+    @include breakpoint($bp-1) {
+        width: percentage(758/1218);
+        padding-bottom: 20*$vs;
+        margin: 0 auto;
+        font-size: $fz-hecto;
+        font-weight: $fw-gentona-medium;
+        line-height: $lh-wide;
+    }
 }
-
-
-
-
 
 .site-footer {
-  overflow: hidden;
-  padding-top: 10*$vs;
-  padding-bottom: 10*$vs;
-  background: #4A484C;
+    overflow: hidden;
+    padding-top: 10*$vs;
+    padding-bottom: 10*$vs;
+    background: #4A484C;
 }
-
 
 .site-footer-canister {
-  @include _container;
+    @include _container;
 
-  overflow: hidden;
+    overflow: hidden;
 }
-
 
 .site-footer-seal {
-  display: block;
-  width: 341px;
-  margin: 0 auto;
+    display: block;
+    width: 341px;
+    margin: 0 auto;
 }
-
-
-
-
 
 .footer-logo {
     @include _ir;
@@ -1634,412 +1509,350 @@ select {
     background: transparent url('../images/jhu-enterprise-logo-white.svg') center center no-repeat;
 
     .lt-ie9 & {
-      text-indent: -9999px;
-      background-image: url('../images/jhu-enterprise-logo-white.png');
+        text-indent: -9999px;
+        background-image: url('../images/jhu-enterprise-logo-white.png');
     }
 }
 
-
 .footer-link {
-  display: block;
-  margin: 0 auto;
-  text-align: center;
-  color: #fff;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
 }
-
 
 .site-footer-contact {
-  display: table;
-  width: 100%;
-  font-size: $fz-centi;
-  line-height: $lh-thin;
-  color: $white;
+    display: table;
+    width: 100%;
+    font-size: $fz-centi;
+    line-height: $lh-thin;
+    color: $white;
 
-  @include breakpoint($bp-1) {
-    display: block;
-    float: right;
-    overflow: hidden;
-    width: percentage(286/1218);
-    padding-top: 12*$vs;
-    margin: 0;
-  }
+    @include breakpoint($bp-1) {
+        display: block;
+        float: right;
+        overflow: hidden;
+        width: percentage(286/1218);
+        padding-top: 12*$vs;
+        margin: 0;
+    }
 }
 
-
 .contact-01 {
-  display: table-cell;
+    display: table-cell;
 
-  @include breakpoint($bp-1) {
-    float: left;
-    width: 48.7096774194%;
-  }
+    @include breakpoint($bp-1) {
+        float: left;
+        width: 48.7096774194%;
+    }
 }
 
 .contact-02 {
-  display: table-cell;
+    display: table-cell;
 
-  @include breakpoint($bp-1) {
-    float: right;
-    width: 48.7096774194%;
-    margin-top: 0;
-  }
+    @include breakpoint($bp-1) {
+        float: right;
+        width: 48.7096774194%;
+        margin-top: 0;
+    }
 }
-
-
-
-
 
 .site-content {
-  overflow: hidden;
-  padding-top: 10*$vs;
-  padding-bottom: 16*$vs;
-  background: $white;
+    overflow: hidden;
+    padding-top: 10*$vs;
+    padding-bottom: 16*$vs;
+    background: $white;
 }
-
 
 // .t-build .site-content {
 //   color: $red-heath
 // }
-
-
 // .t-hire .site-content {
 //   color: $green-persian
 // }
-
-
-
-
-
 .page-heading {
-  max-width: 85%;
-  margin-bottom: 4*$vs;
-  font-size: $fz-kilo;
-  line-height: $lh-thin;
+    max-width: 85%;
+    margin-bottom: 4*$vs;
+    font-size: $fz-kilo;
+    line-height: $lh-thin;
 }
-
 
 .page-content {
-  overflow: hidden;
-  margin-bottom: 16*$vs;
+    overflow: hidden;
+    margin-bottom: 16*$vs;
 }
-
 
 .page-content-intro {
-  max-width: 85%;
-  margin-bottom: 8*$vs;
-  font-size: $fz-deca;
-  font-weight: $fw-gentona-medium;
-  line-height: $lh-wide;
+    max-width: 85%;
+    margin-bottom: 8*$vs;
+    font-size: $fz-deca;
+    font-weight: $fw-gentona-medium;
+    line-height: $lh-wide;
 }
 
-
 .goal-list-01 {
-  padding-left: 30px;
-  font-size: $fz;
-  line-height: $lh-thin;
+    padding-left: 30px;
+    font-size: $fz;
+    line-height: $lh-thin;
 
-  @include breakpoint($bp-1) {
-    float: left;
-    width: 48.7096774194%;
-  }
+    @include breakpoint($bp-1) {
+        float: left;
+        width: 48.7096774194%;
+    }
 
-  .lt-ie9 & {
-    width: 45%;
-  }
+    .lt-ie9 & {
+        width: 45%;
+    }
 }
 
 .goal-list-02 {
-  padding-left: 30px;
-  margin-top: 8*$vs;
-  font-size: 18px;
-  line-height: 1.5;
+    padding-left: 30px;
+    margin-top: 8*$vs;
+    font-size: 18px;
+    line-height: 1.5;
 
-  @include breakpoint($bp-1) {
-    float: right;
-    width: 48.7096774194%;
-    margin-top: 0;
-  }
+    @include breakpoint($bp-1) {
+        float: right;
+        width: 48.7096774194%;
+        margin-top: 0;
+    }
 
-  .lt-ie9 & {
-    width: 45%;
-  }
-
+    .lt-ie9 & {
+        width: 45%;
+    }
 }
 
 .goal-list-01 li + li,
 .goal-list-02 li + li {
-  margin-top: .5em;
+    margin-top: .5em;
 }
-
 
 .success-story {
-  @include breakpoint($bp-1) {
-    float: left;
-    width: percentage(850/1218);
-    margin-right: 32px;
-  }
+    @include breakpoint($bp-1) {
+        float: left;
+        width: percentage(850/1218);
+        margin-right: 32px;
+    }
 }
-
 
 .success-story .block-media-left {
-  background: none;
+    background: none;
 }
-
 
 .success-story .block-media-attach {
-  @include breakpoint($bp-1) {
-    margin-right: 4*$vs;
-  }
+    @include breakpoint($bp-1) {
+        margin-right: 4*$vs;
+    }
 }
-
 
 .success-story .block-media-ratio {
-  height: auto;
-  padding-top: 0;
+    height: auto;
+    padding-top: 0;
 }
-
 
 .success-story .block-media-src {
-  position: static;
-  width: 100%;
-  height: auto;
-  transform: translateX(0%);
+    position: static;
+    width: 100%;
+    height: auto;
+    transform: translateX(0%);
 }
-
 
 .success-story .block-media-type {
-  font-family: $heading-font-family;
-  font-size: $fz-centi;
-  font-weight: $fw-quadon-eb;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: $black;
+    font-family: $heading-font-family;
+    font-size: $fz-centi;
+    font-weight: $fw-quadon-eb;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: $black;
 }
-
 
 .success-story .block-media-heading {
-  padding: 0;
-  font-size: $fz;
-  font-weight: 500;
-  color: $black;
+    padding: 0;
+    font-size: $fz;
+    font-weight: 500;
+    color: $black;
 }
-
 
 // .t-build .block-media-left {
 //   color: $red-heath
 // }
-
-
 // .t-build .block-media-type {
 //   color: $red-roughy
 // }
-
-
 // .t-hire .block-media-left {
 //   color: $green-persian
 // }
-
-
 // .t-hire .block-media-type {
 //   color: $green-half-baked
 // }
-
-
 // .t-buy .block-media-left {
 //   color: $green-cucumber
 // }
-
-
 // .t-buy .block-media-type {
 //   color: $green-chalet
 // }
-
-
-
-
-
 .page-actions {
-  overflow: hidden;
-  padding-top: 4*$vs;
+    overflow: hidden;
+    padding-top: 4*$vs;
 
-  @include breakpoint($bp-1) {
-    padding-top: 12*$vs;
-  }
+    @include breakpoint($bp-1) {
+        padding-top: 12*$vs;
+    }
 }
-
 
 .page-actions .focus-link-option {
-  @include _animate;
+    @include _animate;
 
-  display: block;
-  width: 100%;
-  padding: 3*$vs 3*$vs 4*$vs;
-  margin: 0;
-  font-family: $heading-font-family;
-  font-weight: $fw-quadon-b;
-  line-height: 1;
-  text-align: center;
-  border: $vs solid;
+    display: block;
+    width: 100%;
+    padding: 3*$vs 3*$vs 4*$vs;
+    margin: 0;
+    font-family: $heading-font-family;
+    font-weight: $fw-quadon-b;
+    line-height: 1;
+    text-align: center;
+    border: $vs solid;
 
-  &:hover,
-  &:focus {
-    @include _animate-hover;
-  }
-  + .focus-link-option {
-    margin-top: 4*$vs;
-  }
-  .lt-ie9 & {
-    width: 90%;
-  }
+    &:hover,
+    &:focus {
+        @include _animate-hover;
+    }
+    + .focus-link-option {
+        margin-top: 4*$vs;
+    }
+    .lt-ie9 & {
+        width: 90%;
+    }
 }
-
 
 .t-build .focus-link-option {
-  &:link,
-  &:active,
-  &:visited {
-    color: $red-roughy;
-    border-color: $red-roughy;
-  }
-  &:hover,
-  &:focus {
-    color: $white;
-    background-color: $red-roughy
-  }
+    &:link,
+    &:active,
+    &:visited {
+        color: $red-roughy;
+        border-color: $red-roughy;
+    }
+    &:hover,
+    &:focus {
+        color: $white;
+        background-color: $red-roughy
+    }
 }
-
 
 .t-hire .focus-link-option {
-  &:link,
-  &:active,
-  &:visited {
-    color: $green-half-baked;
-    border-color: $green-half-baked;
-  }
-  &:hover,
-  &:focus {
-    color: $white;
-    background-color: $green-half-baked
-  }
+    &:link,
+    &:active,
+    &:visited {
+        color: $green-half-baked;
+        border-color: $green-half-baked;
+    }
+    &:hover,
+    &:focus {
+        color: $white;
+        background-color: $green-half-baked
+    }
 }
-
 
 .t-buy .focus-link-option {
-  &:link,
-  &:active,
-  &:visited {
-    color: $green-cucumber;
-    border-color: $green-cucumber;
-  }
-  &:hover,
-  &:focus {
-    color: $white;
-    background-color: $green-cucumber
-  }
+    &:link,
+    &:active,
+    &:visited {
+        color: $green-cucumber;
+        border-color: $green-cucumber;
+    }
+    &:hover,
+    &:focus {
+        color: $white;
+        background-color: $green-cucumber
+    }
 }
-
-
 
 .about-local {
-  padding-top: 8*$vs;
-  padding-bottom: 8*$vs;
-  background: $grey-ebb;
+    padding-top: 8*$vs;
+    padding-bottom: 8*$vs;
+    background: $grey-ebb;
 
-  @include breakpoint($bp-1) {
-    padding-top: 16*$vs;
-    padding-bottom: 16*$vs;
-  }
+    @include breakpoint($bp-1) {
+        padding-top: 16*$vs;
+        padding-bottom: 16*$vs;
+    }
 }
-
 
 .lt-ie9 .about-local {
-  float: left;
-  width: 100%;
+    float: left;
+    width: 100%;
 }
 
-
 .about-local {
-  font-size: $fz-deca;
-  line-height: $lh-thin;
+    font-size: $fz-deca;
+    line-height: $lh-thin;
 }
 
 .about-local-heading {
-  margin-bottom: .5em;
-  font-size: $fz-hecto;
+    margin-bottom: .5em;
+    font-size: $fz-hecto;
 }
 
-
 .about-local-content {
-  @include _cms;
+    @include _cms;
 
-  max-width: 90%;
-  margin-bottom: 1em;
-  font-weight: $fw-gentona-medium;
-  color: $blue-rhino;
+    max-width: 90%;
+    margin-bottom: 1em;
+    font-weight: $fw-gentona-medium;
+    color: $blue-rhino;
 }
 
 .lt-ie9 .about-local-content {
-  float: left;
-  width: 90%;
+    float: left;
+    width: 90%;
 }
-
 
 .about-local-link {
-  &:link,
-  &:active,
-  &:visited {
-    @include _animate;
+    &:link,
+    &:active,
+    &:visited {
+        @include _animate;
 
-    display: inline-block;
-    padding: 3*$vs 3*$vs 3*$vs;
-    margin: 0;
-    font-family: $heading-font-family;
-    font-size: $fz-deca;
-    font-weight: $fw-quadon-eb;
-    line-height: 1;
-    text-align: center;
-    text-decoration: none;
-    color: $blue-cornflower;
-    border: $vs solid ;
-  }
-  &:hover,
-  &:focus {
-    @include _animate-hover;
+        display: inline-block;
+        padding: 3*$vs 3*$vs 3*$vs;
+        margin: 0;
+        font-family: $heading-font-family;
+        font-size: $fz-deca;
+        font-weight: $fw-quadon-eb;
+        line-height: 1;
+        text-align: center;
+        text-decoration: none;
+        color: $blue-cornflower;
+        border: $vs solid;
+    }
+    &:hover,
+    &:focus {
+        @include _animate-hover;
 
-    color: $blue-rhino;
-  }
+        color: $blue-rhino;
+    }
 }
-
-
-
-
 
 // .t-buy {
 //   color: $green-cucumber;
 // }
-
-
-
-
-
 // Blocal
 //
-
 //
 // Blocal Brand
 .blocal-brand {
-  overflow: hidden;
-  width: 301px;
-  height: 301px;
-  margin: 0 auto;
-  background: url('../images/blocal-logo.png') center center no-repeat;
+    overflow: hidden;
+    width: 301px;
+    height: 301px;
+    margin: 0 auto;
+    background: url('../images/blocal-logo.png') center center no-repeat;
 
-  &:before {
-    content: '';
-    display: block;
-    width: 1px;
-    height: 150%;
-  }
+    &:before {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 150%;
+    }
 }
 
 .blocal-brand--interior {
@@ -2048,41 +1861,35 @@ select {
     }
 }
 
-
-
-
-
 .blocal-intro {
-  overflow: hidden;
-  padding-top: 24px;
-  padding-bottom: 24px;
+    overflow: hidden;
+    padding-top: 24px;
+    padding-bottom: 24px;
 
-  @include breakpoint($bp-1) {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
+    @include breakpoint($bp-1) {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
 }
 
 .blocal-intro__heading,
 .blocal-intro__lead {
-  font-family: $heading-font-family;
-  font-size: $fz-mega;
-  font-weight: $fw-quadon-b;
-  line-height: $lh-base;
-  color: $white;
+    font-family: $heading-font-family;
+    font-size: $fz-mega;
+    font-weight: $fw-quadon-b;
+    line-height: $lh-base;
+    color: $white;
 }
 
-
 .blocal-intro__lead {
-  font-family: $default-font-family;
-  font-size: $fz-hecto;
-  font-weight: $fw-gentona-medium;
+    font-family: $default-font-family;
+    font-size: $fz-hecto;
+    font-weight: $fw-gentona-medium;
 }
 
 .blocal-intro__attach {
     @include breakpoint( $bp-1) {
         float: left;
-
     }
 }
 
@@ -2092,7 +1899,6 @@ select {
         margin-right: 6.32%;
     }
 }
-
 
 .success-story {
     position: relative;
@@ -2106,6 +1912,7 @@ select {
 
 .success-story__left,
 .success-story__right {
+    width: 100%;
     background-color: $yellow-supernova;
 
     @include breakpoint($bp-1) {
@@ -2113,7 +1920,6 @@ select {
         width: 50%;
     }
 }
-
 
 .success-story__attach {
     @include breakpoint($bp-1) {
@@ -2125,6 +1931,9 @@ select {
 }
 
 .success-story__src {
+    width: 100%;
+    height: auto;
+
     @include breakpoint($bp-1) {
         position: absolute;
         top: 0;
@@ -2133,7 +1942,6 @@ select {
         height: 100%;
     }
 }
-
 
 .success-story__body {
     padding: 20px 24px 24px;
@@ -2181,32 +1989,31 @@ select {
     &:link,
     &:active,
     &:visited {
-      @include _animate;
+        @include _animate;
 
-      display: inline-block;
-      padding: 3*$vs 3*$vs 3*$vs;
-      margin: 0;
-      font-family: $heading-font-family;
-      font-size: $fz;
-      font-weight: $fw-quadon-b;
-      line-height: 1;
-      text-align: center;
-      text-decoration: none;
-      color: $blue-cornflower;
-      border: $vs solid $white;
+        display: inline-block;
+        padding: 3*$vs 3*$vs 3*$vs;
+        margin: 0;
+        font-family: $heading-font-family;
+        font-size: $fz;
+        font-weight: $fw-quadon-b;
+        line-height: 1;
+        text-align: center;
+        text-decoration: none;
+        color: $blue-cornflower;
+        border: $vs solid $white;
     }
     &:hover,
     &:focus {
-      @include _animate-hover;
+        @include _animate-hover;
 
-      color: $blue-rhino;
+        color: $blue-rhino;
     }
 }
 
-
 .partners {
-        margin-top: 24px;
-        margin-bottom: 24px;
+    margin-top: 24px;
+    margin-bottom: 24px;
 
     @include breakpoint($bp-1) {
         margin-top: 54px;
@@ -2228,7 +2035,6 @@ select {
     color: $blue-rhino;
 }
 
-
 .partners__list {
     font-size: 0;
     line-height: 0;
@@ -2244,6 +2050,7 @@ select {
 .partner-item {
     display: block;
     position: relative;
+    font-size: $fz;
     border-top: 1px solid $blue-rhino;
 
     @include breakpoint($bp-1) {
@@ -2251,7 +2058,6 @@ select {
         width: 24%;
         margin-top: 0;
         margin-bottom: $vs*3;
-        font-size: $fz;
     }
 }
 
@@ -2263,11 +2069,6 @@ select {
 }
 
 .partner-item + .partner-item {
-    margin-top: $vs*3;
-
-    @include breakpoint($bp-1) {
-        margin-top: 0;
-    }
 }
 
 .partner-item__link {
@@ -2284,7 +2085,9 @@ select {
     &:hover,
     &:focus {
         .partner-item__more {
-            opacity: 1;
+            .no-touch & {
+                opacity: 1;
+            }
         }
     }
 }
@@ -2292,42 +2095,61 @@ select {
 .partner-item__more {
     @include _animate;
 
-    opacity: 0;
-
+    .no-touch & {
+        opacity: 0;
+    }
     &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background-color: rgba( $blue-rhino, .9);
+        .no-touch & {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba( $blue-rhino, .9);
+        }
     }
     &:after {
         content: 'Learn More';
-        display: inline-block;
+        display: block;
         position: absolute;
-        top: 50%;
-        left: 50%;
+        bottom: 0;
+        left: 0;
+        width: 100%;
         padding: $vs*4 $vs*2;
+        text-align: center;
         color: $white;
-        border: 2px solid $white;
-        transform: translate3d(-50%, -50%, 0);
+        background-color: $blue-rhino;
+
+        .no-touch & {
+            position: absolute;
+            top: 50%;
+            bottom: auto;
+            left: 50%;
+            color: $white;
+            border: 2px solid $white;
+            transform: translate3d(-50%, -50%, 0);
+        }
     }
 }
 
 .partner-panel {
     @include _animate;
 
-    position: absolute;
+    position: fixed;
     // z-index: $z-modal;
     z-index: -1;
     top: 0;
+    right: 0;
+    bottom: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
     opacity: 0;
-    background: rgba( $blue-rhino, .9 );
+    background: rgba( $blue-rhino, .9);
+}
+
+.partner-panel .page-overlay-close {
+    top: 40px;
+    right: 12px;
 }
 
 [data-panel-active] {
@@ -2336,13 +2158,15 @@ select {
 
 [data-panel-active] .partner-panel {
     z-index: $z-modal;
+    overflow-y: scroll;
     opacity: 1;
-}
 
+    -webkit-overflow-scrolling: touch;
+}
 
 .partner-panel__body {
     overflow: hidden;
-    padding: 48px 60px;
+    padding: 24px 30px;
     border-top: 16px solid $yellow-supernova;
     background: $white;
 
@@ -2352,7 +2176,7 @@ select {
         right: 0;
         bottom: 0;
         left: 33%;
-        box-shadow: -2px 0 6px rgba( $black, .4 );
+        box-shadow: -2px 0 6px rgba( $black, .4);
     }
 }
 
@@ -2413,7 +2237,6 @@ select {
     font-family: $heading-font-family;
     font-size: $fz-dec;
     font-weight: $fw-quadon-b;
-
 }
 
 .partner-commitment__heading--Build {
@@ -2427,7 +2250,6 @@ select {
 .partner-commitment__heading--Buy {
     color: $green-cucumber;
 }
-
 
 .main-content {
     @include breakpoint($bp-1) {
