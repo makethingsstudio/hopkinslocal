@@ -310,8 +310,13 @@ a:visited {
 }
 
 input,
-select {
+select,
+textarea {
     border: 1px solid $blue-rhino;
+}
+
+textarea {
+    padding: $vs*2;
 }
 
 [type="submit"] {
@@ -518,6 +523,18 @@ select {
         &:hover,
         &:focus {
             color: $yellow-supernova;
+        }
+        &.current-menu-item,
+        &.is-active {
+            &:link,
+            &:active,
+            &:visited {
+                color: $yellow-supernova;
+            }
+            &:hover,
+            &:focus {
+                border-bottom: 2px solid $yellow-supernova;
+            }
         }
     }
 }
@@ -1583,6 +1600,8 @@ select {
 }
 
 .page-content-intro {
+    @include _cms;
+
     max-width: 85%;
     margin-bottom: 8*$vs;
     font-size: $fz-deca;
@@ -2162,8 +2181,14 @@ select {
 
 [data-panel-active] .partner-panel {
     z-index: $z-modal;
+    overflow-y: scroll;
     opacity: 1;
 
+    @include breakpoint($bp-1) {
+        overflow: hidden;
+    }
+
+    -webkit-overflow-scrolling: touch
 }
 
 .partner-panel__bg {
@@ -2177,7 +2202,6 @@ select {
 }
 
 .partner-panel__body {
-    overflow: hidden;
     padding: 24px 30px;
     border-top: 16px solid $yellow-supernova;
     background: $white;
@@ -2188,10 +2212,11 @@ select {
         right: 0;
         bottom: 0;
         left: 33%;
-        overflow-y:scroll;
+    overflow-y: scroll;
         box-shadow: -2px 0 6px rgba( $black, .4);
 
-        -webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch;
+
     }
 }
 
